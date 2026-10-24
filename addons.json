@@ -19,11 +19,11 @@
   },
   {
     "id": 3,
-    "nama": "Nama Shader",
-    "deskripsi": "Tulis deskripsi singkat tentang shader ini",
+    "nama": "bsl y shaders",
+    "deskripsi": "memperbagus tampilan Minecraft andsa",
     "kategori": "shader",
-    "gambar": "",
-    "link_download": "",
+    "gambar": "https://files.catbox.moe/3klyfl.jpg",
+    "link_download": "https://www.mediafire.com/file/n7byt0syo3rgc5c/BSL+Y+Shaders.mcpack/file",
     "versi_mc": "1.20+"
   },
   {
