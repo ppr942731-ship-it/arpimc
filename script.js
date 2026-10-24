@@ -19,15 +19,56 @@ function renderSkins(category) {
     ? skinData 
     : skinData.filter(s => s.kategori === category);
 
-  filtered.forEach(skin => {
+  filtered.forEach((skin, index) => {
     list.innerHTML += `
       <div class="card" data-cat="${skin.kategori}">
         <span class="tag">${skin.tag}</span>
-        <img loading="lazy" src="${skin.gambar}" alt="${skin.tag}">
-        <a href="${skin.link_download}" target="_blank" class="btn">⬇️ DOWNLOAD SKIN</a>
+        <img loading="lazy" src="${skin.gambar}" alt="${skin.tag}" id="skin-img-${index}">
+        <div class="card-buttons">
+          <button class="btn btn-preview" data-img="${skin.gambar}" data-tag="${skin.tag}">👁 PREVIEW</button>
+          <a href="${skin.link_download}" target="_blank" class="btn">⬇️ DOWNLOAD</a>
+        </div>
       </div>
     `;
   });
+
+  // Pasang event listener untuk tombol preview
+  document.querySelectorAll('.btn-preview').forEach(btn => {
+    btn.onclick = () => {
+      openModal(btn.dataset.img, btn.dataset.tag);
+    };
+  });
+}
+
+// ===== MODAL PREVIEW =====
+function openModal(imgSrc, title) {
+  const overlay = document.createElement('div');
+  overlay.className = 'modal-overlay active';
+  overlay.innerHTML = `
+    <div class="modal-content">
+      <h4>${title}</h4>
+      <img src="${imgSrc}" alt="${title}">
+      <button class="modal-close">Tutup</button>
+    </div>
+  `;
+  document.body.appendChild(overlay);
+  document.body.style.overflow = 'hidden';
+
+  // Tutup modal
+  const closeBtn = overlay.querySelector('.modal-close');
+  const closeModal = () => {
+    overlay.style.opacity = '0';
+    overlay.style.visibility = 'hidden';
+    setTimeout(() => {
+      overlay.remove();
+      document.body.style.overflow = '';
+    }, 300);
+  };
+
+  closeBtn.onclick = closeModal;
+  overlay.onclick = (e) => {
+    if (e.target === overlay) closeModal();
+  };
 }
 
 // ===== THEME SWITCHER =====
