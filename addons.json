@@ -1,20 +1,20 @@
 [
   {
     "id": 1,
-    "nama": "Nama Addon",
-    "deskripsi": "Tulis deskripsi singkat tentang addon ini",
+    "nama": "Mutants",
+    "deskripsi": "menambahkan monster kedalam Minecraft anda",
     "kategori": "addon",
-    "gambar": "",
-    "link_download": "",
+    "gambar": "https://files.catbox.moe/3kgszm.jpg",
+    "link_download": "https://www.mediafire.com/file/n8wn32k7mwsjh1e/MUTANTS!+Add-On+2.0+by+Vano+craft+(addon).mcaddon/file",
     "versi_mc": "1.20+"
   },
   {
     "id": 2,
-    "nama": "Nama Pack",
-    "deskripsi": "Tulis deskripsi singkat tentang pack ini",
+    "nama": "3d skin",
+    "deskripsi": " membuat skin menjadi 3d",
     "kategori": "pack",
-    "gambar": "",
-    "link_download": "",
+    "gambar": "https://files.catbox.moe/fa8tro.jpg",
+    "link_download": "https://www.mediafire.com/file/ctputsnqf3goega/3dskinlayer_as.mcpack/file",
     "versi_mc": "1.20+"
   },
   {
