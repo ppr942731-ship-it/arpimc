@@ -1,98 +1,70 @@
 <!DOCTYPE html>
-<html lang="id" data-theme="dark">
+<html lang="id">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>ArpiMC Zone 🎮</title>
+  <title>ArpiMC ZONE - Download Skin Minecraft PE Gratis</title>
+  <meta name="description" content="Download skin Minecraft PE gratis. Kategori Cowok, Cewek, PVP, Aesthetic. Gratis 100% tanpa iklan.">
+  <meta name="keywords" content="skin minecraft, skin minecraft pe, download skin gratis, arpi mc zone">
+  <meta name="author" content="ArpiMC ZONE">
+  <meta property="og:title" content="ArpiMC ZONE - Download Skin Minecraft Gratis">
+  <meta property="og:description" content="Koleksi skin Minecraft PE Gratis.">
+  <meta name="theme-color" content="#0066FF">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="style.css">
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css">
 </head>
 <body>
 
-  <!-- Navbar -->
-  <nav class="navbar">
-    <div class="nav-container">
-      <a href="#" class="logo">
-        <span class="logo-icon">🎮</span>
-        <span class="logo-text">ArpiMC Zone</span>
-      </a>
-      <div class="nav-actions">
-        <button id="theme-toggle" class="theme-btn" aria-label="Toggle Theme">
-          <i class="fa-solid fa-sun sun-icon"></i>
-          <i class="fa-solid fa-moon moon-icon"></i>
-        </button>
-      </div>
+  <nav>
+    <div class="brand">
+      <h2>ArpiMC ZONE</h2>
+      <span class="tagline">Skin Minecraft Gratis No Ribet</span>
     </div>
+    <button class="theme-btn" id="themeToggle">🎨</button>
   </nav>
 
-  <!-- Hero Section -->
-  <section class="hero">
-    <div class="hero-container">
-      <div class="hero-content">
-        <span class="hero-badge">✨ Koleksi Skin Minecraft Terbaik</span>
-        <h1 class="hero-title">Temukan Skin Favoritmu di <span class="text-gradient">ArpiMC Zone</span></h1>
-        <p class="hero-desc">Koleksi skin Minecraft berkualitas tinggi, siap download langsung. Tampil beda di dunia Minecraft kamu!</p>
-        <div class="hero-stats">
-          <div class="stat-item">
-            <div class="stat-value" id="total-skins">0</div>
-            <div class="stat-label">Koleksi Skin</div>
-          </div>
-          <div class="stat-item">
-            <div class="stat-value">Gratis</div>
-            <div class="stat-label">Tanpa Iklan</div>
-          </div>
-          <div class="stat-item">
-            <div class="stat-value">⚡</div>
-            <div class="stat-label">Cepat & Aman</div>
-          </div>
-        </div>
-        <a href="#skins" class="btn-primary">
-          <i class="fa-solid fa-arrow-down"></i> Lihat Semua Skin
-        </a>
-      </div>
-      <div class="hero-visual">
-        <div class="hero-card card-1">
-          <i class="fa-solid fa-palette"></i>
-          <span>Desain Eksklusif</span>
-        </div>
-        <div class="hero-card card-2">
-          <i class="fa-solid fa-bolt"></i>
-          <span>Download Sekali Klik</span>
-        </div>
-        <div class="hero-card card-3">
-          <i class="fa-solid fa-heart"></i>
-          <span>Dibuat dengan ❤️</span>
-        </div>
-      </div>
-    </div>
-  </section>
+  <div class="container">
+    <header>
+      <h1>Download Skin Minecraft Gratis</h1>
+      <p class="subtitle">BOSEN SKIN ITU-ITU AJA? AMBIL GRATIS DI SINI 🗿</p>
+    </header>
 
-  <!-- Skins Section -->
-  <section id="skins" class="skins-section">
-    <div class="section-container">
-      <div class="section-header">
-        <span class="section-icon">📁</span>
-        <h2 class="section-title">Koleksi Skin</h2>
-        <p class="section-subtitle">Pilih dan unduh skin favoritmu sekarang</p>
-        <div class="section-line"></div>
+    <section class="dashboard">
+      <div class="stats">
+        <div class="stat-box"><h3 id="totalSkin">3</h3><p>Total Skin</p></div>
+        <div class="stat-box"><h3>4</h3><p>Kategori</p></div>
+        <div class="stat-box"><h3>100%</h3><p>Gratis</p></div>
       </div>
-      <div id="skin-grid" class="skin-grid">
-        <!-- Skin cards muncul di sini -->
+      <div class="categories">
+        <button class="cat-btn active" data-cat="all">Semua</button>
+        <button class="cat-btn" data-cat="cowok">Cowok</button>
+        <button class="cat-btn" data-cat="cewek">Cewek</button>
+        <button class="cat-btn" data-cat="pvp">PVP</button>
+        <button class="cat-btn" data-cat="aesthetic">Aesthetic</button>
       </div>
-    </div>
-  </section>
+    </section>
 
-  <!-- Footer -->
-  <footer class="footer">
-    <div class="footer-container">
-      <div class="footer-brand">
-        <h3 class="footer-logo">🎮 ArpiMC Zone</h3>
-        <p>Koleksi skin Minecraft favoritmu</p>
+    <h3 class="section-title">🔥 Koleksi Skin</h3>
+    <div class="slider" id="skinList">
+      <!-- Skin dimuat dari data.json -->
+    </div>
+
+    <h3 class="section-title">❓ Q&A - Tanya Jawab</h3>
+    <div class="qa-wrap">
+      <div class="qa-item">
+        <button class="qa-q" aria-expanded="false">Q: Gimana cara pasang skin di Minecraft PE?</button>
+        <div class="qa-a"><p>A: Download file .png → Buka Minecraft → Profil → Edit Character → Import dari file → Pilih skin nya. Selesai 🗿</p></div>
       </div>
-      <div class="footer-bottom">
-        <p>&copy; 2026 ArpiMC Zone. Dibuat dengan ❤️</p>
+      <div class="qa-item">
+        <button class="qa-q" aria-expanded="false">Q: Apa skin di ArpiMC ZONE gratis?</button>
+        <div class="qa-a"><p>A: GRATIS 100%. Gak ada bayar, gak ada iklan tipu-tipu. Langsung download pakai aja!</p></div>
       </div>
     </div>
+  </div>
+
+  <footer>
+    <p>© 2026 ArpiMC ZONE. Dibuat dengan ❤️</p>
   </footer>
 
   <script src="script.js"></script>
