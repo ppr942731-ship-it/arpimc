@@ -6,7 +6,7 @@ fetch('data.json')
   .then(data => {
     skinData = data;
     document.getElementById('totalSkin').textContent = data.length;
-    renderSkins('all');
+    renderSkins('all')
   })
   .catch(err => console.error('Error memuat data:', err));
 
