@@ -1,31 +1,92 @@
 <!DOCTYPE html>
-<html lang="id">
+<html lang="id" data-theme="dark">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>MC Skin Gallery 🎮</title>
+  <title>ArpiMC Zone 🎮</title>
   <link rel="stylesheet" href="style.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css">
 </head>
 <body>
 
-  <div class="container">
-    <header class="header-box">
-      <h1>🎨 MC Skin Gallery</h1>
-      <p>Koleksi skin Minecraft favoritmu</p>
-    </header>
-
-    <div class="stats-box">
-      <span id="total-skins">0</span> Skin Tersedia
+  <!-- Navbar -->
+  <nav class="navbar">
+    <div class="nav-container">
+      <a href="#" class="logo">
+        <span class="logo-icon">🎮</span>
+        <span class="logo-text">ArpiMC Zone</span>
+      </a>
+      <div class="nav-actions">
+        <button id="theme-toggle" class="theme-btn" aria-label="Toggle Theme">
+          <i class="fa-solid fa-sun sun-icon"></i>
+          <i class="fa-solid fa-moon moon-icon"></i>
+        </button>
+      </div>
     </div>
+  </nav>
 
-    <h2 class="section-title">📁 Daftar Skin</h2>
-    <div id="skin-grid" class="skin-grid">
-      <!-- Skin cards muncul di sini -->
+  <!-- Hero Section -->
+  <section class="hero">
+    <div class="hero-container">
+      <div class="hero-content">
+        <span class="hero-badge">✨ Koleksi Skin Minecraft Terbaik</span>
+        <h1 class="hero-title">Temukan Skin Favoritmu di <span class="text-gradient">ArpiMC Zone</span></h1>
+        <p class="hero-desc">Koleksi skin Minecraft berkualitas tinggi, siap download langsung. Tampil beda di dunia Minecraft kamu!</p>
+        <div class="hero-stats">
+          <div class="stat-item">
+            <div class="stat-value" id="total-skins">0</div>
+            <div class="stat-label">Koleksi Skin</div>
+          </div>
+          <div class="stat-item">
+            <div class="stat-value">Gratis</div>
+            <div class="stat-label">Untuk Semua</div>
+          </div>
+        </div>
+        <a href="#skins" class="btn-primary">
+          <i class="fa-solid fa-download"></i> Jelajahi Skin
+        </a>
+      </div>
+      <div class="hero-visual">
+        <div class="floating-card card-1">
+          <i class="fa-solid fa-palette"></i>
+          <span>Desain Keren</span>
+        </div>
+        <div class="floating-card card-2">
+          <i class="fa-solid fa-bolt"></i>
+          <span>Download Cepat</span>
+        </div>
+        <div class="floating-card card-3">
+          <i class="fa-solid fa-check-circle"></i>
+          <span>Berkualitas</span>
+        </div>
+      </div>
     </div>
-  </div>
+  </section>
 
-  <footer class="footer-box">
-    <p>Dibuat dengan ❤️ — MC Skin Gallery</p>
+  <!-- Skins Section -->
+  <section id="skins" class="skins-section">
+    <div class="section-container">
+      <div class="section-header">
+        <h2 class="section-title">📁 Koleksi Skin</h2>
+        <p class="section-subtitle">Pilih dan unduh skin favoritmu sekarang</p>
+      </div>
+      <div id="skin-grid" class="skin-grid">
+        <!-- Skin cards muncul di sini -->
+      </div>
+    </div>
+  </section>
+
+  <!-- Footer -->
+  <footer class="footer">
+    <div class="footer-container">
+      <div class="footer-brand">
+        <h3 class="footer-logo">🎮 ArpiMC Zone</h3>
+        <p>Koleksi skin Minecraft favoritmu</p>
+      </div>
+      <div class="footer-bottom">
+        <p>&copy; 2026 ArpiMC Zone. Dibuat dengan ❤️</p>
+      </div>
+    </div>
   </footer>
 
   <script src="script.js"></script>
