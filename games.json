@@ -4,5 +4,11 @@
     "nama": "Tic-Tac-Toe",
     "deskripsi": "Bermain silang-silang bersama teman",
     "link": "https://tic-tac-toe-arpi.vercel.app/"
+  }, 
+  {
+    "id": 2,
+    "nama": "Minecraft Quiz", 
+    "deskripsi": "tebak seberapa tau anda tentang mc", 
+    "link": "https://minecraftquizarpi.vercel.app/"
   }
 ]
