@@ -23,10 +23,7 @@ function renderSkins(category) {
     list.innerHTML += `
       <div class="card" data-cat="${skin.kategori}">
         <span class="tag">${skin.tag}</span>
-        <img loading="lazy" src="${skin.gambar}" alt="${skin.nama}">
-        <p style="font-weight:600; margin:8px 0 4px;">${skin.nama}</p>
-        <p style="font-size:0.85em; color:var(--muted); margin-bottom:8px;">${skin.deskripsi}</p>
-        <p style="font-size:0.8em; color:var(--muted); margin-bottom:12px;">📅 ${skin.tanggal_upload}</p>
+        <img loading="lazy" src="${skin.gambar}" alt="${skin.tag}">
         <a href="${skin.link_download}" target="_blank" class="btn">⬇️ DOWNLOAD SKIN</a>
       </div>
     `;
