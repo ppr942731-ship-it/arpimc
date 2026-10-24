@@ -33,10 +33,10 @@ function renderSkins() {
     : skins.filter(s => s.kategori === currentSkinFilter);
   
   grid.innerHTML = filtered.map(item => `
-    <div class="card">
-      <img src="${item.gambar}" alt="${item.tag}" class="card-image" loading="lazy">
-      <h3 class="card-title">${item.tag}</h3>
-      <div class="card-buttons">
+    <div class="skin-card">
+      <img src="${item.gambar}" alt="${item.tag}" class="skin-image" loading="lazy">
+      <h3 class="skin-title">${item.tag}</h3>
+      <div class="skin-buttons">
         <button class="btn btn-secondary" data-preview="${item.gambar}" data-title="${item.tag}">Preview</button>
         <a href="${item.link_download}" target="_blank" class="btn btn-primary">Unduh</a>
       </div>
@@ -54,30 +54,36 @@ function renderAddons() {
     : addons.filter(a => a.kategori === currentAddonFilter);
   
   grid.innerHTML = filtered.map(item => `
-    <div class="card">
-      ${item.gambar 
-        ? `<img src="${item.gambar}" alt="${item.nama}" class="card-image" loading="lazy">`
-        : `<div class="card-image" style="display:flex;align-items:center;justify-content:center;font-size:2rem;color:var(--text-alt)">📦</div>`
-      }
-      <h3 class="card-title">${item.nama}</h3>
-      <p class="card-desc">${item.deskripsi || ''}</p>
-      ${item.versi_mc ? `<div class="card-meta"><span class="meta-tag">MC: ${item.versi_mc}</span></div>` : ''}
-      <div class="card-buttons">
-        <a href="${item.link_download || '#'}" target="_blank" class="btn btn-primary" style="width:100%">Unduh</a>
+    <div class="addon-card">
+      <div class="addon-image-wrapper">
+        ${item.gambar 
+          ? `<img src="${item.gambar}" alt="${item.nama}" class="addon-image" loading="lazy">`
+          : `<span style="font-size:2rem;color:var(--text-alt)">📦</span>`
+        }
       </div>
+      <h3 class="addon-title">${item.nama}</h3>
+      ${item.deskripsi ? `<p class="addon-desc">${item.deskripsi}</p>` : ''}
+      ${item.versi_mc ? `<div class="addon-meta"><span class="meta-tag">MC: ${item.versi_mc}</span></div>` : ''}
+      <a href="${item.link_download || '#'}" target="_blank" class="btn btn-primary" style="width:100%">Unduh</a>
     </div>
   `).join('');
 }
 
-// === RENDER GAME ===
+// === RENDER GAME — DENGAN IFRAME PREVIEW ===
 function renderGames() {
   const grid = document.getElementById('gameGrid');
   grid.innerHTML = games.map(item => `
-    <div class="card">
-      <div style="font-size:2.5rem;text-align:center;padding:24px 0;">🎮</div>
-      <h3 class="card-title" style="text-align:center">${item.nama}</h3>
-      <p class="card-desc" style="text-align:center">${item.deskripsi}</p>
-      <a href="${item.link}" target="_blank" class="btn btn-primary" style="width:100%">Buka Game</a>
+    <div class="game-card">
+      <h3 class="game-title">${item.nama}</h3>
+      <p class="game-desc">${item.deskripsi}</p>
+      <div class="game-iframe-container">
+        <iframe src="${item.link}" title="${item.nama}" loading="lazy"
+          sandbox="allow-same-origin allow-scripts"></iframe>
+      </div>
+      <div class="game-links">
+        <a href="${item.link}" target="_blank" class="btn btn-primary">Buka Penuh</a>
+        <a href="${item.link}" target="_blank" class="btn btn-secondary btn-small">Tab Baru</a>
+      </div>
     </div>
   `).join('');
 }
@@ -107,9 +113,7 @@ modalClose.addEventListener('click', () => {
 });
 
 modal.addEventListener('click', (e) => {
-  if (e.target === modal) {
-    modalClose.click();
-  }
+  if (e.target === modal) modalClose.click();
 });
 
 // === NAVIGASI BAWAH ===
@@ -125,23 +129,23 @@ document.querySelectorAll('.nav-item').forEach(item => {
 });
 
 // === FILTER SKIN ===
-document.querySelectorAll('#skinFilters .filter-btn').forEach(btn => {
-  btn.addEventListener('click', () => {
+document.addEventListener('click', (e) => {
+  if (e.target.matches('#skinFilters .filter-btn')) {
     document.querySelectorAll('#skinFilters .filter-btn').forEach(b => b.classList.remove('active'));
-    btn.classList.add('active');
-    currentSkinFilter = btn.dataset.cat;
+    e.target.classList.add('active');
+    currentSkinFilter = e.target.dataset.cat;
     renderSkins();
-  });
+  }
 });
 
 // === FILTER ADDON ===
-document.querySelectorAll('#addonFilters .filter-btn').forEach(btn => {
-  btn.addEventListener('click', () => {
+document.addEventListener('click', (e) => {
+  if (e.target.matches('#addonFilters .filter-btn')) {
     document.querySelectorAll('#addonFilters .filter-btn').forEach(b => b.classList.remove('active'));
-    btn.classList.add('active');
-    currentAddonFilter = btn.dataset.cat;
+    e.target.classList.add('active');
+    currentAddonFilter = e.target.dataset.cat;
     renderAddons();
-  });
+  }
 });
 
 // === MENU TEMA ===
@@ -153,9 +157,7 @@ menuToggle.addEventListener('click', () => {
 });
 
 themeMenu.addEventListener('click', (e) => {
-  if (e.target === themeMenu) {
-    themeMenu.classList.remove('active');
-  }
+  if (e.target === themeMenu) themeMenu.classList.remove('active');
 });
 
 document.querySelectorAll('.theme-option').forEach(btn => {
