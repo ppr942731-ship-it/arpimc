@@ -6,7 +6,7 @@
     "kategori": "addon",
     "gambar": "https://files.catbox.moe/3kgszm.jpg",
     "link_download": "https://www.mediafire.com/file/n8wn32k7mwsjh1e/MUTANTS!+Add-On+2.0+by+Vano+craft+(addon).mcaddon/file",
-    "versi_mc": "1.20+"
+    "versi_mc": "1.26+"
   },
   {
     "id": 2,
@@ -15,7 +15,7 @@
     "kategori": "pack",
     "gambar": "https://files.catbox.moe/fa8tro.jpg",
     "link_download": "https://www.mediafire.com/file/ctputsnqf3goega/3dskinlayer_as.mcpack/file",
-    "versi_mc": "1.20+"
+    "versi_mc": "1.26+"
   },
   {
     "id": 3,
@@ -24,7 +24,7 @@
     "kategori": "shader",
     "gambar": "https://files.catbox.moe/3klyfl.jpg",
     "link_download": "https://www.mediafire.com/file/n7byt0syo3rgc5c/BSL+Y+Shaders.mcpack/file",
-    "versi_mc": "1.20+"
+    "versi_mc": "1.26+"
   },
   {
     "id": 4,
@@ -33,15 +33,15 @@
     "kategori": "ui",
     "gambar": "https://files.catbox.moe/n7682n.jpg",
     "link_download": "https://www.mediafire.com/file/17vn4xii9qsooi7/AncxliyPackV7FixBugs.mcpack/file",
-    "versi_mc": "1.20+"
+    "versi_mc": "1.26+"
   },
   {
     "id": 5,
-    "nama": "Konten Lainnya",
+    "nama": " Minecraft v26.51",
     "deskripsi": "Hal-hal menarik lainnya untuk Minecraft",
     "kategori": "lain",
     "gambar": "",
-    "link_download": "",
-    "versi_mc": "1.20+"
+    "link_download": "https://www.mediafire.com/file/9zidzug2eqiw0g3/MC_26.51.1.apk/file",
+    "versi_mc": "1.26.51.1"
   }
 ]
