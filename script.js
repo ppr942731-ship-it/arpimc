@@ -6,7 +6,7 @@ fetch('data.json')
   .then(data => {
     skinData = data;
     document.getElementById('totalSkin').textContent = data.length;
-    renderSkins('all')
+    renderSkins('all');
   })
   .catch(err => console.error('Error memuat data:', err));
 
@@ -23,7 +23,7 @@ function renderSkins(category) {
     list.innerHTML += `
       <div class="card" data-cat="${skin.kategori}">
         <span class="tag">${skin.tag}</span>
-        <img loading="lazy" src="${skin.gambar}" alt="${skin.tag}" id="skin-img-${index}">
+        <img loading="lazy" src="${skin.gambar}" alt="${skin.tag}">
         <div class="card-buttons">
           <button class="btn btn-preview" data-img="${skin.gambar}" data-tag="${skin.tag}">👁 PREVIEW</button>
           <a href="${skin.link_download}" target="_blank" class="btn">⬇️ DOWNLOAD</a>
@@ -32,44 +32,39 @@ function renderSkins(category) {
     `;
   });
 
-  // Pasang event listener untuk tombol preview
+  // Pasang event listener tombol preview
   document.querySelectorAll('.btn-preview').forEach(btn => {
-    btn.onclick = () => {
+    btn.addEventListener('click', () => {
       openModal(btn.dataset.img, btn.dataset.tag);
-    };
+    });
   });
 }
 
 // ===== MODAL PREVIEW =====
+const modal = document.getElementById('previewModal');
+const modalTitle = document.getElementById('modalTitle');
+const modalImage = document.getElementById('modalImage');
+const modalClose = document.getElementById('modalClose');
+
 function openModal(imgSrc, title) {
-  const overlay = document.createElement('div');
-  overlay.className = 'modal-overlay active';
-  overlay.innerHTML = `
-    <div class="modal-content">
-      <h4>${title}</h4>
-      <img src="${imgSrc}" alt="${title}">
-      <button class="modal-close">Tutup</button>
-    </div>
-  `;
-  document.body.appendChild(overlay);
+  modalTitle.textContent = title;
+  modalImage.src = imgSrc;
+  modal.classList.add('active');
   document.body.style.overflow = 'hidden';
-
-  // Tutup modal
-  const closeBtn = overlay.querySelector('.modal-close');
-  const closeModal = () => {
-    overlay.style.opacity = '0';
-    overlay.style.visibility = 'hidden';
-    setTimeout(() => {
-      overlay.remove();
-      document.body.style.overflow = '';
-    }, 300);
-  };
-
-  closeBtn.onclick = closeModal;
-  overlay.onclick = (e) => {
-    if (e.target === overlay) closeModal();
-  };
 }
+
+// Tutup modal
+modalClose.addEventListener('click', () => {
+  modal.classList.remove('active');
+  document.body.style.overflow = '';
+});
+
+modal.addEventListener('click', (e) => {
+  if (e.target === modal) {
+    modal.classList.remove('active');
+    document.body.style.overflow = '';
+  }
+});
 
 // ===== THEME SWITCHER =====
 const body = document.body;
