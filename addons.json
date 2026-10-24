@@ -1,0 +1,47 @@
+[
+  {
+    "id": 1,
+    "nama": "Nama Addon",
+    "deskripsi": "Tulis deskripsi singkat tentang addon ini",
+    "kategori": "addon",
+    "gambar": "",
+    "link_download": "",
+    "versi_mc": "1.20+"
+  },
+  {
+    "id": 2,
+    "nama": "Nama Pack",
+    "deskripsi": "Tulis deskripsi singkat tentang pack ini",
+    "kategori": "pack",
+    "gambar": "",
+    "link_download": "",
+    "versi_mc": "1.20+"
+  },
+  {
+    "id": 3,
+    "nama": "Nama Shader",
+    "deskripsi": "Tulis deskripsi singkat tentang shader ini",
+    "kategori": "shader",
+    "gambar": "",
+    "link_download": "",
+    "versi_mc": "1.20+"
+  },
+  {
+    "id": 4,
+    "nama": "Antarmuka Pengguna",
+    "deskripsi": "Ubah tampilan antarmuka permainanmu",
+    "kategori": "ui",
+    "gambar": "",
+    "link_download": "",
+    "versi_mc": "1.20+"
+  },
+  {
+    "id": 5,
+    "nama": "Konten Lainnya",
+    "deskripsi": "Hal-hal menarik lainnya untuk Minecraft",
+    "kategori": "lain",
+    "gambar": "",
+    "link_download": "",
+    "versi_mc": "1.20+"
+  }
+]
