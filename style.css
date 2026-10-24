@@ -1,0 +1,158 @@
+/* ===== Neumorphism Dark Theme ===== */
+:root {
+  --bg: #e0e5ec;
+  --bg-dark: #2a2d34;
+  --shadow-1: rgba(0, 0, 0, 0.35);
+  --shadow-2: rgba(255, 255, 255, 0.05);
+  --card-bg: #2a2d34;
+  --text: #e4e7ed;
+  --accent: #7aa2f7;
+  --accent-soft: rgba(122, 162, 247, 0.15);
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: 'Segoe UI', system-ui, sans-serif;
+}
+
+body {
+  background: linear-gradient(145deg, #272a31, #2f323b);
+  min-height: 100vh;
+  padding: 1.5rem;
+  color: var(--text);
+}
+
+.container {
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+/* === Neumorphic Box Style === */
+.header-box, .stats-box, .skin-card, .footer-box {
+  background: var(--card-bg);
+  border-radius: 20px;
+  box-shadow: 
+    8px 8px 16px var(--shadow-1),
+    -8px -8px 16px var(--shadow-2);
+}
+
+.header-box {
+  text-align: center;
+  padding: 2rem;
+  margin-bottom: 1.5rem;
+}
+
+.header-box h1 {
+  font-size: 1.7rem;
+  color: var(--accent);
+  margin-bottom: 0.5rem;
+}
+
+.header-box p {
+  color: #9aa5b8;
+  font-size: 0.95rem;
+}
+
+.stats-box {
+  text-align: center;
+  padding: 1rem;
+  margin-bottom: 2rem;
+  font-size: 1rem;
+  color: var(--accent);
+  font-weight: 500;
+}
+
+.stats-box span {
+  font-size: 1.3rem;
+  font-weight: 700;
+}
+
+.section-title {
+  font-size: 1.2rem;
+  margin-bottom: 1.2rem;
+  color: #cdd6f4;
+  padding-left: 0.5rem;
+  border-left: 3px solid var(--accent);
+}
+
+.skin-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+  gap: 1.5rem;
+}
+
+.skin-card {
+  overflow: hidden;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.skin-card:hover {
+  transform: translateY(-6px);
+  box-shadow: 
+    12px 12px 24px var(--shadow-1),
+    -12px -12px 24px var(--shadow-2),
+    0 0 0 1px var(--accent-soft);
+}
+
+.skin-img {
+  width: 100%;
+  height: 280px;
+  object-fit: cover;
+  background: #333742;
+}
+
+.skin-info {
+  padding: 1.2rem;
+}
+
+.skin-name {
+  font-size: 1.05rem;
+  font-weight: 600;
+  color: #e4e7ed;
+  margin-bottom: 0.5rem;
+}
+
+.skin-desc {
+  font-size: 0.85rem;
+  color: #9aa5b8;
+  margin-bottom: 0.8rem;
+  line-height: 1.4;
+}
+
+.skin-date {
+  font-size: 0.78rem;
+  color: #7f8494;
+  margin-bottom: 1rem;
+}
+
+.btn-download {
+  display: block;
+  width: 100%;
+  background: linear-gradient(145deg, #6b93e8, #7aa2f7);
+  color: white;
+  text-align: center;
+  padding: 0.6rem;
+  border-radius: 12px;
+  text-decoration: none;
+  font-weight: 500;
+  font-size: 0.9rem;
+  box-shadow: 
+    4px 4px 8px rgba(0, 0, 0, 0.25),
+    -4px -4px 8px rgba(255, 255, 255, 0.05);
+  transition: all 0.2s ease;
+}
+
+.btn-download:hover {
+  background: linear-gradient(145deg, #5b83d8, #6a92e7);
+  transform: scale(0.98);
+}
+
+.footer-box {
+  text-align: center;
+  padding: 1.5rem;
+  margin-top: 3rem;
+  color: #7f8494;
+  font-size: 0.85rem;
+}
