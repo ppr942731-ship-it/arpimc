@@ -1,5 +1,22 @@
 /* === VARIABEL TEMA === */
 :root {
+  --bg: #0F172A;
+  --bg-alt: #1E293B;
+  --surface: #1E293B;
+  --text: #F8FAFC;
+  --text-alt: #94A3B8;
+  --primary: #3B82F6;
+  --primary-alt: #2563EB;
+  --border: rgba(59, 130, 246, 0.15);
+  --shadow-sm: 0 2px 8px rgba(0, 0, 0, 0.25);
+  --shadow-md: 0 4px 16px rgba(0, 0, 0, 0.35);
+  --radius-sm: 10px;
+  --radius-md: 14px;
+  --radius-lg: 18px;
+}
+
+/* === TEMA DEFAULT TERANG === */
+html:not([data-theme]) {
   --bg: #F0F7FF;
   --bg-alt: #FFFFFF;
   --surface: #FFFFFF;
@@ -10,9 +27,6 @@
   --border: rgba(0, 102, 255, 0.08);
   --shadow-sm: 0 2px 8px rgba(0, 102, 255, 0.06);
   --shadow-md: 0 4px 16px rgba(0, 102, 255, 0.10);
-  --radius-sm: 10px;
-  --radius-md: 14px;
-  --radius-lg: 18px;
 }
 
 /* === TEMA NEO-BRUTASLIM === */
@@ -82,9 +96,9 @@ body {
 /* === HEADER === */
 .site-header {
   display: flex;
-  justify-content: space-between;
   align-items: center;
-  padding: 16px 20px;
+  gap: 12px;
+  padding: 12px 20px;
   background: var(--surface);
   border-bottom: 1px solid var(--border);
   position: sticky;
@@ -93,10 +107,24 @@ body {
   transition: background-color 0.3s ease;
 }
 
+.header-logo-link {
+  text-decoration: none;
+  display: flex;
+  align-items: center;
+}
+
+.site-logo {
+  width: 40px;
+  height: 40px;
+  border-radius: 10px;
+  object-fit: contain;
+}
+
 .site-title {
-  font-size: 1.25rem;
+  font-size: 1.15rem;
   font-weight: 700;
   color: var(--primary);
+  flex: 1;
 }
 
 .menu-toggle {
@@ -108,7 +136,7 @@ body {
   padding: 4px 10px;
 }
 
-/* === MENU TEMA — SELALU JELAS === */
+/* === MENU TEMA === */
 .theme-menu {
   position: fixed;
   top: 0;
@@ -310,11 +338,17 @@ body {
 
 .skin-buttons {
   display: flex;
-  gap: 8px;
+  gap: 6px;
   margin-top: auto;
 }
 
-/* === GRID KARTU — ADDON (LEBAR 16:9) === */
+.skin-buttons .btn {
+  flex: 1;
+  padding: 8px 6px;
+  font-size: 0.8rem;
+}
+
+/* === GRID KARTU — ADDON === */
 .addon-grid {
   display: grid;
   grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
@@ -384,6 +418,16 @@ body {
   border-radius: 10px;
 }
 
+.card-buttons-row {
+  display: flex;
+  gap: 8px;
+  margin-top: auto;
+}
+
+.card-buttons-row .btn {
+  flex: 1;
+}
+
 /* === GRID KARTU — GAME === */
 .game-grid {
   display: grid;
@@ -443,7 +487,6 @@ body {
 
 /* === TOMBOL === */
 .btn {
-  flex: 1;
   padding: 10px 12px;
   border-radius: var(--radius-sm);
   border: none;
@@ -471,7 +514,7 @@ body {
 }
 
 .btn-secondary:hover {
-  background: rgba(0, 102, 255, 0.05);
+  background: rgba(59, 130, 246, 0.05);
 }
 
 .btn-small {
@@ -480,102 +523,4 @@ body {
   flex: none;
 }
 
-/* === MODAL PREVIEW === */
-.modal-overlay {
-  position: fixed;
-  inset: 0;
-  background: rgba(0, 0, 0, 0.7);
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  z-index: 300;
-  opacity: 0;
-  visibility: hidden;
-  transition: all 0.3s ease;
-  padding: 20px;
-}
-
-.modal-overlay.active {
-  opacity: 1;
-  visibility: visible;
-}
-
-.modal-content {
-  background: var(--surface);
-  border: 1px solid var(--border);
-  border-radius: var(--radius-lg);
-  padding: 24px;
-  max-width: 400px;
-  width: 100%;
-  text-align: center;
-  transform: scale(0.9);
-  transition: transform 0.3s ease;
-}
-
-.modal-overlay.active .modal-content {
-  transform: scale(1);
-}
-
-.modal-content h3 {
-  color: var(--primary);
-  margin-bottom: 16px;
-  font-size: 1.1rem;
-}
-
-.modal-content img {
-  width: 100%;
-  border-radius: var(--radius-md);
-  margin-bottom: 16px;
-}
-
-.modal-close {
-  background: var(--primary);
-  color: white;
-  border: none;
-  padding: 10px 24px;
-  border-radius: var(--radius-sm);
-  font-weight: 600;
-  cursor: pointer;
-}
-
-/* === NAVIGASI BAWAH === */
-.bottom-nav {
-  position: fixed;
-  bottom: 0;
-  left: 0;
-  right: 0;
-  background: var(--surface);
-  border-top: 1px solid var(--border);
-  display: flex;
-  justify-content: space-around;
-  padding: 10px 0 calc(10px + env(safe-area-inset-bottom));
-  z-index: 100;
-  transition: background-color 0.3s ease;
-}
-
-.nav-item {
-  background: none;
-  border: none;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  gap: 4px;
-  cursor: pointer;
-  color: var(--text-alt);
-  transition: color 0.2s ease;
-  padding: 4px 16px;
-}
-
-.nav-item.active {
-  color: var(--primary);
-}
-
-.nav-icon {
-  font-size: 1.1rem;
-  font-weight: 700;
-}
-
-.nav-label {
-  font-size: 0.7rem;
-  font-weight: 500;
-}
+/* === MODAL PREVIEW
