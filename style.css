@@ -553,10 +553,3 @@ body {
   font-size: 1.1rem;
   margin-bottom: 16px;
   color: var(--primary);
-  text-align: center;
-}
-
-.modal-content img {
-  width: 100%;
-  border-radius: var(--radius-md);
-  margin-bottom: 
