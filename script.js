@@ -5,12 +5,6 @@ let games = [];
 let currentSkinFilter = 'all';
 let currentAddonFilter = 'all';
 
-// === BAGIKAN KE WHATSAPP ===
-function shareWA(judul) {
-  const teks = encodeURIComponent(`Lihat nih ${judul} 👉 ${window.location.href}`);
-  window.open(`https://wa.me/?text=${teks}`, '_blank');
-}
-
 // === MUAT SEMUA DATA ===
 Promise.all([
   fetch('skins.json').then(r => r.json()),
@@ -43,9 +37,8 @@ function renderSkins() {
       <img src="${item.gambar}" alt="${item.tag}" class="skin-image" loading="lazy">
       <h3 class="skin-title">${item.tag}</h3>
       <div class="skin-buttons">
-        <button class="btn btn-secondary" data-preview="${item.gambar}" data-title="${item.tag}">👁️</button>
-        <a href="${item.link_download}" target="_blank" class="btn btn-primary">⬇️</a>
-        <button class="btn btn-secondary" onclick="shareWA('${item.tag}')">📤</button>
+        <button class="btn btn-secondary" data-preview="${item.gambar}" data-title="${item.tag}">Preview</button>
+        <a href="${item.link_download}" target="_blank" class="btn btn-primary">Unduh</a>
       </div>
     </div>
   `).join('');
@@ -71,10 +64,7 @@ function renderAddons() {
       <h3 class="addon-title">${item.nama}</h3>
       ${item.deskripsi ? `<p class="addon-desc">${item.deskripsi}</p>` : ''}
       ${item.versi_mc ? `<div class="addon-meta"><span class="meta-tag">MC: ${item.versi_mc}</span></div>` : ''}
-      <div class="card-buttons-row">
-        <a href="${item.link_download || '#'}" target="_blank" class="btn btn-primary">⬇️ Unduh</a>
-        <button class="btn btn-secondary" onclick="shareWA('${item.nama}')">📤 Bagikan</button>
-      </div>
+      <a href="${item.link_download || '#'}" target="_blank" class="btn btn-primary" style="width:100%">Unduh</a>
     </div>
   `).join('');
 }
@@ -88,8 +78,7 @@ function renderGames() {
       <p class="game-desc">${item.deskripsi}</p>
       <div class="game-iframe-container">
         <iframe src="${item.link}" title="${item.nama}" loading="lazy"
-          sandbox="allow-same-origin allow-scripts">
-        </iframe>
+          sandbox="allow-same-origin allow-scripts"></iframe>
       </div>
       <div class="game-links">
         <a href="${item.link}" target="_blank" class="btn btn-primary">Buka Penuh</a>
