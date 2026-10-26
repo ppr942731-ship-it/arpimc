@@ -8,7 +8,13 @@
   {
     "id": 2,
     "nama": "Minecraft Quiz Mob", 
-    "deskripsi": "tebak seberapa tau anda tentang mc", 
+    "deskripsi": "tebak seberapa tau anda tentang mob mc", 
     "link": "https://arpihost2.lovable.app/kuis-mc-mob/"
+  }, 
+  {
+    "id": 3,
+    "nama": " Minecraft Quiz Item", 
+    "deskripsi": "tebak seberapa tau anda tentang item mc", 
+    "link": "https://arpihost2.lovable.app/kuis-mc-item/"
   }
 ]
