@@ -4,6 +4,13 @@ let addons = [];
 let games = [];
 let currentSkinFilter = 'all';
 let currentAddonFilter = 'all';
+let turnstileToken = '';
+
+// === FUNGSI CALLBACK TURNSTILE ===
+window.turnstileCallback = function(token) {
+  turnstileToken = token;
+  console.log('✅ Token Turnstile berhasil didapat (butuh Worker untuk validasi nyata):', token);
+};
 
 // === MUAT SEMUA DATA ===
 Promise.all([
@@ -23,7 +30,7 @@ Promise.all([
   renderAddons();
   renderGames();
 })
-.catch(err => console.error('Gagal memuat data:', err));
+.catch(err => console.error('❌ Gagal memuat data:', err));
 
 // === RENDER SKIN ===
 function renderSkins() {
@@ -38,12 +45,13 @@ function renderSkins() {
       <h3 class="skin-title">${item.tag}</h3>
       <div class="skin-buttons">
         <button class="btn btn-secondary" data-preview="${item.gambar}" data-title="${item.tag}">Preview</button>
-        <a href="${item.link_download}" target="_blank" class="btn btn-primary">Unduh</a>
+        <a href="${item.link_download}" target="_blank" class="btn btn-primary btn-unduh">Unduh</a>
       </div>
     </div>
   `).join('');
   
   attachPreviewEvents();
+  attachDownloadCheck();
 }
 
 // === RENDER ADDON ===
@@ -64,9 +72,22 @@ function renderAddons() {
       <h3 class="addon-title">${item.nama}</h3>
       ${item.deskripsi ? `<p class="addon-desc">${item.deskripsi}</p>` : ''}
       ${item.versi_mc ? `<div class="addon-meta"><span class="meta-tag">MC: ${item.versi_mc}</span></div>` : ''}
-      <a href="${item.link_download || '#'}" target="_blank" class="btn btn-primary" style="width:100%">Unduh</a>
+      <a href="${item.link_download || '#'}" target="_blank" class="btn btn-primary btn-unduh" style="width:100%">Unduh</a>
     </div>
   `).join('');
+  attachDownloadCheck();
+}
+
+// === FUNGSI CEK SEBELUM UNDUH (Frontend saja!) ===
+function attachDownloadCheck() {
+  document.querySelectorAll('.btn-unduh').forEach(link => {
+    link.addEventListener('click', (e) => {
+      if(!turnstileToken) {
+        e.preventDefault();
+        alert('⚠️ Silakan selesaikan verifikasi Cloudflare Turnstile terlebih dahulu! (Ingat: ini cuma peringatan browser, nanti tambah Worker untuk perlindungan penuh)');
+      }
+    });
+  });
 }
 
 // === RENDER GAME — DENGAN IFRAME PREVIEW ===
