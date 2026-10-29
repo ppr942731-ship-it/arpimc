@@ -7,6 +7,8 @@
   <meta name="description" content="Koleksi skin, addon, dan permainan untuk Minecraft — lengkap dan mudah diunduh, gratis tanpa biaya apapun">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <!-- ✅ Script Cloudflare Turnstile -->
+  <script src="https://challenges.cloudflare.com/turnstile/v0/api.js" async defer></script>
   <link rel="stylesheet" href="style.css">
 </head>
 <body>
@@ -48,6 +50,8 @@
         <button class="filter-btn" data-cat="template">Template Skin</button>
         <button class="filter-btn" data-cat="pack">Skin Pack</button>
       </div>
+      <!-- ✅ Kotak Turnstile Verifikasi -->
+      <div class="cf-turnstile" data-sitekey="0x4AAAAAAFqY8-hqGc_8WKa6" data-action="unduh_skin"></div>
       <div class="skin-grid" id="skinGrid"></div>
     </section>
 
@@ -70,6 +74,8 @@
         <button class="filter-btn" data-cat="ui">UI</button>
         <button class="filter-btn" data-cat="lain">Lain-lain</button>
       </div>
+      <!-- ✅ Kotak Turnstile Verifikasi Addon -->
+      <div class="cf-turnstile" data-sitekey="0x4AAAAAAFqY8-hqGc_8WKa6" data-action="unduh_addon"></div>
       <div class="addon-grid" id="addonGrid"></div>
     </section>
 
@@ -110,7 +116,7 @@
 
   <script src="script.js"></script>
   
-  <!-- Cloudflare Web Analytics -->
+  <!-- Cloudflare Web Analytics (tetap ada seperti semula!) -->
   <script type='module' src='https://static.cloudflareinsights.com/beacon.min.js' data-cf-beacon='{"token": "d2823010cfef49e9b6b122f5ff9ea46a"}'></script>
   <!-- End Cloudflare Web Analytics -->
   
