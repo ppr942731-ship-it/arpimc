@@ -1,4 +1,4 @@
-/* === VARIABEL TEMA === */
+/* === VARIABELA === */
 :root {
   --bg: #F0F7FF;
   --bg-alt: #FFFFFF;
@@ -578,4 +578,4 @@ body {
 .nav-label {
   font-size: 0.7rem;
   font-weight: 500;
-}
+  }
