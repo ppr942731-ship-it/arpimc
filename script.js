@@ -178,4 +178,4 @@ document.querySelectorAll('.theme-option').forEach(btn => {
 const savedTheme = localStorage.getItem('theme');
 if (savedTheme) {
   document.documentElement.setAttribute('data-theme', savedTheme);
-        }
+      }
