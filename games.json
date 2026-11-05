@@ -16,5 +16,17 @@
     "nama": " Minecraft Quiz Item", 
     "deskripsi": "tebak seberapa tau anda tentang item mc", 
     "link": "https://arpihost2.lovable.app/kuis-mc-item/"
+  }, 
+  {
+    "id": 4,
+    "nama": "avatar maker", 
+    "deskripsi": "buat avatar Minecraft anda", 
+    "link": "https://mcskins.top/avatar-maker"
+  }, 
+  {
+    "id": 5,
+    "nama": " Minecraft Quiz Item", 
+    "deskripsi": "tebak seberapa tau anda tentang item mc", 
+    "link": "https://arpihost2.lovable.app/kuis-mc-item/"
   }
 ]
