@@ -1,0 +1,24 @@
+{
+  "rewrites": [
+    {
+      "source": "/skin",
+      "destination": "/index.html"
+    },
+    {
+      "source": "/addon",
+      "destination": "/index.html"
+    },
+    {
+      "source": "/addons",
+      "destination": "/index.html"
+    },
+    {
+      "source": "/game",
+      "destination": "/index.html"
+    },
+    {
+      "source": "/info",
+      "destination": "/index.html"
+    }
+  ]
+}
