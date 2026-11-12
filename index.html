@@ -4,115 +4,293 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>ArpiMC Zone</title>
-  <meta name="description" content="Koleksi skin, addon, dan permainan untuk Minecraft — lengkap dan mudah diunduh, gratis tanpa biaya apapun">
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <meta name="description" content="Koleksi Skin & Addon Minecraft Bedrock — Gratis, langsung unduh tanpa ribet.">
+  <meta name="author" content="ArpiMC Zone">
+  
+  <!-- Open Graph -->
+  <meta property="og:title" content="ArpiMC Zone">
+  <meta property="og:description" content="Tempat berbagi skin, addon, dan permainan Minecraft Bedrock — semuanya gratis!">
+  <meta property="og:image" content="https://files.catbox.moe/7vkqqk.jpg">
+  <meta property="og:url" content="https://arpimc.zone.id">
+  <meta property="og:type" content="website">
+  
+  <!-- Icon -->
+  <link rel="icon" href="https://files.catbox.moe/7vkqqk.jpg">
+  
   <link rel="stylesheet" href="style.css">
 </head>
 <body>
 
+  <!-- Latar Coslo -->
+  <div id="coslo-bg-layer"></div>
+
   <!-- Header -->
   <header class="site-header">
-    <h1 class="site-title">ArpiMC Zone</h1>
-    <button class="menu-toggle" id="menuToggle">☰</button>
+    <div class="header-content">
+      <button id="sidebarToggle" class="sidebar-toggle" aria-label="Menu">☰</button>
+      <img src="https://files.catbox.moe/7vkqqk.jpg" alt="Logo ArpiMC Zone" class="site-logo">
+      <h1 class="site-title">ArpiMC Zone</h1>
+      <button id="themeToggle" class="theme-toggle" aria-label="Pengaturan Tema">🎨</button>
+    </div>
   </header>
 
-  <!-- Menu Pilihan Tema -->
-  <div class="theme-menu" id="themeMenu">
-    <div class="theme-menu-content">
-      <h3>Pilih Tema</h3>
-      <button class="theme-option" data-theme="default">Default</button>
-      <button class="theme-option" data-theme="neobrutal">Neo-Brutaslim</button>
-      <button class="theme-option" data-theme="dark">Dark</button>
-      <button class="theme-option" data-theme="nori">Tema Pink</button>
+  <!-- Sidebar Overlay -->
+  <div id="sidebarOverlay" class="sidebar-overlay hidden"></div>
+
+  <!-- Sidebar -->
+  <aside id="sidebar" class="sidebar hidden">
+    <div class="sidebar-content">
+      <div class="sidebar-header">
+        <h3>Pengaturan</h3>
+        <button id="closeSidebar" class="close-sidebar">&times;</button>
+      </div>
+      
+      <!-- Pilihan Bahasa -->
+      <div class="sidebar-section">
+        <h4 class="sidebar-subtitle">🌐 Bahasa</h4>
+        <div class="language-list">
+          <button class="lang-option active" data-lang="id">🇮🇩 Indonesia</button>
+          <button class="lang-option" data-lang="en">🇬🇧 English</button>
+        </div>
+      </div>
+      
+      <!-- Pilihan Tema -->
+      <div class="sidebar-section" style="margin-top: 24px;">
+        <h4 class="sidebar-subtitle">🎨 Tema</h4>
+        <div class="theme-list">
+          <button class="theme-choice" data-theme="default">☀️ Default</button>
+          <button class="theme-choice" data-theme="dark">🌙 Gelap</button>
+          <button class="theme-choice" data-theme="neobrutaslim">⬛ Neo Brutaslim</button>
+          <button class="theme-choice" data-theme="coslo">🖼️ Coslo</button>
+        </div>
+        
+        <!-- Pengaturan Coslo -->
+        <div id="cosloSettings" class="coslo-settings hidden">
+          <p class="coslo-desc">Pilih gambar atau video untuk latar belakangmu</p>
+          <label class="upload-area">
+            <span class="upload-label">
+              <span class="upload-icon">📁</span>
+              <span>Klik untuk upload</span>
+            </span>
+            <input type="file" id="cosloUpload" accept="image/*,video/*" class="file-input">
+          </label>
+          <div id="cosloPreviewWrap" class="hidden">
+            <p>Pratinjau:</p>
+            <div id="cosloPreview"></div>
+            <button id="resetCoslo" class="reset-btn">🗑️ Hapus Latar</button>
+          </div>
+        </div>
+      </div>
     </div>
-  </div>
+  </aside>
 
-  <main class="container">
-    <!-- Halaman Skin -->
-    <section id="skinsPage" class="page active">
-      <div class="page-intro">
+  <!-- Konten Utama -->
+  <main>
+    <!-- ============= HALAMAN BERANDA ============= -->
+    <section id="page-home" class="page-section active">
+      <div class="home-container">
+        <div class="home-content">
+          <div class="home-avatar">
+            <img src="https://files.catbox.moe/8cl496.png" alt="ArpiMC Zone">
+          </div>
+          <h2 class="home-title">ArpiMC Zone</h2>
+          <p class="home-desc">Tempat berbagi skin, addon, dan permainan Minecraft Bedrock. Temukan konten terbaik untuk membuat petualanganmu makin seru — semuanya gratis!</p>
+          
+          <div class="home-buttons">
+            <a href="#/skin" class="home-btn primary" data-nav="skin">
+              🎨 Jelajahi Skin →
+            </a>
+            <a href="#/addon" class="home-btn secondary" data-nav="addon">
+              📦 Lihat Addon →
+            </a>
+          </div>
+          
+          <div class="home-social">
+            <a href="https://whatsapp.com/channel/0029Vb7r7gM8V0txIEvMQ01R" target="_blank" rel="noopener noreferrer" class="social-icon" aria-label="Saluran WhatsApp ArpiMC Skin">💬</a>
+            <a href="https://tiktok.com/@apinnmc" target="_blank" rel="noopener noreferrer" class="social-icon" aria-label="TikTok @apinnmc">🎵</a>
+            <a href="https://saweria.co/arpimc" target="_blank" rel="noopener noreferrer" class="social-icon" aria-label="Dukung ArpiMC">💜</a>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============= HALAMAN SKIN ============= -->
+    <section id="page-skin" class="page-section">
+      <div class="container">
         <h2>Koleksi Skin</h2>
-        <p>Temukan skin favoritmu, langsung unduh tanpa ribet. Semua yang ada di sini gratis, tanpa biaya apapun.</p>
+        <p class="page-desc">Temukan skin favoritmu, langsung unduh tanpa ribet. Semua yang ada di sini gratis, tanpa biaya apapun.</p>
+        
+        <div class="stats-row">
+          <div class="stat-card">
+            <div class="stat-number" id="totalSkins">0</div>
+            <div class="stat-label">Skin</div>
+          </div>
+          <div class="stat-card">
+            <div class="stat-number">10+</div>
+            <div class="stat-label">Kategori</div>
+          </div>
+          <div class="stat-card">
+            <div class="stat-number">∞</div>
+            <div class="stat-label">Gratis</div>
+          </div>
+        </div>
+        
+        <div class="filter-row">
+          <button class="filter-tab active" data-filter="all">Semua</button>
+          <button class="filter-tab" data-filter="cowok">Cowok</button>
+          <button class="filter-tab" data-filter="cewek">Cewek</button>
+          <button class="filter-tab" data-filter="pvp">PVP</button>
+          <button class="filter-tab" data-filter="template">Template Skin</button>
+          <button class="filter-tab" data-filter="pack">Skin Pack</button>
+          <button class="filter-tab" data-filter="emote">Emote</button>
+          <button class="filter-tab" data-filter="google">Skin Google</button>
+          <button class="filter-tab" data-filter="couple">Skin Couple</button>
+          <button class="filter-tab" data-filter="lain">Lain-lain</button>
+        </div>
+        
+        <div id="skinsGrid" class="cards-grid">
+          <p class="loading-text">Memuat skin...</p>
+        </div>
       </div>
-      <div class="stats-row">
-        <div class="stat-card"><span id="totalSkin">0</span><small>Skin</small></div>
-        <div class="stat-card"><span>5</span><small>Kategori</small></div>
-        <div class="stat-card"><span>Gratis</span><small>Selamanya</small></div>
-      </div>
-      <div class="filter-bar" id="skinFilters">
-        <button class="filter-btn active" data-cat="all">Semua</button>
-        <button class="filter-btn" data-cat="cowok">Cowok</button>
-        <button class="filter-btn" data-cat="cewek">Cewek</button>
-        <button class="filter-btn" data-cat="pvp">PVP</button>
-        <button class="filter-btn" data-cat="template">Template Skin</button>
-        <button class="filter-btn" data-cat="pack">Skin Pack</button>
-      </div>
-      <div class="skin-grid" id="skinGrid"></div>
     </section>
 
-    <!-- Halaman Addon -->
-    <section id="addonsPage" class="page">
-      <div class="page-intro">
+    <!-- ============= HALAMAN ADDON ============= -->
+    <section id="page-addon" class="page-section">
+      <div class="container">
         <h2>Koleksi Addon</h2>
-        <p>Tambahkan pengalaman baru ke dalam permainanmu. Langsung unduh dan gunakan secara bebas.</p>
+        <p class="page-desc">Kumpulan addon, resource pack, shader, dan UI untuk Minecraft Bedrock Edition.</p>
+        
+        <div class="filter-row">
+          <button class="filter-tab active" data-filter="all">Semua</button>
+          <button class="filter-tab" data-filter="addon">Addon</button>
+          <button class="filter-tab" data-filter="pack">Pack</button>
+          <button class="filter-tab" data-filter="shader">Shader</button>
+          <button class="filter-tab" data-filter="ui">UI</button>
+          <button class="filter-tab" data-filter="horror">Horror</button>
+          <button class="filter-tab" data-filter="survival">Survival</button>
+          <button class="filter-tab" data-filter="maps">Maps</button>
+          <button class="filter-tab" data-filter="apk">APK</button>
+          <button class="filter-tab" data-filter="lain">Lain-lain</button>
+        </div>
+        
+        <div id="addonsGrid" class="cards-grid">
+          <p class="loading-text">Memuat addon...</p>
+        </div>
       </div>
-      <div class="stats-row">
-        <div class="stat-card"><span id="totalAddon">0</span><small>Item</small></div>
-        <div class="stat-card"><span>5</span><small>Kategori</small></div>
-        <div class="stat-card"><span>Gratis</span><small>Selamanya</small></div>
-      </div>
-      <div class="filter-bar" id="addonFilters">
-        <button class="filter-btn active" data-cat="all">Semua</button>
-        <button class="filter-btn" data-cat="addon">Addon</button>
-        <button class="filter-btn" data-cat="pack">Pack</button>
-        <button class="filter-btn" data-cat="shader">Shader</button>
-        <button class="filter-btn" data-cat="ui">UI</button>
-        <button class="filter-btn" data-cat="lain">Lain-lain</button>
-      </div>
-      <div class="addon-grid" id="addonGrid"></div>
     </section>
 
-    <!-- Halaman Game -->
-    <section id="gamesPage" class="page">
-      <div class="page-intro">
-        <h2>Mini Game</h2>
-        <p>Beristirahat sejenak dan mainkan permainan sederhana. Semua bisa dimainkan langsung tanpa instalasi.</p>
+    <!-- ============= HALAMAN GAME ============= -->
+    <section id="page-game" class="page-section">
+      <div class="container">
+        <h2>Mini Game & Alat</h2>
+        <p class="page-desc">Mainkan game seru dan gunakan alat bantu sederhana langsung di sini.</p>
+        
+        <div class="filter-row">
+          <button class="filter-tab active" data-filter="all">Semua</button>
+          <button class="filter-tab" data-filter="game">Game</button>
+          <button class="filter-tab" data-filter="tools">Alat</button>
+          <button class="filter-tab" data-filter="fun">Seru-seruan</button>
+          <button class="filter-tab" data-filter="random">Acak</button>
+          <button class="filter-tab" data-filter="lain">Lain-lain</button>
+        </div>
+        
+        <div id="gamesGrid" class="cards-grid">
+          <p class="loading-text">Memuat game...</p>
+        </div>
       </div>
-      <div class="game-grid" id="gameGrid"></div>
+    </section>
+
+    <!-- ============= HALAMAN INFO ============= -->
+    <section id="page-info" class="page-section">
+      <div class="container">
+        <h2>Tentang ArpiMC Zone</h2>
+        <p class="page-desc" id="infoDesc">Memuat informasi...</p>
+        <div id="infoLinks">
+          <p class="loading-text">Memuat data...</p>
+        </div>
+      </div>
     </section>
   </main>
 
-  <!-- Modal Preview -->
-  <div class="modal-overlay" id="previewModal">
-    <div class="modal-content">
-      <h3 id="modalTitle"></h3>
-      <img id="modalImage" alt="">
-      <button class="modal-close" id="modalClose">Tutup</button>
+  <!-- ============= MODAL PREVIEW SKIN ============= -->
+  <div id="skinModal" class="modal hidden">
+    <div class="modal-header">
+      <button class="back-btn">← Kembali</button>
+      <h3 id="skinModalTitle">Preview Skin</h3>
+      <a id="skinModalDownloadTop" href="#" target="_blank" class="download-top">Unduh</a>
+    </div>
+    <div class="modal-body">
+      <img id="skinModalImage" src="" alt="Preview Skin" class="preview-image">
+    </div>
+    <div class="modal-footer">
+      <p id="skinModalInfo" class="skin-info"></p>
+      <div class="button-row">
+        <a id="skinModalDownload" href="#" target="_blank" class="btn-action btn-green">📥 Unduh</a>
+        <button id="skinModalCopy" class="btn-action btn-gray">🔗 Salin Link</button>
+        <button id="skinModalShareWA" class="btn-action btn-wa">💬 WhatsApp</button>
+      </div>
     </div>
   </div>
 
-  <!-- Navigasi Bawah -->
+  <!-- ============= MODAL PREVIEW ADDON ============= -->
+  <div id="addonModal" class="modal hidden">
+    <div class="modal-header">
+      <button class="back-btn">← Kembali</button>
+      <h3 id="addonModalTitle">Preview Addon</h3>
+      <a id="addonModalDownloadTop" href="#" target="_blank" class="download-top">Unduh</a>
+    </div>
+    <div class="modal-body">
+      <img id="addonModalImage" src="" alt="Preview Addon" class="preview-image">
+    </div>
+    <div class="modal-footer">
+      <p id="addonModalInfo" class="addon-info"></p>
+      <div class="button-row">
+        <a id="addonModalDownload" href="#" target="_blank" class="btn-action btn-green">📥 Unduh</a>
+        <button id="addonModalCopy" class="btn-action btn-gray">🔗 Salin Link</button>
+        <button id="addonModalShareWA" class="btn-action btn-wa">💬 WhatsApp</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- ============= MODAL GAME ============= -->
+  <div id="gameModal" class="modal hidden">
+    <div class="modal-header">
+      <button class="back-btn">← Kembali</button>
+      <h3 id="gameModalTitle">Game</h3>
+      <a id="gameModalNewTab" href="#" target="_blank" class="download-top">Buka Tab Baru</a>
+    </div>
+    <div class="modal-body modal-iframe">
+      <iframe id="gameIframe" title="Game"></iframe>
+    </div>
+  </div>
+
+  <!-- ============= NAVIGASI BAWAH ============= -->
   <nav class="bottom-nav">
-    <button class="nav-item active" data-page="skins">
-      <span class="nav-icon">S</span>
+    <button class="nav-item active" data-page="home">
+      <span class="nav-icon">🏠</span>
+      <span class="nav-label">Rumah</span>
+    </button>
+    <button class="nav-item" data-page="skin">
+      <span class="nav-icon">🎨</span>
       <span class="nav-label">Skin</span>
     </button>
-    <button class="nav-item" data-page="addons">
-      <span class="nav-icon">A</span>
+    <button class="nav-item" data-page="addon">
+      <span class="nav-icon">📦</span>
       <span class="nav-label">Addon</span>
     </button>
-    <button class="nav-item" data-page="games">
-      <span class="nav-icon">G</span>
+    <button class="nav-item" data-page="game">
+      <span class="nav-icon">🎮</span>
       <span class="nav-label">Game</span>
+    </button>
+    <button class="nav-item" data-page="info">
+      <span class="nav-icon">ℹ️</span>
+      <span class="nav-label">Info</span>
     </button>
   </nav>
 
+
+<script type="application/json" id="site-data-addons">[{"id": 1, "nama": "Mutants", "kategori": "addon", "gambar": "https://files.catbox.moe/3kgszm.jpg", "link_download": "https://www.mediafire.com/file/n8wn32k7mwsjh1e/MUTANTS!+Add-On+2.0+by+Vano+craft+(addon).mcaddon/file", "deskripsi": "Menambahkan monster ke dalam Minecraft kamu", "versi": "1.26+", "ukuran": "9,53 mb", "tanggal_upload": "25 Okt 2026"}, {"id": 2, "nama": "3D Skin", "kategori": "pack", "gambar": "https://files.catbox.moe/fa8tro.jpg", "link_download": "https://www.mediafire.com/file/ctputsnqf3goega/3dskinlayer_as.mcpack/file", "deskripsi": "Membuat skin menjadi 3D", "versi": "1.26+", "ukuran": "2,24 mb", "tanggal_upload": "25 Okt 2026"}, {"id": 3, "nama": "BSL Y Shaders", "kategori": "shader", "gambar": "https://files.catbox.moe/3klyfl.jpg", "link_download": "https://www.mediafire.com/file/n7byt0syo3rgc5c/BSL+Y+Shaders.mcpack/file", "deskripsi": "Memperbagus tampilan Minecraft kamu", "versi": "1.26+", "ukuran": "1,25 mb", "tanggal_upload": "25 Okt 2026"}, {"id": 4, "nama": "UI Ancxliy V7", "kategori": "ui", "gambar": "https://files.catbox.moe/n7682n.jpg", "link_download": "https://www.mediafire.com/file/17vn4xii9qsooi7/AncxliyPackV7FixBugs.mcpack/file", "deskripsi": "Mengubah tampilan lobby dengan gaya Jepang", "versi": "1.26+", "ukuran": "23,33 mb", "tanggal_upload": "25 Okt 2026"}]</script>
+<script type="application/json" id="site-data-info">{"tentang": "ArpiMC Zone adalah tempat berbagi koleksi skin, addon, resource pack, dan permainan Minecraft Bedrock. Jelajahi koleksi, lihat pratinjau, lalu buka tautan unduhan dari sumber yang tersedia.", "saluran": [{"nama": "Kemino Skin", "link": "https://whatsapp.com/channel/0029VbCxBy9ADTOIAxNYA80w"}, {"nama": "ArpiMC Skin", "link": "https://whatsapp.com/channel/0029Vb7r7gM8V0txIEvMQ01R"}, {"nama": "ArpiMC Add-on", "link": "https://whatsapp.com/channel/0029Vb77ZvbAojYrfMN7C322"}, {"nama": "Request VIP", "link": "https://whatsapp.com/channel/0029Vb8Php13GJP6okh8ZI0f"}, {"nama": "Apin Codex Team", "link": "https://whatsapp.com/channel/0029VbDCiMWG8l5I6znJLX1R"}], "sosmed": [{"nama": "TikTok · @apinnmc", "link": "https://tiktok.com/@apinnmc"}, {"nama": "Telegram · ArpiMC1", "link": "https://t.me/ArpiMC1"}], "website": [{"nama": "Linktree", "link": "https://linktr.ee/marple.v2"}, {"nama": "Pembuat Prompt", "link": "https://arpimc-gen-v4.vercel.app"}, {"nama": "Top Up All Game", "link": "https://saweria.co/arpimc/toko-top-up"}], "dukungan": [{"nama": "Saweria", "link": "https://saweria.co/arpimc"}, {"nama": "Sociabuzz", "link": "https://sociabuzz.com/arpi_mc/tribe"}]}</script>
   <script src="script.js"></script>
-  
-  <!-- Cloudflare Web Analytics -->
-  <script type='module' src='https://static.cloudflareinsights.com/beacon.min.js' data-cf-beacon='{"token": "d2823010cfef49e9b6b122f5ff9ea46a"}'></script>
-  <!-- End Cloudflare Web Analytics -->
-  
 </body>
 </html>
