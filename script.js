@@ -1,112 +1,32 @@
-// ArpiMC Zone — revisi stabil
-'use strict';
-
-let currentPage = 'home';
-let skinsData = [], addonsData = [], gamesData = [], siteData = {};
-const $ = (id) => document.getElementById(id);
-const esc = (value='') => String(value).replace(/[&<>"']/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
-const safeUrl = (value='') => { try { const u = new URL(value, location.href); return ['http:','https:'].includes(u.protocol) ? u.href : '#'; } catch { return '#'; } };
-const dataFromEmbed = (id) => { const el = $(id); if (!el) return null; try { return JSON.parse(el.textContent); } catch { return null; } };
-
- document.addEventListener('DOMContentLoaded', async () => {
-  initRouter(); initSidebar(); initThemes(); initCosloUpload(); initLanguage();
-  await loadAllData();
-  initModalControls();
-});
-
-function initRouter() {
-  function navigateTo(page, updateUrl=true) {
-    if (!['home','skin','addon','game','info'].includes(page)) page='home';
-    document.querySelectorAll('.page-section').forEach(p => p.classList.toggle('active', p.id === `page-${page}`));
-    document.querySelectorAll('.nav-item').forEach(b => b.classList.toggle('active', b.dataset.page === page));
-    currentPage=page;
-    if (updateUrl) history.replaceState({}, '', `/${page === 'home' ? '' : page}`);
-    closeSidebar();
-    window.scrollTo({top:0,behavior:'smooth'});
-  }
-  window.navigateTo = navigateTo;
-  const path=location.pathname.replace(/^\/+|\/+$/g,'');
-  const route=path.startsWith('game/') ? 'game' : (['skin','addon','game','info'].includes(path) ? path : 'home');
-  navigateTo(route,false);
-  document.querySelectorAll('[data-nav]').forEach(a=>a.addEventListener('click',e=>{e.preventDefault();navigateTo(a.dataset.nav);}));
-  document.querySelectorAll('.nav-item').forEach(b=>b.addEventListener('click',()=>navigateTo(b.dataset.page)));
-  if(path.startsWith('game/')) setTimeout(()=>bukaGameBySlug(path.slice(5)),250);
+const LOGO_URL='https://files.catbox.moe/7vkqqk.jpg';
+let skinsData=[],addonsData=[],gamesData=[],siteData={};
+const $=s=>document.querySelector(s);
+const esc=s=>String(s??'').replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
+const slugify=s=>String(s||'').toLowerCase().normalize('NFD').replace(/[\u0300-\u036f]/g,'').replace(/[^a-z0-9]+/g,'-').replace(/^-|-$/g,'');
+const routes={skin:'/skin',addon:'/addon',game:'/game',info:'/info'};
+function currentPage(){let p=location.pathname.replace(/\/$/,'').split('/').pop().toLowerCase();if(p==='addons')p='addon';return routes[p]?p:'skin'}
+function setPage(page,{push=true}={}){if(!routes[page])page='skin';if(push&&location.pathname!==routes[page])history.pushState({},'',routes[page]);document.querySelectorAll('.page-section').forEach(x=>x.classList.remove('active'));$('#page-'+page).classList.add('active');document.querySelectorAll('.nav-item').forEach(x=>x.classList.toggle('active',x.dataset.page===page));window.scrollTo({top:0,behavior:'instant'});}
+function makeKey(item,type){if(type==='skin'){let s=item.slug||`skin-${item.kategori}-${item.id}`;s=s.replace(/^skin-/,'').replace(new RegExp(`-${item.id}$`),'');return `${s}-id`}if(type==='addon')return `${slugify(item.nama||item.tag)}-id`;return `${slugify(item.nama)}-id`}
+function routeForItem(item,type){return `${routes[type]}?${encodeURIComponent(makeKey(item,type))}=${item.id}`}
+function findDirectItem(){const params=new URLSearchParams(location.search);for(const [k,v] of params.entries()){if(!k.endsWith('-id'))continue;const id=Number(v);if(!Number.isInteger(id))continue;const key=k.slice(0,-3);let type=currentPage();if(type==='skin'){let item=skinsData.find(x=>x.id===id);if(item)return {type,item}}if(type==='addon'){let item=addonsData.find(x=>x.id===id);if(item)return {type,item}}if(type==='game'){let item=gamesData.find(x=>x.id===id);if(item)return {type,item}}// tolerate links opened on an unexpected route
+let item=skinsData.find(x=>x.id===id&&makeKey(x,'skin').startsWith(key)) ;if(item)return {type:'skin',item};item=addonsData.find(x=>x.id===id&&makeKey(x,'addon')===k);if(item)return {type:'addon',item};item=gamesData.find(x=>x.id===id&&makeKey(x,'game')===k);if(item)return {type:'game',item};}return null}
+function renderCards(){
+ $('#totalSkins').textContent=skinsData.length;
+ const skinFilter=$('#skinFilters');skinFilter.addEventListener('click',e=>{const b=e.target.closest('[data-filter]');if(!b)return;skinFilter.querySelectorAll('button').forEach(x=>x.classList.toggle('active',x===b));renderSkinList(b.dataset.filter)});
+ const addonFilter=$('#addonFilters');addonFilter.addEventListener('click',e=>{const b=e.target.closest('[data-filter]');if(!b)return;addonFilter.querySelectorAll('button').forEach(x=>x.classList.toggle('active',x===b));renderAddonList(b.dataset.filter)});
+ renderSkinList('all');renderAddonList('all');renderGameList();
 }
-
-function initSidebar() {
-  $('sidebarToggle')?.addEventListener('click',()=>{ $('sidebar')?.classList.remove('hidden'); $('sidebarOverlay')?.classList.remove('hidden'); });
-  $('closeSidebar')?.addEventListener('click',closeSidebar);
-  $('sidebarOverlay')?.addEventListener('click',closeSidebar);
-}
-function closeSidebar(){ $('sidebar')?.classList.add('hidden'); $('sidebarOverlay')?.classList.add('hidden'); }
-
-function initThemes(){
-  let theme=localStorage.getItem('arpimc-theme')||'default'; setTheme(theme);
-  document.querySelectorAll('.theme-choice').forEach(b=>{b.classList.toggle('active',b.dataset.theme===theme);b.addEventListener('click',()=>{setTheme(b.dataset.theme);document.querySelectorAll('.theme-choice').forEach(x=>x.classList.toggle('active',x===b));});});
-}
-function setTheme(theme){
-  document.documentElement.setAttribute('data-theme',theme); localStorage.setItem('arpimc-theme',theme);
-  $('cosloSettings')?.classList.toggle('hidden',theme!=='coslo');
-  if(theme==='coslo'){const bg=localStorage.getItem('arpimc-coslo-bg'),type=localStorage.getItem('arpimc-coslo-type');if(bg)applyCosloBackground(bg,type);}
-  else removeCosloBackground();
-}
-function initCosloUpload(){
-  $('cosloUpload')?.addEventListener('change',e=>{const file=e.target.files?.[0];if(!file)return;if(file.size>8*1024*1024){alert('Ukuran file maksimal 8 MB.');e.target.value='';return;}
-    const reader=new FileReader();reader.onload=ev=>{const type=file.type.startsWith('video')?'video':'image',url=ev.target.result;
-      $('cosloPreviewWrap')?.classList.remove('hidden');$('cosloPreview').innerHTML=type==='video'?`<video src="${url}" muted loop autoplay playsinline></video>`:`<img src="${url}" alt="Pratinjau latar">`;
-      try{localStorage.setItem('arpimc-coslo-bg',url);localStorage.setItem('arpimc-coslo-type',type);}catch{alert('File terlalu besar untuk disimpan di browser.');return;}if(localStorage.getItem('arpimc-theme')==='coslo')applyCosloBackground(url,type);
-    };reader.readAsDataURL(file);
-  });
-  $('resetCoslo')?.addEventListener('click',()=>{localStorage.removeItem('arpimc-coslo-bg');localStorage.removeItem('arpimc-coslo-type');$('cosloPreviewWrap')?.classList.add('hidden');$('cosloPreview').innerHTML='';$('cosloUpload').value='';removeCosloBackground();});
-}
-function applyCosloBackground(url,type){const layer=$('coslo-bg-layer');if(!layer)return;layer.innerHTML=type==='video'?`<video src="${url}" muted loop autoplay playsinline></video>`:`<div style="width:100%;height:100%;background-image:url('${url}');background-position:center;background-size:cover"></div>`;document.body.classList.add('coslo-active');}
-function removeCosloBackground(){if($('coslo-bg-layer'))$('coslo-bg-layer').innerHTML='';document.body.classList.remove('coslo-active');}
-function initLanguage(){document.querySelectorAll('.lang-option').forEach(b=>{b.classList.toggle('active',b.dataset.lang===(localStorage.getItem('arpimc-lang')||'id'));b.addEventListener('click',()=>{localStorage.setItem('arpimc-lang',b.dataset.lang);document.querySelectorAll('.lang-option').forEach(x=>x.classList.toggle('active',x===b));alert(b.dataset.lang==='en'?'English selection saved. Some content remains in Indonesian.':'Bahasa Indonesia dipilih.');});});}
-
-async function loadAllData(){
-  try{
-    const embedded=[dataFromEmbed('site-data-skins'),dataFromEmbed('site-data-addons'),dataFromEmbed('site-data-games'),dataFromEmbed('site-data-info')];
-    if(embedded.every(Boolean)){[skinsData,addonsData,gamesData,siteData]=embedded;}
-    else {const names=['skins.json','addons.json','games.json','data.json'];const results=await Promise.all(names.map(async n=>{const r=await fetch(n);if(!r.ok)throw new Error(`Gagal memuat ${n}`);return r.json();}));[skinsData,addonsData,gamesData,siteData]=results;}
-    skinsData=skinsData.map(s=>({...s,nama:s.nama||s.tag||`Skin #${s.id}`,kredit:s.kredit||(String(s.deskripsi||'').replace(/^Credit by\s*/i,''))}));
-    $('totalSkins').textContent=skinsData.length;
-    renderSkins('all');renderAddons('all');renderGames('all');renderInfo();
-    initFilters();checkDirectPreviewLink();
-  }catch(err){console.error(err);['skinsGrid','addonsGrid','gamesGrid','infoLinks'].forEach(id=>{if($(id))$(id).innerHTML='<p class="loading-text">Data gagal dimuat. Periksa file JSON atau koneksi internet.</p>';});}
-}
-function initFilters(){
-  [['#page-skin .filter-tab',renderSkins],['#page-addon .filter-tab',renderAddons],['#page-game .filter-tab',renderGames]].forEach(([selector,render])=>{
-    document.querySelectorAll(selector).forEach(btn=>btn.addEventListener('click',()=>{document.querySelectorAll(selector).forEach(x=>x.classList.toggle('active',x===btn));render(btn.dataset.filter);}));
-  });
-}
-function imageMarkup(url,alt,kind='skin'){
-  const safe=safeUrl(url);return safe==='#'?`<div class="image-fallback" aria-label="Gambar tidak tersedia">${kind==='addon'?'📦':'🎨'}</div>`:`<img src="${esc(safe)}" alt="${esc(alt)}" loading="lazy" onerror="this.outerHTML='<div class=&quot;image-fallback&quot;>🖼️</div>'">`;
-}
-function renderSkins(category){const grid=$('skinsGrid');const list=category==='all'?skinsData:skinsData.filter(s=>s.kategori===category);if(!list.length){grid.innerHTML='<p class="loading-text">Belum ada skin di kategori ini.</p>';return;}
-  grid.innerHTML=list.map(s=>`<article class="skin-card"><div class="card-img-wrap" role="button" tabindex="0" aria-label="Preview ${esc(s.nama)}" onclick="bukaPreviewSkin(${Number(s.id)})" onkeydown="if(event.key==='Enter'||event.key===' '){event.preventDefault();bukaPreviewSkin(${Number(s.id)})}">${imageMarkup(s.gambar,s.nama)}</div><div class="card-body"><h3 class="card-name">${esc(s.nama)}</h3><p class="card-meta">${esc(s.kategori||'Skin')} ${s.kredit?'· Credit: '+esc(s.kredit):''}</p><div class="card-buttons"><button class="card-btn preview" onclick="bukaPreviewSkin(${Number(s.id)})">Preview</button><a href="${esc(safeUrl(s.link_download))}" target="_blank" rel="noopener noreferrer" class="card-btn download">Unduh</a></div></div></article>`).join('');
-}
-function renderAddons(category){const grid=$('addonsGrid');const list=category==='all'?addonsData:addonsData.filter(a=>a.kategori===category);if(!list.length){grid.innerHTML='<p class="loading-text">Belum ada addon di kategori ini.</p>';return;}
-  grid.innerHTML=list.map(a=>`<article class="addon-card"><div class="card-img-wrap" role="button" tabindex="0" onclick="bukaPreviewAddon(${Number(a.id)})" onkeydown="if(event.key==='Enter'||event.key===' '){event.preventDefault();bukaPreviewAddon(${Number(a.id)})}">${imageMarkup(a.gambar,a.nama,'addon')}</div><div class="card-body"><h3 class="card-name">${esc(a.nama)}</h3><p class="card-meta">${esc(a.kategori||'Addon')} ${a.versi?'· MC '+esc(a.versi):''}</p><div class="card-buttons"><button class="card-btn preview" onclick="bukaPreviewAddon(${Number(a.id)})">Preview</button><a href="${esc(safeUrl(a.link_download))}" target="_blank" rel="noopener noreferrer" class="card-btn download">Unduh</a></div></div></article>`).join('');
-}
-function renderGames(category){const grid=$('gamesGrid');const list=category==='all'?gamesData:gamesData.filter(g=>(g.tipe||'game')===category);if(!list.length){grid.innerHTML='<p class="loading-text">Belum ada konten di kategori ini.</p>';return;}
-  grid.innerHTML=list.map(g=>`<article class="game-card"><div class="card-body"><h3 class="game-name">${esc(g.nama)}</h3><p class="game-desc">${esc(g.deskripsi||'')}</p><p class="card-meta">${esc(g.tipe||'game')}</p><button class="card-btn download" onclick="bukaGame(${Number(g.id)})">Preview / Buka →</button></div></article>`).join('');
-}
-function makeShareUrl(type,item){const url=new URL(location.href);url.search='';url.hash='';url.searchParams.set(`${type}-id`,item.id);return url.href;}
-function showModal(id){$(id)?.classList.remove('hidden');document.body.style.overflow='hidden';}
-function bukaPreviewSkin(id){const s=skinsData.find(x=>Number(x.id)===Number(id));if(!s)return;const share=makeShareUrl(s.kategori||'skin',s);$('skinModalTitle').textContent=s.nama;$('skinModalImage').src=s.gambar||'';$('skinModalImage').alt=s.nama;$('skinModalImage').onerror=()=>{$('skinModalImage').style.display='none';};$('skinModalImage').onload=()=>{$('skinModalImage').style.display='block';};$('skinModalInfo').textContent=[s.kredit?`Credit: ${s.kredit}`:'',s.tanggal_upload?`Tanggal: ${s.tanggal_upload}`:'',s.deskripsi&&!/^Credit by/i.test(s.deskripsi)?s.deskripsi:''].filter(Boolean).join(' • ')||'Informasi skin';setDownload('skinModalDownload',s.link_download);setDownload('skinModalDownloadTop',s.link_download);$('skinModalCopy').onclick=()=>copyText(share);$('skinModalShareWA').onclick=()=>shareWA(`Skin: ${s.nama}\n${s.kredit?'Credit: '+s.kredit+'\n':''}Unduh: ${s.link_download}\nArpiMC Zone`);showModal('skinModal');history.replaceState({},'',share);}
-function bukaPreviewAddon(id){const a=addonsData.find(x=>Number(x.id)===Number(id));if(!a)return;const share=makeShareUrl('addon',a);$('addonModalTitle').textContent=a.nama;$('addonModalImage').src=a.gambar||'';$('addonModalImage').alt=a.nama;$('addonModalImage').onerror=()=>{$('addonModalImage').style.display='none';};$('addonModalImage').onload=()=>{$('addonModalImage').style.display='block';};$('addonModalInfo').textContent=[a.deskripsi||'',a.versi?`Versi MC: ${a.versi}`:'',a.ukuran?`Ukuran: ${a.ukuran}`:'',a.tanggal_upload?`Tanggal: ${a.tanggal_upload}`:''].filter(Boolean).join(' • ')||'Informasi addon';setDownload('addonModalDownload',a.link_download);setDownload('addonModalDownloadTop',a.link_download);$('addonModalCopy').onclick=()=>copyText(share);$('addonModalShareWA').onclick=()=>shareWA(`Addon: ${a.nama}\n${a.deskripsi||''}\nUnduh: ${a.link_download}\nArpiMC Zone`);showModal('addonModal');history.replaceState({},'',share);}
-function setDownload(id,url){const el=$(id);if(!el)return;const u=safeUrl(url);el.href=u;el.style.pointerEvents=u==='#'?'none':'';el.style.opacity=u==='#'?'.5':'';}
-async function copyText(value){try{await navigator.clipboard.writeText(value);alert('Link berhasil disalin.');}catch{prompt('Salin tautan ini:',value);}}
-function shareWA(message){window.open('https://wa.me/?text='+encodeURIComponent(message),'_blank','noopener');}
-function bukaGame(id){const g=gamesData.find(x=>Number(x.id)===Number(id));if(!g)return;$('gameModalTitle').textContent=g.nama;$('gameIframe').src=safeUrl(g.link);$('gameModalNewTab').href=safeUrl(g.link);showModal('gameModal');history.replaceState({},'',`/game/${encodeURIComponent(g.slug||g.nama.toLowerCase().replace(/[^a-z0-9]+/g,'-'))}`);}
-function bukaGameBySlug(slug){const g=gamesData.find(x=>(x.slug||x.nama.toLowerCase().replace(/[^a-z0-9]+/g,'-'))===decodeURIComponent(slug));if(g)bukaGame(g.id);}
-function closeModal(id){const el=$(id);if(!el||el.classList.contains('hidden'))return;el.classList.add('hidden');if(id==='gameModal')$('gameIframe').src='';if(!document.querySelector('.modal:not(.hidden)'))document.body.style.overflow='';history.replaceState({},'',`/${currentPage==='home'?'':currentPage}`);}
-function tutupSkinModal(){closeModal('skinModal');}function tutupAddonModal(){closeModal('addonModal');}function tutupGameModal(){closeModal('gameModal');}
-function initModalControls(){document.querySelector('#skinModal .back-btn')?.addEventListener('click',tutupSkinModal);document.querySelector('#addonModal .back-btn')?.addEventListener('click',tutupAddonModal);document.querySelector('#gameModal .back-btn')?.addEventListener('click',tutupGameModal);document.querySelectorAll('.modal').forEach(m=>m.addEventListener('click',e=>{if(e.target===m){if(m.id==='skinModal')tutupSkinModal();if(m.id==='addonModal')tutupAddonModal();if(m.id==='gameModal')tutupGameModal();}}));document.addEventListener('keydown',e=>{if(e.key==='Escape'){tutupSkinModal();tutupAddonModal();tutupGameModal();}});}
-function checkDirectPreviewLink(){const p=new URLSearchParams(location.search);for(const [key,value] of p){if(!key.endsWith('-id'))continue;const id=Number(value);if(key==='addon-id')bukaPreviewAddon(id);else if(skinsData.some(s=>Number(s.id)===id))bukaPreviewSkin(id);else if(addonsData.some(a=>Number(a.id)===id))bukaPreviewAddon(id);break;}}
-
-function renderInfo(){
-  const desc=siteData.tentang||'ArpiMC Zone, koleksi skin dan addon Minecraft Bedrock.';$('infoDesc').textContent=desc;
-  const sections=[['📢 Saluran WhatsApp','Ikuti saluran untuk melihat koleksi dan pembaruan.',siteData.saluran],['📱 Media Sosial','Temukan pembaruan dan aktivitas ArpiMC.',siteData.sosmed],['🌐 Website & Layanan','Layanan dan halaman terkait.',siteData.website],['💜 Dukungan','Dukungan untuk membantu keberlangsungan konten.',siteData.dukungan]];
-  $('infoLinks').innerHTML=sections.map(([title,sub,list])=>Array.isArray(list)&&list.length?`<section class="info-card"><h3>${esc(title)}</h3><p>${esc(sub)}</p><div class="info-grid">${list.map(item=>`<a class="info-grid-btn" href="${esc(safeUrl(item.link))}" target="_blank" rel="noopener noreferrer">${esc(item.nama)}</a>`).join('')}</div></section>`:'').join('')||'<p class="loading-text">Belum ada informasi.</p>';
-}
+function renderSkinList(cat){const arr=cat==='all'?skinsData:skinsData.filter(x=>x.kategori===cat);$('#skinsGrid').innerHTML=arr.length?arr.map(x=>`<article class="card"><img class="card-image" src="${esc(x.gambar)}" alt="${esc(x.tag)}" loading="lazy" data-open="skin" data-id="${x.id}"><div class="card-body"><h3 class="card-title">${esc(x.tag)}</h3><div class="card-actions"><button class="btn btn-secondary" data-open="skin" data-id="${x.id}">Preview</button><a class="btn btn-primary" href="${esc(x.link_download)}" target="_blank" rel="noopener">Unduh</a></div></div></article>`).join(''):'<p class="empty">Belum ada skin pada kategori ini.</p>'}
+function renderAddonList(cat){const arr=cat==='all'?addonsData:addonsData.filter(x=>x.kategori===cat);$('#addonsGrid').innerHTML=arr.length?arr.map(x=>`<article class="card addon"><img class="card-image" src="${esc(x.gambar)}" alt="${esc(x.nama||x.tag)}" loading="lazy" data-open="addon" data-id="${x.id}"><div class="card-body"><h3 class="card-title">${esc(x.nama||x.tag)}</h3><p class="card-meta">${esc(x.versi||'')} ${x.ukuran?'· '+esc(x.ukuran):''}</p><div class="card-actions"><button class="btn btn-secondary" data-open="addon" data-id="${x.id}">Preview</button><a class="btn btn-primary" href="${esc(x.link_download)}" target="_blank" rel="noopener">Unduh</a></div></div></article>`).join(''):'<p class="empty">Belum ada addon pada kategori ini.</p>'}
+function renderGameList(){$('#gamesGrid').innerHTML=gamesData.length?gamesData.map(x=>`<article class="card game"><div class="game-cover"><svg viewBox="0 0 24 24"><path d="M7 8h10a4 4 0 0 1 3.8 5.2l-1 3.2a2.5 2.5 0 0 1-4.1 1.1L13.5 15h-3l-2.2 2.5a2.5 2.5 0 0 1-4.1-1.1l-1-3.2A4 4 0 0 1 7 8Z"/><path d="M8 10.5v4m-2-2h4m6-1h.01M18 13h.01"/></svg></div><div class="card-body"><h3 class="card-title">${esc(x.nama)}</h3><p class="card-meta">${esc(x.deskripsi||'Mini game')}</p><div class="card-actions"><button class="btn btn-primary" data-open="game" data-id="${x.id}">Mainkan</button><a class="btn btn-secondary" href="${esc(x.link)}" target="_blank" rel="noopener">Tab baru</a></div></div></article>`).join(''):'<p class="empty">Belum ada game.</p>'}
+function renderInfo(){const groups=[['Saluran WhatsApp',siteData.saluran],['Media Sosial',siteData.sosmed],['Website & Layanan',siteData.website],['Dukungan',siteData.dukungan]];$('#infoDesc').textContent=siteData.deskripsi||'Informasi ArpiMC Zone.';$('#infoLinks').innerHTML=groups.filter(g=>g[1]?.length).map(([title,items])=>`<section class="info-card"><h2>${esc(title)}</h2><div class="link-grid">${items.map(x=>`<a class="info-link" href="${esc(x.link)}" target="_blank" rel="noopener noreferrer">${esc(x.nama)}</a>`).join('')}</div></section>`).join('')}
+function openPreview(type,id,{updateUrl=true}={}){const list=type==='skin'?skinsData:type==='addon'?addonsData:gamesData;const item=list.find(x=>x.id===Number(id));if(!item)return;setPage(type,{push:false});const modal=$('#previewModal');$('#modalTitle').textContent=type==='skin'?item.tag:(item.nama||item.tag);const open=$('#modalOpen');open.href=type==='game'?item.link:item.link_download;open.textContent=type==='game'?'Buka tab':'Unduh';let content='';let actions='';if(type==='game'){content=`<iframe class="game-frame" src="${esc(item.link)}" title="${esc(item.nama)}" loading="lazy" allow="fullscreen; autoplay; clipboard-read; clipboard-write" referrerpolicy="strict-origin-when-cross-origin"></iframe>`;actions=`<a class="btn btn-primary" href="${esc(item.link)}" target="_blank" rel="noopener">Buka di tab baru</a>`}else{content=`<img class="preview-image" src="${esc(item.gambar)}" alt="${esc(item.tag||item.nama)}"><p class="preview-details">${esc(item.deskripsi||'')}<br>${type==='skin'?'Credit dan tanggal mengikuti sumber asli.':`Versi: ${esc(item.versi||'Tidak disebutkan')} · Ukuran: ${esc(item.ukuran||'Tidak disebutkan')}`}<br>Diunggah: ${esc(item.tanggal_upload||'Tidak diketahui')}</p>`;actions=`<a class="btn btn-primary" href="${esc(item.link_download)}" target="_blank" rel="noopener">Unduh</a><button class="btn btn-secondary" id="copyShare">Salin tautan</button><button class="btn btn-secondary" id="shareWA">Bagikan WA</button>`}
+$('#modalContent').innerHTML=content;$('#modalActions').innerHTML=actions;modal.classList.remove('hidden');document.body.style.overflow='hidden';if(updateUrl){history.pushState({preview:{type,id:item.id}},'',routeForItem(item,type))}const shareUrl=location.origin+routeForItem(item,type);const copy=$('#copyShare');if(copy)copy.onclick=async()=>{try{await navigator.clipboard.writeText(shareUrl);copy.textContent='Tersalin';}catch{prompt('Salin tautan ini:',shareUrl)}};const wa=$('#shareWA');if(wa)wa.onclick=()=>window.open('https://wa.me/?text='+encodeURIComponent((item.tag||item.nama)+'\n'+shareUrl),'_blank','noopener');}
+function closePreview({updateUrl=true}={}){$('#previewModal').classList.add('hidden');$('#modalContent').innerHTML='';$('#modalActions').innerHTML='';document.body.style.overflow='';if(updateUrl){const p=currentPage();history.pushState({},'',routes[p])}}
+function showRoute(){const page=currentPage();setPage(page,{push:false});const direct=findDirectItem();if(direct)openPreview(direct.type,direct.item.id,{updateUrl:false});else if(location.search)history.replaceState({},'',routes[page]);}
+async function loadJson(name){const r=await fetch(name);if(!r.ok)throw new Error(`HTTP ${r.status} ${name}`);return r.json()}
+async function init(){try{[skinsData,addonsData,gamesData,siteData]=await Promise.all(['skins.json','addons.json','games.json','data.json'].map(loadJson));renderCards();renderInfo();showRoute()}catch(err){console.error(err);document.querySelectorAll('.cards-grid').forEach(el=>el.innerHTML='<p class="empty">Data gagal dimuat. Pastikan file JSON berada satu folder dengan index.html.</p>');}}
+document.addEventListener('click',e=>{const trigger=e.target.closest('[data-open]');if(trigger){openPreview(trigger.dataset.open,trigger.dataset.id);return}const nav=e.target.closest('.nav-item');if(nav){e.preventDefault();const p=nav.dataset.page;closePreview({updateUrl:false});history.pushState({},'',routes[p]);setPage(p,{push:false})}});
+$('#modalBack').addEventListener('click',()=>closePreview());$('#previewModal').addEventListener('click',e=>{if(e.target===$('#previewModal'))closePreview()});window.addEventListener('popstate',()=>{if(!$('#previewModal').classList.contains('hidden'))closePreview({updateUrl:false});showRoute()});document.addEventListener('keydown',e=>{if(e.key==='Escape'){if(!$('#previewModal').classList.contains('hidden'))closePreview();$('#themePanel').classList.add('hidden')}});
+const panel=$('#themePanel');$('#themeToggle').onclick=()=>panel.classList.remove('hidden');$('#themeClose').onclick=()=>panel.classList.add('hidden');panel.addEventListener('click',e=>{if(e.target===panel)panel.classList.add('hidden')});document.querySelectorAll('.theme-choice').forEach(b=>b.addEventListener('click',()=>{const t=b.dataset.theme;if(t==='default')document.documentElement.removeAttribute('data-theme');else document.documentElement.dataset.theme=t;localStorage.setItem('arpimc-theme',t);panel.classList.add('hidden')}));const saved=localStorage.getItem('arpimc-theme');if(saved&&saved!=='default')document.documentElement.dataset.theme=saved;
+init();
