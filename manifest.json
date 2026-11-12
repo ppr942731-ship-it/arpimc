@@ -1,0 +1,46 @@
+{
+  "id": "/",
+  "name": "ArpiMC Zone",
+  "short_name": "ArpiMC",
+  "start_url": "/skin",
+  "scope": "/",
+  "display": "standalone",
+  "background_color": "#F0F7FF",
+  "theme_color": "#0066ff",
+  "icons": [
+    {
+      "src": "https://files.catbox.moe/7vkqqk.jpg",
+      "sizes": "any",
+      "type": "image/jpeg",
+      "purpose": "any maskable"
+    }
+  ],
+  "shortcuts": [
+    {
+      "name": "Koleksi Skin",
+      "short_name": "Skin",
+      "description": "Buka koleksi skin Minecraft",
+      "url": "/skin",
+      "icons": [
+        {
+          "src": "https://files.catbox.moe/7vkqqk.jpg",
+          "sizes": "any",
+          "type": "image/jpeg"
+        }
+      ]
+    },
+    {
+      "name": "Koleksi Addon",
+      "short_name": "Addon",
+      "description": "Buka koleksi addon Minecraft",
+      "url": "/addon",
+      "icons": [
+        {
+          "src": "https://files.catbox.moe/7vkqqk.jpg",
+          "sizes": "any",
+          "type": "image/jpeg"
+        }
+      ]
+    }
+  ]
+}
