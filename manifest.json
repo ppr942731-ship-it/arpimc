@@ -1,44 +1,61 @@
 {
   "id": "/",
   "name": "ArpiMC Zone",
-  "short_name": "ArpiMC",
+  "short_name": "ArpiMC Zone",
+  "description": "Koleksi skin, addon, game, dan tools Minecraft.",
   "start_url": "/skin",
   "scope": "/",
   "display": "standalone",
-  "background_color": "#F0F7FF",
+  "background_color": "#f0f7ff",
   "theme_color": "#0066ff",
   "icons": [
     {
       "src": "https://files.catbox.moe/7vkqqk.jpg",
       "sizes": "any",
       "type": "image/jpeg",
-      "purpose": "any maskable"
+      "purpose": "any"
+    },
+    {
+      "src": "/icon.svg",
+      "sizes": "any",
+      "type": "image/svg+xml",
+      "purpose": "any"
     }
   ],
   "shortcuts": [
     {
       "name": "Koleksi Skin",
       "short_name": "Skin",
-      "description": "Buka koleksi skin Minecraft",
+      "description": "Buka koleksi skin ArpiMC Zone",
       "url": "/skin",
       "icons": [
         {
           "src": "https://files.catbox.moe/7vkqqk.jpg",
           "sizes": "any",
           "type": "image/jpeg"
+        },
+        {
+          "src": "/icon.svg",
+          "sizes": "any",
+          "type": "image/svg+xml"
         }
       ]
     },
     {
       "name": "Koleksi Addon",
       "short_name": "Addon",
-      "description": "Buka koleksi addon Minecraft",
+      "description": "Buka koleksi addon ArpiMC Zone",
       "url": "/addon",
       "icons": [
         {
           "src": "https://files.catbox.moe/7vkqqk.jpg",
           "sizes": "any",
           "type": "image/jpeg"
+        },
+        {
+          "src": "/icon.svg",
+          "sizes": "any",
+          "type": "image/svg+xml"
         }
       ]
     }
