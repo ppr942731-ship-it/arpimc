@@ -1,10 +1,5 @@
 {
-  "tentang": "ArpiMC Zone adalah tempat berbagi koleksi skin, addon, resource pack, dan permainan Minecraft Bedrock. Jelajahi koleksi, lihat pratinjau, lalu buka tautan unduhan dari sumber yang tersedia.",
   "saluran": [
-    {
-      "nama": "Kemino Skin",
-      "link": "https://whatsapp.com/channel/0029VbCxBy9ADTOIAxNYA80w"
-    },
     {
       "nama": "ArpiMC Skin",
       "link": "https://whatsapp.com/channel/0029Vb7r7gM8V0txIEvMQ01R"
@@ -24,11 +19,11 @@
   ],
   "sosmed": [
     {
-      "nama": "TikTok · @apinnmc",
+      "nama": "TikTok",
       "link": "https://tiktok.com/@apinnmc"
     },
     {
-      "nama": "Telegram · ArpiMC1",
+      "nama": "Telegram",
       "link": "https://t.me/ArpiMC1"
     }
   ],
@@ -48,12 +43,18 @@
   ],
   "dukungan": [
     {
-      "nama": "Saweria",
+      "nama": "Dukung melalui Saweria",
       "link": "https://saweria.co/arpimc"
     },
     {
-      "nama": "Sociabuzz",
+      "nama": "Dukung melalui Sociabuzz",
       "link": "https://sociabuzz.com/arpi_mc/tribe"
     }
-  ]
+  ],
+  "unduh_arpimc_zone": {
+    "nama": "Unduh ArpiMC Zone",
+    "link": "/",
+    "mode": "pwa-install",
+    "keterangan": "Pasang ArpiMC Zone ke layar utama perangkat."
+  }
 }
