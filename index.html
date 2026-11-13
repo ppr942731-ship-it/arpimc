@@ -2,23 +2,33 @@
 <html lang="id">
 <head>
 <meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
-<title>ArpiMC Zone</title><meta name="description" content="ArpiMC Zone adalah situs resmi dan pusat komunitas milik ArpiMC yang menyediakan kumpulan skin, add-on Minecraft, dan berbagai konten game gratis."><link rel="canonical" href="https://arpimc.zone.id/">
-<meta name="theme-color" content="#0066ff"><meta property="og:title" content="ArpiMC Zone"><meta property="og:description" content="Koleksi skin, addon, game, dan tools Minecraft."><meta property="og:image" content="https://files.catbox.moe/7vkqqk.jpg">
-<link rel="icon" href="https://files.catbox.moe/7vkqqk.jpg"><link rel="manifest" href="/manifest.json"><link rel="preconnect" href="https://files.catbox.moe"><link rel="stylesheet" href="/style.css">
-</head><body>
-<header class="site-header"><a class="brand" href="/skin" aria-label="ArpiMC Zone"><img src="https://files.catbox.moe/7vkqqk.jpg" alt="Logo ArpiMC Zone" onerror="this.src='/icon.svg'"><span>ArpiMC Zone</span></a><button class="icon-button" id="themeOpen" aria-label="Pilih tema"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 6h16M4 12h16M4 18h16"/></svg></button></header>
+<title>ArpiMC Zone</title>
+<meta name="description" content="ArpiMC Zone adalah situs resmi dan pusat komunitas milik ArpiMC yang menyediakan kumpulan skin, add-on Minecraft, dan berbagai konten game gratis.">
+<link rel="canonical" href="https://arpimc.zone.id/">
+<meta name="theme-color" content="#0066ff"><meta property="og:title" content="ArpiMC Zone"><meta property="og:description" content="Temukan skin Minecraft, addon, dan game gratis di ArpiMC Zone."><meta property="og:image" content="https://files.catbox.moe/7vkqqk.jpg">
+<link rel="icon" href="https://files.catbox.moe/7vkqqk.jpg"><link rel="manifest" href="/manifest.json">
+<link rel="preconnect" href="https://files.catbox.moe"><link rel="stylesheet" href="/style.css">
+</head>
+<body>
+<header class="site-header">
+ <a class="brand" href="/skin" aria-label="ArpiMC Zone"><img src="https://files.catbox.moe/7vkqqk.jpg" alt="Logo ArpiMC Zone" onerror="this.src='/icons/icon.svg'"><span>ArpiMC Zone</span></a>
+ <div class="header-actions">
+  <a class="download-zone" id="downloadZone" href="/" aria-label="Unduh ArpiMC Zone"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 3v11m0 0 4-4m-4 4-4-4M4 16v4h16v-4"/></svg><span>Unduh ArpiMC Zone</span></a>
+  <button class="icon-button" id="themeOpen" aria-label="Buka menu tema"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 6h16M4 12h16M4 18h16"/></svg></button>
+ </div>
+</header>
 <main class="container">
 <section id="listingView">
  <div class="page-heading"><p class="eyebrow">MINECRAFT COLLECTION</p><h1 id="pageTitle">Koleksi Skin</h1><p id="pageDescription">Temukan skin favoritmu, langsung unduh tanpa ribet.</p></div>
- <div id="stats" class="stats-row"></div>
- <div id="filters" class="filter-row"></div>
+ <div id="stats" class="stats-row"></div><div id="filters" class="filter-row"></div>
  <div id="cards" class="cards-grid" aria-live="polite"><p class="loading">Memuat koleksi...</p></div>
 </section>
 <section id="detailView" class="detail-view hidden" aria-live="polite">
  <div class="detail-top"><button class="back-button" id="backButton"><svg viewBox="0 0 24 24"><path d="m15 18-6-6 6-6M9 12h12"/></svg><span>Kembali</span></button><span class="detail-type" id="detailType"></span></div>
- <div id="gameToolbar" class="game-toolbar hidden"><button class="back-button" id="backButtonGame"><svg viewBox="0 0 24 24"><path d="m15 18-6-6 6-6M9 12h12"/></svg><span>Kembali</span></button><a id="gameNewTab" class="back-button" href="#" target="_blank" rel="noopener"><span>Buka Tab Baru</span><svg viewBox="0 0 24 24"><path d="M14 4h6v6M20 4l-9 9M18 13v6a1 1 0 0 1-1 1H5a1 1 0 0 1-1-1V7a1 1 0 0 1 1-1h6"/></svg></a></div><div class="detail-layout" id="detailLayout"><div class="preview-frame-wrap" id="previewWrap"><iframe id="previewFrame" title="Pratinjau konten" allow="fullscreen; autoplay; clipboard-read; clipboard-write" allowfullscreen loading="eager"></iframe></div><div class="detail-info" id="detailInfo"><h1 id="detailTitle"></h1><p id="detailDescription"></p><div class="detail-meta" id="detailMeta"></div><div class="detail-actions" id="detailActions"></div></div></div>
+ <div id="gameToolbar" class="game-toolbar hidden"><button class="back-button" id="backButtonGame"><svg viewBox="0 0 24 24"><path d="m15 18-6-6 6-6M9 12h12"/></svg><span>Kembali</span></button><a id="gameNewTab" class="back-button" href="#" target="_blank" rel="noopener"><span>Buka Tab Baru</span><svg viewBox="0 0 24 24"><path d="M14 4h6v6M20 4l-9 9M18 13v6a1 1 0 0 1-1 1H5a1 1 0 0 1-1-1V7a1 1 0 0 1 1-1h6"/></svg></a></div>
+ <div class="detail-layout" id="detailLayout"><div class="preview-frame-wrap" id="previewWrap"><iframe id="previewFrame" title="Pratinjau konten" allow="fullscreen; autoplay; clipboard-read; clipboard-write" allowfullscreen loading="eager"></iframe></div><div class="detail-info" id="detailInfo"><h1 id="detailTitle"></h1><p id="detailDescription"></p><div class="detail-meta" id="detailMeta"></div><div class="detail-actions" id="detailActions"></div></div></div>
 </section>
-<section id="infoView" class="hidden"><div class="page-heading"><p class="eyebrow">TENTANG WEBSITE</p><h1>Tentang ArpiMC Zone</h1><p>Temukan kanal, media sosial, website, dan tautan dukungan.</p></div><div id="infoGroups" class="info-grid"></div></section>
+<section id="infoView" class="hidden"><div class="page-heading"><p class="eyebrow">TENTANG WEBSITE</p><h1>Tentang ArpiMC Zone</h1><p>Semua kanal, media sosial, layanan, dan tautan dukungan dalam satu tempat.</p></div><div id="infoGroups" class="info-grid"></div></section>
 </main>
 <nav class="bottom-nav" aria-label="Navigasi utama">
 <a class="nav-item" data-route="skin" href="/skin"><svg viewBox="0 0 24 24"><path d="M12 3a9 9 0 1 0 0 18h1.2a2 2 0 0 0 1.5-3.3 1.7 1.7 0 0 1 1.3-2.8H18a3 3 0 0 0 3-3c0-5-4-8.9-9-8.9Z"/><path d="M7.5 10h.01M10 7h.01M15 7.5h.01M17 11h.01"/></svg><span>Skin</span></a>
@@ -27,4 +37,6 @@
 <a class="nav-item" data-route="info" href="/info"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><path d="M12 11v5M12 8h.01"/></svg><span>Info</span></a>
 </nav>
 <div class="theme-backdrop hidden" id="themePanel"><div class="theme-panel"><div class="theme-head"><h2>Pilih Tema</h2><button id="themeClose" class="close-button" aria-label="Tutup">×</button></div><button class="theme-choice" data-theme="default">Default</button><button class="theme-choice" data-theme="neobrutal">Neo-Brutaslim</button><button class="theme-choice" data-theme="dark">Dark</button><button class="theme-choice" data-theme="nori">Tema Pink</button></div></div>
-<script src="/script.js" defer></script></body></html>
+<div class="toast hidden" id="toast" role="status"></div>
+<script src="/script.js" defer></script>
+</body></html>
