@@ -1,7 +1,7 @@
 {
   "id": "/",
   "name": "ArpiMC Zone",
-  "short_name": "ArpiMC Zone",
+  "short_name": "ArpiMC",
   "description": "Koleksi skin, addon, game, dan tools Minecraft.",
   "start_url": "/skin",
   "scope": "/",
@@ -16,10 +16,16 @@
       "purpose": "any"
     },
     {
-      "src": "/icon.svg",
-      "sizes": "any",
-      "type": "image/svg+xml",
+      "src": "/icons/icon-192.png",
+      "sizes": "192x192",
+      "type": "image/png",
       "purpose": "any"
+    },
+    {
+      "src": "/icons/icon-512.png",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "any maskable"
     }
   ],
   "shortcuts": [
@@ -35,9 +41,9 @@
           "type": "image/jpeg"
         },
         {
-          "src": "/icon.svg",
-          "sizes": "any",
-          "type": "image/svg+xml"
+          "src": "/icons/icon-96.png",
+          "sizes": "96x96",
+          "type": "image/png"
         }
       ]
     },
@@ -53,9 +59,9 @@
           "type": "image/jpeg"
         },
         {
-          "src": "/icon.svg",
-          "sizes": "any",
-          "type": "image/svg+xml"
+          "src": "/icons/icon-96.png",
+          "sizes": "96x96",
+          "type": "image/png"
         }
       ]
     }
