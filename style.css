@@ -40,3 +40,41 @@
 /* Update: paired card actions, game cards without image thumbnails, and compact install control. */
 .header-actions{display:flex;align-items:center;gap:9px}.download-zone{display:inline-flex;align-items:center;gap:7px;min-height:40px;padding:0 12px;border-radius:11px;background:var(--primary);color:#fff;font-size:11px;font-weight:800;box-shadow:var(--shadow)}.download-zone svg{width:17px;height:17px;fill:none;stroke:currentColor;stroke-width:1.9;stroke-linecap:round;stroke-linejoin:round}.card-actions{display:grid;grid-template-columns:1fr 1fr;gap:7px}.card-actions .card-button{display:flex;align-items:center;justify-content:center;text-decoration:none;min-height:36px}.card-download{background:var(--bg-alt);color:var(--primary);border:1px solid var(--border)}.card-download[aria-disabled="true"]{opacity:.5;pointer-events:none}.card-share{margin-top:7px;width:100%;min-height:33px;border:1px solid var(--border);border-radius:9px;background:transparent;color:var(--muted);font-size:10px;font-weight:700;cursor:pointer}.game-card .card-body{padding:15px}.game-card .card-title{font-size:14px}.game-card .card-desc{font-size:11px}.game-card .card-button{min-height:38px}.toast{position:fixed;z-index:60;left:50%;bottom:86px;transform:translateX(-50%);max-width:calc(100% - 32px);padding:11px 15px;border-radius:12px;background:#172033;color:#fff;font-size:12px;font-weight:700;box-shadow:0 6px 24px #0003}.hidden{display:none!important}
 @media(max-width:480px){.site-header{padding-inline:12px}.brand{font-size:15px;gap:8px}.brand img{width:34px;height:34px}.header-actions{gap:6px}.download-zone{padding:0 9px;min-height:38px;font-size:10px}.download-zone svg{width:15px;height:15px}.icon-button{width:38px;height:38px}.card-share{font-size:9px}}
+
+/* Final refinement: restore clean portrait skin cards, landscape addon cards and separate tools route. */
+.card-media-button{padding:0;border:0;border-radius:0;cursor:pointer;text-align:inherit;color:inherit;background:var(--bg-alt)}
+.skin-ratio .card-media{aspect-ratio:9/16;background:#edf4ff}
+.skin-ratio .card-image{object-fit:cover;object-position:center}
+.addon-ratio .card-media{aspect-ratio:16/9;background:#edf4ff}
+.addon-ratio .card-image{object-fit:cover}
+.preview-frame-wrap.skin-preview{width:min(100%,420px);aspect-ratio:9/16;height:auto;min-height:0;max-height:72vh;background:var(--bg-alt)}
+.preview-frame-wrap.addon-preview{width:100%;aspect-ratio:16/9;height:auto;min-height:0;max-height:none;background:var(--bg-alt)}
+.preview-frame-wrap.image-preview iframe{background:var(--bg-alt)}
+.game-card .card-actions{margin-top:10px}
+.game-card .card-actions .card-button{min-height:38px}
+.card-share{cursor:pointer}
+@media(max-width:650px){.preview-frame-wrap.skin-preview{width:min(100%,360px);max-height:68vh}.preview-frame-wrap.addon-preview{width:100%;aspect-ratio:16/9}}
+
+/* Info center: Tutorial + About ArpiMC */
+.info-tabs{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin:20px 0 16px;padding:6px;border:1px solid var(--border);border-radius:15px;background:var(--surface);box-shadow:var(--shadow)}
+.info-tab{display:flex;align-items:center;justify-content:center;gap:9px;min-height:46px;padding:10px;border:1px solid transparent;border-radius:11px;background:transparent;color:var(--muted);font-size:12px;font-weight:800;cursor:pointer}
+.info-tab svg{width:19px;height:19px;fill:none;stroke:currentColor;stroke-width:1.8;stroke-linecap:round;stroke-linejoin:round}
+.info-tab.active{background:var(--primary);color:#fff;box-shadow:0 4px 12px color-mix(in srgb,var(--primary) 25%,transparent)}
+.info-panel{padding-bottom:24px}
+.tutorial-intro{display:flex;align-items:center;gap:15px;padding:19px;border:1px solid var(--border);border-radius:18px;background:linear-gradient(135deg,var(--bg-alt),var(--surface));box-shadow:var(--shadow)}
+.tutorial-mark{width:52px;height:52px;flex:0 0 52px;display:grid;place-items:center;border-radius:15px;background:var(--primary);color:white}
+.tutorial-mark svg{width:27px;height:27px;fill:none;stroke:currentColor;stroke-width:1.8;stroke-linecap:round;stroke-linejoin:round}
+.tutorial-intro .eyebrow{margin:0 0 4px}.tutorial-intro h2{font-size:18px;margin:0 0 5px}.tutorial-intro p:last-child{font-size:12px;line-height:1.55;color:var(--muted);margin:0}
+.tutorial-list{display:grid;gap:11px;margin-top:14px}
+.tutorial-card{display:grid;grid-template-columns:42px 1fr;gap:12px;align-items:start;padding:16px;border:1px solid var(--border);border-radius:15px;background:var(--surface);box-shadow:var(--shadow)}
+.tutorial-number{width:38px;height:38px;display:grid;place-items:center;border-radius:12px;background:var(--bg-alt);color:var(--primary);font-size:13px;font-weight:900}
+.tutorial-card h3{font-size:13px;margin:1px 0 6px}.tutorial-card p{font-size:11px;line-height:1.65;color:var(--muted);margin:0}
+.tutorial-note{margin-top:13px;padding:13px 15px;border-left:4px solid var(--primary);border-radius:10px;background:var(--bg-alt);color:var(--muted);font-size:11px;line-height:1.6}.tutorial-note b{color:var(--text)}
+.about-hero{display:grid;grid-template-columns:104px 1fr;gap:18px;align-items:center;padding:20px;border:1px solid var(--border);border-radius:19px;background:linear-gradient(135deg,var(--bg-alt),var(--surface));box-shadow:var(--shadow)}
+.about-logo{width:104px;height:104px;padding:7px;border:1px solid var(--border);border-radius:22px;background:var(--surface);box-shadow:var(--shadow)}.about-logo img{width:100%;height:100%;object-fit:cover;border-radius:16px}
+.about-copy .eyebrow{margin:0 0 5px}.about-copy h2{font-size:23px;margin:0 0 6px}.about-copy p{font-size:11px;line-height:1.65;color:var(--muted);margin:6px 0 0}.about-copy .about-lead{font-size:13px;color:var(--text);font-weight:800}
+.about-feature-grid{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:9px;margin:13px 0}
+.about-feature{display:flex;flex-direction:column;align-items:center;justify-content:center;gap:8px;min-height:86px;padding:10px 6px;border:1px solid var(--border);border-radius:14px;background:var(--surface);box-shadow:var(--shadow);text-align:center}.about-feature span{font-size:19px;color:var(--primary);font-weight:900}.about-feature b{font-size:10px;line-height:1.35}
+.about-story{padding:18px;border:1px solid var(--border);border-radius:17px;background:var(--surface);box-shadow:var(--shadow);margin:13px 0 18px}.about-story h3{font-size:13px;margin:0 0 7px}.about-story p{font-size:11px;line-height:1.7;color:var(--muted);margin:0 0 14px}.about-story h3:not(:first-child){margin-top:17px}.about-story .about-disclaimer{margin:0;padding:11px 12px;border-radius:10px;background:var(--bg-alt);font-size:10px}
+.info-empty{padding:10px 0;color:var(--muted);font-size:11px}
+@media(max-width:520px){.about-hero{grid-template-columns:72px 1fr;gap:12px;padding:14px}.about-logo{width:72px;height:72px;border-radius:17px}.about-logo img{border-radius:12px}.about-copy h2{font-size:19px}.about-copy p{font-size:10px}.about-copy .about-lead{font-size:11px}.about-feature-grid{grid-template-columns:repeat(2,minmax(0,1fr))}.tutorial-intro{align-items:flex-start;padding:15px}.tutorial-mark{width:43px;height:43px;flex-basis:43px}.tutorial-intro h2{font-size:16px}}
