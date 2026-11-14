@@ -56,5 +56,41 @@
     "link": "/",
     "mode": "pwa-install",
     "keterangan": "Pasang ArpiMC Zone ke layar utama perangkat."
-  }
+  },
+  "about": {
+    "title": "ArpiMC Zone",
+    "tagline": "Jelajahi skin, addon, game, dan tools Minecraft dalam satu tempat.",
+    "description": "ArpiMC Zone adalah website komunitas yang dikelola dengan identitas ArpiMC. Website ini dibuat untuk mengumpulkan berbagai konten Minecraft agar pengunjung dapat menemukan koleksi, melihat pratinjau, mengunduh file yang tersedia, dan membuka permainan atau tools dengan lebih praktis.",
+    "focus": [
+      "Skin Minecraft",
+      "Addon & Resource Pack",
+      "Game pilihan",
+      "Tools pendukung"
+    ],
+    "content": "Di bagian Skin, pengunjung dapat menjelajahi koleksi berdasarkan kategori dan membuka pratinjau gambar sebelum mengunduh. Bagian Addon menampilkan addon, pack, shader, dan UI dengan gambar landscape serta halaman detail. Bagian Game berisi permainan yang dapat dibuka melalui pemutar halaman; kategori Tools memiliki halaman terpisah di /tools. Setiap item yang mendukungnya juga dapat dibagikan melalui WhatsApp menggunakan tautan halaman item.",
+    "policy": "ArpiMC Zone berupaya menjaga navigasi yang jelas dan menyertakan informasi yang tersedia dari setiap item. File, tautan unduhan, kompatibilitas versi, dan layanan eksternal dikelola oleh sumber masing-masing sehingga dapat berubah sewaktu-waktu. Periksa keterangan item sebelum memasang atau menggunakan file.",
+    "disclaimer": "ArpiMC Zone merupakan proyek komunitas independen. Situs ini tidak berafiliasi dengan, disponsori oleh, atau didukung secara resmi oleh Mojang Studios maupun Microsoft. Minecraft adalah merek dagang dari pemiliknya."
+  },
+  "tutorial": [
+    {
+      "title": "Menjelajahi koleksi skin",
+      "text": "Buka menu Skin, pilih kategori Cowok, Cewek, PVP, Template Skin, atau Skin Pack. Tekan gambar atau tombol Preview untuk melihat detail. Gunakan Unduh pada card jika ingin mengambil file tanpa membuka halaman detail."
+    },
+    {
+      "title": "Melihat dan mengunduh addon",
+      "text": "Buka menu Addon, pilih kategori yang tersedia, lalu gunakan Preview untuk melihat gambar addon dalam format landscape. Tombol Unduh tersedia langsung pada card maupun halaman detail."
+    },
+    {
+      "title": "Memainkan game dan membuka tools",
+      "text": "Buka menu Game untuk melihat permainan. Filter kategori Semua, Game, Tools, Fun, atau Lain-lain. Tombol Mainkan membuka halaman permainan. Tools juga dapat dibuka melalui alamat /tools."
+    },
+    {
+      "title": "Membagikan konten",
+      "text": "Tekan Bagikan pada card atau Kirim via WhatsApp pada halaman detail. Pesan yang disiapkan menyertakan tautan halaman item agar penerima dapat membuka konten yang sama."
+    },
+    {
+      "title": "Memasang ArpiMC Zone",
+      "text": "Gunakan tombol Unduh ArpiMC Zone di bagian atas. Jika browser mendukung instalasi, ikuti prompt yang muncul. Jika tidak, buka menu browser dan pilih Tambahkan ke layar utama. Instalasi PWA memerlukan koneksi HTTPS."
+    }
+  ]
 }
