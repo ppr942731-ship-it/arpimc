@@ -9,11 +9,11 @@
       "destination": "/index.html"
     },
     {
-      "source": "/addons",
+      "source": "/game",
       "destination": "/index.html"
     },
     {
-      "source": "/game",
+      "source": "/tools",
       "destination": "/index.html"
     },
     {
