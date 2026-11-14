@@ -16,3 +16,10 @@ Unggah seluruh isi ZIP ke root hosting. Pastikan file index.html, style.css, scr
 
 Catatan:
 Pembaruan ini mengubah halaman Info dan data penjelasannya. Konten yang berasal dari situs pihak ketiga tetap bergantung pada ketersediaan layanan tersebut.
+
+Perbaikan pemuatan data JSON (v6):
+- JSON dimuat satu per satu dengan pemeriksaan HTTP dan validasi format.
+- Jika server mengirim HTML karena aturan rewrite atau JSON tidak tersedia, website memakai fallback-data.js agar koleksi dan tautan Info tetap berfungsi.
+- JSON memakai strategi network-first pada service worker agar pembaruan data tidak tertahan cache lama.
+- Rewrite SPA hanya berlaku untuk /skin, /addon, /game, /tools, dan /info; file .json/.js/.css tidak diarahkan ke index.html.
+- Unggah SEMUA isi ZIP ke root hosting, jangan hanya index.html.
