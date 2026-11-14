@@ -28,7 +28,17 @@
  <div id="gameToolbar" class="game-toolbar hidden"><button class="back-button" id="backButtonGame"><svg viewBox="0 0 24 24"><path d="m15 18-6-6 6-6M9 12h12"/></svg><span>Kembali</span></button><a id="gameNewTab" class="back-button" href="#" target="_blank" rel="noopener"><span>Buka Tab Baru</span><svg viewBox="0 0 24 24"><path d="M14 4h6v6M20 4l-9 9M18 13v6a1 1 0 0 1-1 1H5a1 1 0 0 1-1-1V7a1 1 0 0 1 1-1h6"/></svg></a></div>
  <div class="detail-layout" id="detailLayout"><div class="preview-frame-wrap" id="previewWrap"><iframe id="previewFrame" title="Pratinjau konten" allow="fullscreen; autoplay; clipboard-read; clipboard-write" allowfullscreen loading="eager"></iframe></div><div class="detail-info" id="detailInfo"><h1 id="detailTitle"></h1><p id="detailDescription"></p><div class="detail-meta" id="detailMeta"></div><div class="detail-actions" id="detailActions"></div></div></div>
 </section>
-<section id="infoView" class="hidden"><div class="page-heading"><p class="eyebrow">TENTANG WEBSITE</p><h1>Tentang ArpiMC Zone</h1><p>Semua kanal, media sosial, layanan, dan tautan dukungan dalam satu tempat.</p></div><div id="infoGroups" class="info-grid"></div></section>
+<section id="infoView" class="hidden">
+ <div class="page-heading"><p class="eyebrow">PUSAT INFORMASI</p><h1>Info ArpiMC Zone</h1><p>Panduan penggunaan website dan informasi tentang komunitas ArpiMC.</p></div>
+ <div class="info-tabs" role="tablist" aria-label="Menu informasi">
+  <button class="info-tab active" id="infoTabTutorial" type="button" role="tab" aria-selected="true" aria-controls="infoTutorial" data-info-tab="tutorial"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 5.5A2.5 2.5 0 0 1 6.5 3H20v16H6.5A2.5 2.5 0 0 0 4 21V5.5Z"/><path d="M4 6h13M8 9h8M8 13h6"/></svg><span>Tutorial</span></button>
+  <button class="info-tab" id="infoTabAbout" type="button" role="tab" aria-selected="false" aria-controls="infoAbout" data-info-tab="about"><svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="M12 11v5M12 8h.01"/></svg><span>About ArpiMC</span></button>
+ </div>
+ <div id="infoTutorial" class="info-panel" role="tabpanel" aria-labelledby="infoTabTutorial"></div>
+ <div id="infoAbout" class="info-panel hidden" role="tabpanel" aria-labelledby="infoTabAbout">
+  <div id="aboutContent"></div><div id="infoGroups" class="info-grid"></div>
+ </div>
+</section>
 </main>
 <nav class="bottom-nav" aria-label="Navigasi utama">
 <a class="nav-item" data-route="skin" href="/skin"><svg viewBox="0 0 24 24"><path d="M12 3a9 9 0 1 0 0 18h1.2a2 2 0 0 0 1.5-3.3 1.7 1.7 0 0 1 1.3-2.8H18a3 3 0 0 0 3-3c0-5-4-8.9-9-8.9Z"/><path d="M7.5 10h.01M10 7h.01M15 7.5h.01M17 11h.01"/></svg><span>Skin</span></a>
