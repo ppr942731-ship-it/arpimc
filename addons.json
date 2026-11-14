@@ -2,46 +2,45 @@
   {
     "id": 1,
     "nama": "Mutants",
-    "deskripsi": "menambahkan monster kedalam Minecraft anda",
     "kategori": "addon",
     "gambar": "https://files.catbox.moe/3kgszm.jpg",
     "link_download": "https://www.mediafire.com/file/n8wn32k7mwsjh1e/MUTANTS!+Add-On+2.0+by+Vano+craft+(addon).mcaddon/file",
-    "versi_mc": "1.26+"
+    "deskripsi": "Menambahkan monster ke dalam Minecraft kamu",
+    "versi": "1.26+",
+    "ukuran": "9,53 mb",
+    "tanggal_upload": "25 Okt 2026"
   },
   {
     "id": 2,
-    "nama": "3d skin",
-    "deskripsi": " membuat skin menjadi 3d",
+    "nama": "3D Skin",
     "kategori": "pack",
     "gambar": "https://files.catbox.moe/fa8tro.jpg",
     "link_download": "https://www.mediafire.com/file/ctputsnqf3goega/3dskinlayer_as.mcpack/file",
-    "versi_mc": "1.26+"
+    "deskripsi": "Membuat skin menjadi 3D",
+    "versi": "1.26+",
+    "ukuran": "2,24 mb",
+    "tanggal_upload": "25 Okt 2026"
   },
   {
     "id": 3,
-    "nama": "bsl y shaders",
-    "deskripsi": "memperbagus tampilan Minecraft andsa",
+    "nama": "BSL Y Shaders",
     "kategori": "shader",
     "gambar": "https://files.catbox.moe/3klyfl.jpg",
     "link_download": "https://www.mediafire.com/file/n7byt0syo3rgc5c/BSL+Y+Shaders.mcpack/file",
-    "versi_mc": "1.26+"
+    "deskripsi": "Memperbagus tampilan Minecraft kamu",
+    "versi": "1.26+",
+    "ukuran": "1,25 mb",
+    "tanggal_upload": "25 Okt 2026"
   },
   {
     "id": 4,
-    "nama": "ui ancxliy v7",
-    "deskripsi": "mengubah tampilan lobby bergaya Jepang",
+    "nama": "UI Ancxliy V7",
     "kategori": "ui",
     "gambar": "https://files.catbox.moe/n7682n.jpg",
     "link_download": "https://www.mediafire.com/file/17vn4xii9qsooi7/AncxliyPackV7FixBugs.mcpack/file",
-    "versi_mc": "1.26+"
-  },
-  {
-    "id": 5,
-    "nama": " Minecraft v26.51",
-    "deskripsi": "Hal-hal menarik lainnya untuk Minecraft",
-    "kategori": "lain",
-    "gambar": "",
-    "link_download": "https://www.mediafire.com/file/9zidzug2eqiw0g3/MC_26.51.1.apk/file",
-    "versi_mc": "1.26.51.1"
+    "deskripsi": "Mengubah tampilan lobby dengan gaya Jepang",
+    "versi": "1.26+",
+    "ukuran": "23,33 mb",
+    "tanggal_upload": "25 Okt 2026"
   }
 ]
