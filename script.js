@@ -8,7 +8,42 @@ function skinSlug(x){let s=x.slug||x.tag||x.nama||'';s=s.replace(/^SKIN\s*/i,'')
 function itemSlug(x,type){if(type==='skin')return skinSlug(x);if(type==='addon'&&String(x.nama||'').toLowerCase()==='mutants')return'mutans';return slugify(x.slug||x.nama||`${type}-${x.id}`)}
 function normalizeType(g){let t=String(g.jenis||g.kategori||g.tipe||'game').toLowerCase();if(['games','game'].includes(t))return'game';if(['tool','tools','alat'].includes(t))return'tools';if(['fun','hiburan'].includes(t))return'fun';return'lain-lain'}
 function toast(msg){const el=$('#toast');el.textContent=msg;el.classList.remove('hidden');clearTimeout(toast.timer);toast.timer=setTimeout(()=>el.classList.add('hidden'),2800)}
-async function load(){try{let s,a,g,d;if(window.ARPIMC_DATA){({skins:s,addons:a,games:g,siteData:d}=window.ARPIMC_DATA)}else{[s,a,g,d]=await Promise.all(['skins.json','addons.json','games.json','data.json'].map(f=>fetch('/'+f).then(r=>{if(!r.ok)throw Error(f);return r.json()})))}state.skins=s;state.addons=a;state.games=g.map(x=>({...x,jenis:normalizeType(x)}));state.siteData=d;setupDownloadButton();renderRoute()}catch(e){$('#cards').innerHTML='<p class="empty">Data gagal dimuat. Pastikan semua file JSON berada di folder utama website.</p>';console.error(e)}}
+async function readJsonFile(file,key){
+ const fallback=window.ARPIMC_FALLBACK_DATA||{};
+ const url=new URL(file,document.baseURI||location.origin+'/');
+ url.searchParams.set('v','6');
+ try{
+  const response=await fetch(url.href,{method:'GET',cache:'no-store',headers:{'Accept':'application/json'}});
+  if(!response.ok)throw new Error(`${file}: HTTP ${response.status}`);
+  const text=await response.text();
+  if(/^\s*</.test(text))throw new Error(`${file}: server mengirim HTML, bukan JSON (kemungkinan aturan rewrite)`);
+  const parsed=JSON.parse(text);
+  if(key==='skins'||key==='addons'||key==='games'){if(!Array.isArray(parsed))throw new Error(`${file}: format harus berupa array`)}
+  else if(!parsed||typeof parsed!=='object'||Array.isArray(parsed))throw new Error(`${file}: format harus berupa object`);
+  return parsed;
+ }catch(error){
+  console.warn(`[ArpiMC Zone] ${file} gagal dimuat; memakai data cadangan lokal.`,error);
+  if(fallback[key]!==undefined)return fallback[key];
+  throw error;
+ }
+}
+async function load(){
+ try{
+  let s,a,g,d;
+  if(window.ARPIMC_DATA){({skins:s,addons:a,games:g,siteData:d}=window.ARPIMC_DATA)}
+  else{[s,a,g,d]=await Promise.all([readJsonFile('skins.json','skins'),readJsonFile('addons.json','addons'),readJsonFile('games.json','games'),readJsonFile('data.json','siteData')])}
+  state.skins=Array.isArray(s)?s:[];
+  state.addons=Array.isArray(a)?a:[];
+  state.games=(Array.isArray(g)?g:[]).map(x=>({...x,jenis:normalizeType(x)}));
+  state.siteData=d&&typeof d==='object'?d:{};
+  setupDownloadButton();
+  renderRoute();
+ }catch(error){
+  console.error('[ArpiMC Zone] Gagal memuat data utama dan cadangan:',error);
+  $('#cards').innerHTML='<p class="empty">Data belum dapat dimuat. Periksa file JSON dan fallback-data.js di folder utama website.</p>';
+  if(location.pathname==='/info'){$('#infoView').classList.remove('hidden');$('#infoTutorial').innerHTML='<p class="empty">Informasi belum dapat dimuat.</p>';}
+ }
+}
 function routeInfo(){let path=location.pathname.replace(/\/+$/,'')||'/skin';let route=path.split('/').filter(Boolean)[0]||'skin';if(route==='addons')route='addon';if(!['skin','addon','game','tools','info'].includes(route))route='skin';let p=new URLSearchParams(location.search),found=null;for(const [k,v] of p.entries()){if(/-id$/.test(k)&&/^\d+$/.test(v)){found={route,id:Number(v)};break}}return{route,found}}
 function navigate(path,push=true){if(push)history.pushState({},'',path);renderRoute();window.scrollTo({top:0,behavior:'instant'})}
 function getItems(route){return route==='skin'?state.skins:route==='addon'?state.addons:state.games}
