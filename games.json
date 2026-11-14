@@ -34,5 +34,23 @@
     "tipe": "tools", 
     "tanggal_upload": "27 okt 2026", 
     "jenis": "tools"
-  }
+  }, 
+  {
+  "id": 5,
+  "nama": "build tutorial",
+  "deskripsi": "disini bisa dapat tutorial build mc",
+  "link": "https://builditapp.com/",
+  "tipe": "tools",
+  "tanggal_upload": "28 okt 2026",
+  "jenis": "tools"
+},
+{
+  "id": 6,
+  "nama": "puzzle image",
+  "deskripsi": "susun gambar kamu",
+  "link": "https://hostxy.cloud/tesaja/puzzle-image/",
+  "tipe": "tools",
+  "tanggal_upload": "14 nov 2026",
+  "jenis": "tools"
+}
 ]
