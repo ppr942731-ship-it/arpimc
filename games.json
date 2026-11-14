@@ -28,5 +28,11 @@
     "nama": "build tutorial", 
     "deskripsi": "disini bisa dapat tutorial build mc", 
     "link": "https://builditapp.com/"
+  }, 
+  {
+    "id": 6,
+    "nama": "puzzle image", 
+    "deskripsi": "susun gambar kamu", 
+    "link": "https://hostxy.cloud/tesaja/puzzle-image/"
   }
 ]
