@@ -25,40 +25,41 @@
     "tipe": "games",
     "tanggal_upload": "26 Okt 2026",
     "jenis": "game"
-  }, 
+  },
   {
     "id": 4,
-    "nama": "avatar maker mc", 
-    "deskripsi": "pembuat avatar dari skin kalain, di sarankan untuk buka tab baru", 
-    "link": "https://mcskins.top/avatar-maker", 
-    "tipe": "tools", 
-    "tanggal_upload": "27 okt 2026", 
+    "nama": "Avatar Maker MC",
+    "deskripsi": "Pembuat avatar dari skin kalian, disarankan untuk buka tab baru",
+    "link": "https://mcskins.top/avatar-maker",
+    "tipe": "tools",
+    "tanggal_upload": "27 Okt 2026",
     "jenis": "tools"
-  }, 
+  },
   {
-  "id": 5,
-  "nama": "build tutorial",
-  "deskripsi": "disini bisa dapat tutorial build mc",
-  "link": "https://builditapp.com/",
-  "tipe": "tools",
-  "tanggal_upload": "28 okt 2026",
-  "jenis": "tools"
-},
-{
-  "id": 6,
-  "nama": "puzzle image",
-  "deskripsi": "susun gambar kamu",
-  "link": "https://hostxy.cloud/arpimc/puzzle-image/",
-  "tipe": "games",
-  "tanggal_upload": "14 nov 2026",
-  "jenis": "game"
-}, 
-  "id": 7,
-  "nama": "nonton tv", 
-  "deskripsi": "nonton tv Indosiar, di sarankan buka di tab baru", 
-  "link": "https://m.vidio.com/live/205-indosiar", 
-  "tipe": "tools", 
-  "tanggal_upload": "15 nov 2026", 
-  "jenis": "tools"
+    "id": 5,
+    "nama": "Build Tutorial",
+    "deskripsi": "Di sini bisa dapat tutorial build MC",
+    "link": "https://builditapp.com/",
+    "tipe": "tools",
+    "tanggal_upload": "28 Okt 2026",
+    "jenis": "tools"
+  },
+  {
+    "id": 6,
+    "nama": "Puzzle Image",
+    "deskripsi": "Susun gambar kamu",
+    "link": "https://hostxy.cloud/arpimc/puzzle-image/",
+    "tipe": "games",
+    "tanggal_upload": "14 Nov 2026",
+    "jenis": "game"
+  },
+  {
+    "id": 7,
+    "nama": "Nonton TV",
+    "deskripsi": "Nonton TV Indosiar, disarankan buka di tab baru",
+    "link": "https://m.vidio.com/live/205-indosiar",
+    "tipe": "tools",
+    "tanggal_upload": "15 Nov 2026",
+    "jenis": "tools"
   }
 ]
