@@ -61,5 +61,14 @@
     "tipe": "tools",
     "tanggal_upload": "15 Nov 2026",
     "jenis": "tools"
+  }, 
+  {
+    "id": 8,
+    "nama": "anya quest", 
+    "deskripsi": "ayo jawab quest dan cobain keseruannya", 
+    "link": "https://anya-quest-lmdp.vercel.app", 
+    "tipe": "games", 
+    "tanggal_upload": " 16 nov 2026", 
+    "jenis": "game"
   }
 ]
