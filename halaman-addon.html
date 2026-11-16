@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <!-- META DEFAULT (CADANGAN) -->
+    <meta property="og:title" content="ArpiMC Zone">
+    <meta property="og:description" content="Temukan skin Minecraft, addon, dan game gratis di ArpiMC Zone">
+    <meta property="og:image" content="https://files.catbox.moe/LOGO_ARPIMC_KAMU_DISINI.png">
+    <meta property="og:url" content="https://arpimc.zone.id/addon">
+
+    <title>ArpiMC Zone - Addon</title>
+
+    <script>
+        const metaDefault = {
+            title: "ArpiMC Zone",
+            desc: "Temukan skin Minecraft, addon, dan game gratis di ArpiMC Zone",
+            img: "https://files.catbox.moe/7vkqqk.jpg"
+        }
+
+        const urlParams = new URLSearchParams(window.location.search);
+        let targetId = null;
+
+        for(const [key, value] of urlParams){
+            if(key.endsWith("-id")){
+                targetId = Number(value);
+                break;
+            }
+        }
+
+        fetch('/data/addons.json')
+        .then(res => res.json())
+        .then(data => {
+            const item = data.find(x => x.id === targetId);
+            let og = metaDefault;
+
+            if(item){
+                og.title = item.nama
+                og.desc = item.deskripsi
+                og.img = item.gambar
+            }
+
+            function setMeta(property, konten){
+                let m = document.querySelector(`meta[property="${property}"]`)
+                if(!m){
+                    m = document.createElement('meta')
+                    m.setAttribute('property', property)
+                    document.head.appendChild(m)
+                }
+                m.setAttribute('content', konten)
+            }
+
+            setMeta("og:title", og.title)
+            setMeta("og:description", og.desc)
+            setMeta("og:image", og.img)
+            setMeta("og:url", window.location.href)
+        })
+    </script>
+</head>
+<body>
+    <h1 id="judul"></h1>
+    <p id="desk"></p>
+    <img id="gambarItem" style="max-width:300px" src="" alt="">
+
+    <script>
+        fetch('/data/addons.json')
+        .then(res => res.json())
+        .then(data => {
+            const urlParams = new URLSearchParams(window.location.search);
+            let targetId = null;
+            for(const [key, value] of urlParams){
+                if(key.endsWith("-id")){
+                    targetId = Number(value);
+                    break;
+                }
+            }
+            const item = data.find(x => x.id === targetId);
+            if(item){
+                document.getElementById("judul").innerText = item.nama
+                document.getElementById("desk").innerText = item.deskripsi
+                document.getElementById("gambarItem").src = item.gambar
+            }
+        })
+    </script>
+</body>
+</html>
