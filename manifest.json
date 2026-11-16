@@ -10,7 +10,7 @@
   "theme_color": "#0066ff",
   "icons": [
     {
-      "src": "https://files.catbox.moe/7vkqqk.jpg",
+      "src": "https://files.catbox.moe/783mpv.png",
       "sizes": "any",
       "type": "image/jpeg",
       "purpose": "any"
@@ -36,7 +36,7 @@
       "url": "/skin",
       "icons": [
         {
-          "src": "https://files.catbox.moe/7vkqqk.jpg",
+          "src": "https://files.catbox.moe/783mpv.png",
           "sizes": "any",
           "type": "image/jpeg"
         },
@@ -54,7 +54,7 @@
       "url": "/addon",
       "icons": [
         {
-          "src": "https://files.catbox.moe/7vkqqk.jpg",
+          "src": "https://files.catbox.moe/783mpv.png",
           "sizes": "any",
           "type": "image/jpeg"
         },
