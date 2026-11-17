@@ -42,5 +42,16 @@
     "versi": "1.26+",
     "ukuran": "23,33 mb",
     "tanggal_upload": "25 Okt 2026"
-  }
+  }, 
+  {
+  "id": 6,
+  "nama": "Cobblemon",
+  "kategori": "addon",
+  "gambar": "https://files.catbox.moe/3msaxh.jpg",
+  "link_download": "https://www.mediafire.com/file/xi6pq1p95j6hfq2/Addon_Cobblemon_English_MCPE_1.26.20_.mcaddon/file",
+  "deskripsi": "Cobblemon Addon menghadirkan pengalaman petualangan bertema Pokémon ke dalam Minecraft Bedrock. Tersedia dalam bahasa Inggris dengan format .mcaddon, kompatibel untuk MCPE 1.26.20.",
+  "versi": "1.26.20",
+  "ukuran": "39 mb",
+  "tanggal_upload": "17 Nov 2026"
+}
 ]
