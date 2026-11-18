@@ -1,36 +1,34 @@
-// LOGIC LU, PIN! JANGAN DIHAPUS!
-// Contoh URL: /skin?cowok-cr-keyy-id=1
-
-async function previewLogicLu() {
-  const path = location.pathname;
-  const query = location.search;
-
-  const param = new URLSearchParams(query);
-  const key = [...param.keys()][0];
-  const id = param.get(key);
-
-  if (!key) return;
-
-  let fileJson = 'skins.json';
-  if (path.includes('addon')) fileJson = 'addons.json';
-  if (path.includes('game')) fileJson = 'games.json';
-
-  const res = await fetch('/' + fileJson);
-  const list = await res.json();
-
-  const item = list.find(x => String(x.id) == String(id));
-  if (!item) return;
-
-  document.title = item.nama + ' | ArpiMC Zone';
-
-  const ogTitle = document.querySelector('meta[property="og:title"]');
-  const ogDesc = document.querySelector('meta[property="og:description"]');
-  const ogImage = document.querySelector('meta[property="og:image"]');
-  const ogUrl = document.querySelector('meta[property="og:url"]');
-
-  if (ogTitle) ogTitle.content = item.nama;
-  if (ogDesc) ogDesc.content = item.deskripsi || item.nama + ' — ArpiMC Zone';
-  if (ogImage) ogImage.content = item.gambar;
-  if (ogUrl) ogUrl.content = location.href;
-}
-previewLogicLu();
+// Metadata dinamis untuk browser pada halaman detail.
+// Untuk WhatsApp/social crawler, gunakan halaman statis /share/.../ yang dibuat oleh generate-previews.py.
+(async function previewLogicLu(){
+  try {
+    const path = location.pathname;
+    const params = new URLSearchParams(location.search);
+    const entry = [...params.entries()].find(([key, value]) => /-id$/.test(key) && /^\d+$/.test(value));
+    if (!entry) return;
+    const [key, id] = entry;
+    const file = path.startsWith('/addon') ? 'addons.json' :
+                 (path.startsWith('/game') || path.startsWith('/tools')) ? 'games.json' : 'skins.json';
+    const response = await fetch('/' + file, {cache:'no-store'});
+    if (!response.ok) return;
+    const list = await response.json();
+    const item = Array.isArray(list) ? list.find(x => String(x.id) === String(id)) : null;
+    if (!item) return;
+    const title = (item.tag || item.nama || 'Konten') + ' | ArpiMC Zone';
+    const description = item.deskripsi || 'Lihat konten di ArpiMC Zone.';
+    document.title = title;
+    const setMeta = (selector, value, attr='content') => {
+      const node = document.querySelector(selector);
+      if (node && value) node.setAttribute(attr, value);
+    };
+    setMeta('meta[property="og:title"]', title);
+    setMeta('meta[property="og:description"]', description);
+    setMeta('meta[property="og:image"]', item.gambar || '');
+    setMeta('meta[property="og:url"]', location.href);
+    setMeta('meta[name="twitter:title"]', title);
+    setMeta('meta[name="twitter:description"]', description);
+    setMeta('meta[name="twitter:image"]', item.gambar || '');
+  } catch (error) {
+    console.warn('[ArpiMC preview] Metadata dinamis dilewati:', error);
+  }
+})();
