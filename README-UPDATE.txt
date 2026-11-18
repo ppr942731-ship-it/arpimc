@@ -1,19 +1,30 @@
-ArpiMC Zone - Update Kategori (18 November 2026)
+# ArpiMC Zone
 
-Perubahan:
-- Skin: Skin Couple, Skin Google, Lain-lain, FAQ Cara Pasang Skin.
-- Addon: Horor, Survival, Tutorial, Lain-lain, FAQ Cara Pasang Addon.
-- Game: Game Santai, Game Quiz, Lain-lain.
-- Tools: Tools, Fun, Lain-lain.
-- FAQ kategori menampilkan panduan pemasangan.
-- Kategori Game/Tools dibaca dari properti kategori pada games.json.
-- Fallback data disinkronkan dengan JSON terbaru.
-- Cache Service Worker dinaikkan ke versi kategori-v7.
+## Pembaruan kategori dan preview share
 
-Catatan migrasi data:
-Data skin/addon lama yang tidak cocok dengan kategori baru dipertahankan dan dipetakan ke Lain-lain agar tidak hilang.
-Game quiz dipetakan ke Game Quiz; Tic-Tac-Toe dan Puzzle Image ke Game Santai; item lain ke Lain-lain.
-Tools lama tetap dipertahankan; Nonton TV dipetakan ke Fun, sedangkan utilitas lain ke Tools.
+- Kategori baru ditambahkan tanpa menghapus kategori lama.
+- Skin: kategori lama tetap ada, ditambah Skin Couple, Skin Google, dan Lain-lain.
+- Addon: kategori lama tetap ada, ditambah Horor dan Survival. FAQ/panduan pemasangan berada di Info.
+- Game: ditambah Game Santai, Game Quiz, dan Lain-lain; kategori lama tetap ada.
+- Tools: Tools, Fun, dan Lain-lain.
+- Halaman Info memiliki tab Tutorial, FAQ, dan About ArpiMC.
+- Tombol **Salin Link Preview** tersedia pada kartu konten.
+- Tombol Bagikan WhatsApp menggunakan URL preview statis agar crawler dapat membaca Open Graph dari HTML awal.
 
-Deployment:
-Upload isi folder ini ke repository utama dan deploy seperti biasa melalui Vercel.
+## Membuat ulang halaman preview setelah mengubah JSON
+
+Setiap kali menambah atau mengubah item di `skins.json`, `addons.json`, atau `games.json`, jalankan:
+
+```bash
+python3 generate-previews.py
+```
+
+Lalu commit/push perubahan JSON beserta folder `share/` yang dihasilkan ke GitHub. Halaman preview statis berisi Open Graph dan Twitter Card, sehingga WhatsApp dapat membaca judul, deskripsi, dan gambar tanpa menunggu JavaScript.
+
+Generator hanya menghapus file yang tercatat di `share/.generated-pages.json`, bukan menghapus seluruh folder `share`.
+
+## Catatan
+
+- Preview media sosial dapat membutuhkan waktu karena WhatsApp menyimpan cache tautan.
+- Untuk menguji tampilan terbaru, gunakan URL preview yang belum pernah dibagikan atau layanan debugger/cache refresh platform jika tersedia.
+- Perubahan ini tidak melakukan deployment ke Vercel secara otomatis.
