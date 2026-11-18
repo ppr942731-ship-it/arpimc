@@ -1,24 +1,13 @@
 {
   "rewrites": [
-    {
-      "source": "/skin",
-      "destination": "/index.html"
-    },
-    {
-      "source": "/addon",
-      "destination": "/index.html"
-    },
-    {
-      "source": "/game",
-      "destination": "/index.html"
-    },
-    {
-      "source": "/tools",
-      "destination": "/index.html"
-    },
-    {
-      "source": "/info",
-      "destination": "/index.html"
-    }
+    { "source": "/share/skin/:id", "destination": "/share/skin/:id/index.html" },
+    { "source": "/share/addon/:id", "destination": "/share/addon/:id/index.html" },
+    { "source": "/share/game/:id", "destination": "/share/game/:id/index.html" },
+    { "source": "/share/tools/:id", "destination": "/share/tools/:id/index.html" },
+    { "source": "/skin", "destination": "/index.html" },
+    { "source": "/addon", "destination": "/index.html" },
+    { "source": "/game", "destination": "/index.html" },
+    { "source": "/tools", "destination": "/index.html" },
+    { "source": "/info", "destination": "/index.html" }
   ]
 }
