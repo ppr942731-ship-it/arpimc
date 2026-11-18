@@ -21,7 +21,6 @@
 <section id="listingView">
  <div class="page-heading"><p class="eyebrow">MINECRAFT COLLECTION</p><h1 id="pageTitle">Koleksi Skin</h1><p id="pageDescription">Temukan skin favoritmu, langsung unduh tanpa ribet.</p></div>
  <div id="stats" class="stats-row"></div><div id="filters" class="filter-row"></div>
- <div id="categoryFaq" class="hidden"></div>
  <div id="cards" class="cards-grid" aria-live="polite"><p class="loading">Memuat koleksi...</p></div>
 </section>
 <section id="detailView" class="detail-view hidden" aria-live="polite">
@@ -34,7 +33,9 @@
  <div class="info-tabs" role="tablist" aria-label="Menu informasi">
   <button class="info-tab active" id="infoTabTutorial" type="button" role="tab" aria-selected="true" aria-controls="infoTutorial" data-info-tab="tutorial"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 5.5A2.5 2.5 0 0 1 6.5 3H20v16H6.5A2.5 2.5 0 0 0 4 21V5.5Z"/><path d="M4 6h13M8 9h8M8 13h6"/></svg><span>Tutorial</span></button>
   <button class="info-tab" id="infoTabAbout" type="button" role="tab" aria-selected="false" aria-controls="infoAbout" data-info-tab="about"><svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="M12 11v5M12 8h.01"/></svg><span>About ArpiMC</span></button>
+  <button class="info-tab" id="infoTabFAQ" type="button" role="tab" aria-selected="false" aria-controls="infoFAQ" data-info-tab="faq"><svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="M9.5 9a2.5 2.5 0 1 1 4.2 1.8c-1 .9-1.7 1.2-1.7 2.7M12 17h.01"/></svg><span>FAQ</span></button>
  </div>
+ <div id="infoFAQ" class="info-panel hidden" role="tabpanel" aria-labelledby="infoTabFAQ"></div>
  <div id="infoTutorial" class="info-panel" role="tabpanel" aria-labelledby="infoTabTutorial"></div>
  <div id="infoAbout" class="info-panel hidden" role="tabpanel" aria-labelledby="infoTabAbout">
   <div id="aboutContent"></div><div id="infoGroups" class="info-grid"></div>
@@ -51,4 +52,5 @@
 <div class="toast hidden" id="toast" role="status"></div>
 <script src="/fallback-data.js" defer></script>
 <script src="/script.js" defer></script>
+<script src="/preview.js" defer></script>
 </body></html>
