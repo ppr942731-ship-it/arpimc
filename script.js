@@ -64,15 +64,15 @@ const img=x.gambar||x.image||'';const ratio=route==='skin'?'skin-ratio':'addon-r
 document.addEventListener('click',e=>{const p=e.target.closest('[data-preview]');if(p){const route=p.dataset.preview,id=Number(p.dataset.id),x=getItems(route).find(i=>i.id===id);if(x)navigate(`/${route}?${itemSlug(x,route)}-id=${id}`);return}const cp=e.target.closest('[data-copy-preview]');if(cp){const route=cp.dataset.copyPreview,id=Number(cp.dataset.id),x=getItems(route).find(i=>i.id===id);if(x)copyPreviewLink(x,route);return}const sh=e.target.closest('[data-share-item]');if(sh){const route=sh.dataset.shareItem,id=Number(sh.dataset.id),x=getItems(route).find(i=>i.id===id);if(x)shareItem(x,route);return}});
 function imageDocument(url,title,kind){const bg=kind==='skin'?'#eef5ff':'#edf4fb';return `<!doctype html><html><head><meta name="viewport" content="width=device-width,initial-scale=1"><style>*{box-sizing:border-box}html,body{margin:0;width:100%;height:100%;background:${bg};display:flex;align-items:center;justify-content:center;overflow:hidden}img{display:block;max-width:100%;max-height:100%;width:auto;height:auto;object-fit:contain;border-radius:8px}</style></head><body><img src="${esc(url)}" alt="${esc(title)}"></body></html>`}
 function creatorFrom(x){const m=String(x.deskripsi||'').match(/credit\s*(?:by)?\s*[:\-]?\s*(.+)/i);return m?m[1].trim():''}
-function shareText(x,route){const itemUrl=detailPath(x,route);const support='saweria.co/arpimc | sociabuzz.com/arpi_mc/tribe';const linktree='https://linktr.ee/marple.v2';if(route==='skin')return `*✨ NEW SKIN DROP BY ARPIMC ZONE✨*
+function shareText(x,route){const previewUrl=previewPath(x,route);const support='saweria.co/arpimc | sociabuzz.com/arpi_mc/tribe';const linktree='https://linktr.ee/marple.v2';if(route==='skin')return `*✨ NEW SKIN DROP BY ARPIMC ZONE✨*
  ✧ ▬▭▬ ▬▭▬ ✦✧✦ ▬▭▬ ▬▭▬ ✧
 👑 Credit: ${creatorFrom(x)}
  ▸ Link Download ⤵
-> ${x.link_download||''}
+> ${previewUrl}
 ━━━━━━━━━━━━━━━
 💌 *Support*: ${support}
 🔗*Linktree*: ${linktree}
-🔎 *sumber*: ${itemUrl}
+🔎 *sumber*: ${SITE}
 ━━━━━━━━━━━━━━━
 \`Follow gak rugi boss, tiap hari skin free kece\``;
 if(route==='addon')return `*✨ NEW ADDON DROP BY ARPIMC ZONE✨*
@@ -81,11 +81,11 @@ if(route==='addon')return `*✨ NEW ADDON DROP BY ARPIMC ZONE✨*
 📝 *Deskripsi*: ${x.deskripsi||'-'}
 👑 *Credit*: ${creatorFrom(x)||'-'}
  ▸ *Link Download* ⤵
-> ${x.link_download||''}
+> ${previewUrl}
 ━━━━━━━━━━━━━━━
 💌 *Support*: ${support}
 🔗 *Linktree*: ${linktree}
-🔎 *Sumber*: ${itemUrl}
+🔎 *Sumber*: ${SITE}
 ━━━━━━━━━━━━━━━
 `;
 return `*🎮 ${route==='tools'?'TOOLS':'GAME'} BY ARPIMC ZONE*
@@ -93,7 +93,7 @@ return `*🎮 ${route==='tools'?'TOOLS':'GAME'} BY ARPIMC ZONE*
 *${x.nama||'Konten'}*
 ${x.deskripsi||''}
 
-🔗 *Buka*: ${itemUrl}
+🔗 *Buka*: ${previewUrl}
 ━━━━━━━━━━━━━━━
 🔗 *Linktree*: ${linktree}
 🔎 *Sumber*: ${SITE}`}
