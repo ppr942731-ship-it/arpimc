@@ -56,7 +56,7 @@
 @media(max-width:650px){.preview-frame-wrap.skin-preview{width:min(100%,360px);max-height:68vh}.preview-frame-wrap.addon-preview{width:100%;aspect-ratio:16/9}}
 
 /* Info center: Tutorial + About ArpiMC */
-.info-tabs{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin:20px 0 16px;padding:6px;border:1px solid var(--border);border-radius:15px;background:var(--surface);box-shadow:var(--shadow)}
+.info-tabs{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:10px;margin:20px 0 16px;padding:6px;border:1px solid var(--border);border-radius:15px;background:var(--surface);box-shadow:var(--shadow)}
 .info-tab{display:flex;align-items:center;justify-content:center;gap:9px;min-height:46px;padding:10px;border:1px solid transparent;border-radius:11px;background:transparent;color:var(--muted);font-size:12px;font-weight:800;cursor:pointer}
 .info-tab svg{width:19px;height:19px;fill:none;stroke:currentColor;stroke-width:1.8;stroke-linecap:round;stroke-linejoin:round}
 .info-tab.active{background:var(--primary);color:#fff;box-shadow:0 4px 12px color-mix(in srgb,var(--primary) 25%,transparent)}
@@ -78,3 +78,5 @@
 .about-story{padding:18px;border:1px solid var(--border);border-radius:17px;background:var(--surface);box-shadow:var(--shadow);margin:13px 0 18px}.about-story h3{font-size:13px;margin:0 0 7px}.about-story p{font-size:11px;line-height:1.7;color:var(--muted);margin:0 0 14px}.about-story h3:not(:first-child){margin-top:17px}.about-story .about-disclaimer{margin:0;padding:11px 12px;border-radius:10px;background:var(--bg-alt);font-size:10px}
 .info-empty{padding:10px 0;color:var(--muted);font-size:11px}
 @media(max-width:520px){.about-hero{grid-template-columns:72px 1fr;gap:12px;padding:14px}.about-logo{width:72px;height:72px;border-radius:17px}.about-logo img{border-radius:12px}.about-copy h2{font-size:19px}.about-copy p{font-size:10px}.about-copy .about-lead{font-size:11px}.about-feature-grid{grid-template-columns:repeat(2,minmax(0,1fr))}.tutorial-intro{align-items:flex-start;padding:15px}.tutorial-mark{width:43px;height:43px;flex-basis:43px}.tutorial-intro h2{font-size:16px}}
+
+.extra-card-actions{margin-top:7px}.extra-card-actions .card-button{font-size:10px;min-height:34px}.extra-card-actions .card-share{margin-top:0;grid-column:1/-1}
