@@ -1,4 +1,4 @@
-const CACHE='arpimc-zone-info-v6';
+const CACHE='arpimc-zone-categories-v7';
 const CORE=['/','/index.html','/style.css','/script.js','/fallback-data.js','/manifest.json','/icon.svg','/icons/icon.svg','/icons/icon-96.png','/icons/icon-192.png','/icons/icon-512.png','/skins.json','/addons.json','/games.json','/data.json'];
 self.addEventListener('install',event=>event.waitUntil((async()=>{const cache=await caches.open(CACHE);await Promise.all(CORE.map(async path=>{try{const response=await fetch(path,{cache:'reload'});if(response.ok)await cache.put(path,response)}catch(error){console.warn('Precache dilewati:',path)}}));await self.skipWaiting()})()));
 self.addEventListener('activate',event=>event.waitUntil((async()=>{for(const key of await caches.keys())if(key.startsWith('arpimc-zone-')&&key!==CACHE)await caches.delete(key);await self.clients.claim()})()));
