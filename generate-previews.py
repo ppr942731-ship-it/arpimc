@@ -28,6 +28,18 @@ def detail_url(item, kind):
     return f'{SITE}/{kind}?{quote(slug)}-id={quote(str(item["id"]))}'
 
 
+def legacy_paths(item, kind):
+    """Return old slug directories kept as compatibility aliases."""
+    ident = str(item['id'])
+    base = item_slug(item, kind)
+    candidates = [f'{base}-{ident}', base]
+    if kind == 'skin':
+        candidates.insert(0, f'skin-{base}-{ident}')
+    if kind == 'addon' and base == 'mutants':
+        candidates.insert(0, 'mutans-1')
+    return dict.fromkeys(candidates)
+
+
 def render(item, kind):
     title = (item.get('tag') if kind == 'skin' else item.get('nama')) or 'Konten ArpiMC Zone'
     desc = item.get('deskripsi') or f'Lihat {title} di ArpiMC Zone.'
@@ -88,7 +100,12 @@ def main():
             rel = (Path('share') / kind / str(item['id']) / 'index.html').as_posix()
             if rel in desired:
                 raise ValueError(f'Preview duplikat: {rel}')
-            desired[rel] = render(item, kind)
+            content = render(item, kind)
+            desired[rel] = content
+            for alias in legacy_paths(item, kind):
+                alias_rel = (Path('share') / kind / alias / 'index.html').as_posix()
+                if alias_rel != rel and alias_rel not in desired:
+                    desired[alias_rel] = content
 
     created = updated = unchanged = 0
     for rel, content in desired.items():
