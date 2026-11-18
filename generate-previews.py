@@ -33,7 +33,7 @@ def render(item, kind):
     desc = item.get('deskripsi') or f'Lihat {title} di ArpiMC Zone.'
     image = item.get('gambar') or item.get('image') or FALLBACK_IMAGE
     target = detail_url(item, kind)
-    canonical = f'{SITE}/share/{kind}/{quote(str(item["id"]))}/'
+    canonical = f'{SITE}/share/{kind}/{quote(str(item["id"]))}/index.html'
     t, d = html.escape(str(title)), html.escape(str(desc))
     img = html.escape(str(image), quote=True)
     dest = html.escape(target, quote=True)
