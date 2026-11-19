@@ -13,7 +13,9 @@
     value=String(value).replace(/^SKIN\s*/i,'').replace(/\s*\|\s*/g,'-').replace(/^CR\s*/i,'cr-');
     return slugify(value)||`${route}-${item.id}`;
   };
-  const previewUrl=(item,route)=>`${currentOrigin()}/share/${route}/${encodeURIComponent(itemSlug(item,route))}`;
+  const previewUrl=(item,route)=>route==='game'||route==='tools'
+    ?`${currentOrigin()}/share/${route}/${encodeURIComponent(String(item.id))}/index.html`
+    :`${currentOrigin()}/share/${route}/${encodeURIComponent(itemSlug(item,route))}`;
   const creatorFrom=item=>{
     const match=String(item.deskripsi||'').match(/credit\s*(?:by)?\s*[:\-]?\s*(.+)/i);
     return match?match[1].trim():'';
@@ -42,13 +44,12 @@
 🔗 *Linktree*: ${LINKTREE}
 ━━━━━━━━━━━━━━━
 \`Buka link untuk melihat preview dan tombol unduh.\``;
-    const external=String(item.link||'').trim()||preview;
     return `*🎮 ${route==='tools'?'TOOLS':'GAME'} BY ARPIMC ZONE*
 
 *${item.nama||'Konten'}*
 ${item.deskripsi||''}
 
-🔗 *Buka website*: ${external}
+🔗 *Link hasil ArpiMC Zone*: ${preview}
 ━━━━━━━━━━━━━━━
 🔗 *Linktree*: ${LINKTREE}
 ━━━━━━━━━━━━━━━
