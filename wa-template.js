@@ -1,8 +1,11 @@
-/* Locked WhatsApp share template: v2. Keep this format stable across JSON updates. */
+/* Locked WhatsApp share template: v3. Keep this format stable across JSON updates. */
 (function(){
-  const PREVIEW_SITE='https://arpimczone.vercel.app';
   const SUPPORT='saweria.co/arpimc | sociabuzz.com/arpi_mc/tribe';
   const LINKTREE='https://linktr.ee/marple.v2';
+  const currentOrigin=()=>{
+    const origin=typeof window!=='undefined'&&window.location&&window.location.origin;
+    return origin&&origin!=='null'?String(origin).replace(/\/+$/,''):'https://arpimc.zone.id';
+  };
   const slugify=value=>String(value||'').toLowerCase().normalize('NFD').replace(/[\u0300-\u036f]/g,'').replace(/[^a-z0-9]+/g,'-').replace(/^-|-$/g,'');
   const itemSlug=(item,route)=>{
     if(item.slug)return slugify(item.slug);
@@ -10,7 +13,7 @@
     value=String(value).replace(/^SKIN\s*/i,'').replace(/\s*\|\s*/g,'-').replace(/^CR\s*/i,'cr-');
     return slugify(value)||`${route}-${item.id}`;
   };
-  const previewUrl=(item,route)=>`${PREVIEW_SITE}/share/${route}/${encodeURIComponent(itemSlug(item,route))}`;
+  const previewUrl=(item,route)=>`${currentOrigin()}/share/${route}/${encodeURIComponent(itemSlug(item,route))}`;
   const creatorFrom=item=>{
     const match=String(item.deskripsi||'').match(/credit\s*(?:by)?\s*[:\-]?\s*(.+)/i);
     return match?match[1].trim():'';
@@ -50,5 +53,5 @@ ${item.deskripsi||''}
 ━━━━━━━━━━━━━━━
 \`Buka link untuk melihat preview dan tombol unduh.\``;
   };
-  window.ARPIMC_WA_TEMPLATE=Object.freeze({version:'locked-v2',render});
+  window.ARPIMC_WA_TEMPLATE=Object.freeze({version:'locked-v3',render});
 })();
