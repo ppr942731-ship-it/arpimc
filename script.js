@@ -64,39 +64,7 @@ const img=x.gambar||x.image||'';const ratio=route==='skin'?'skin-ratio':'addon-r
 document.addEventListener('click',e=>{const p=e.target.closest('[data-preview]');if(p){const route=p.dataset.preview,id=Number(p.dataset.id),x=getItems(route).find(i=>i.id===id);if(x)navigate(`/${route}?${itemSlug(x,route)}-id=${id}`);return}const cp=e.target.closest('[data-copy-preview]');if(cp){const route=cp.dataset.copyPreview,id=Number(cp.dataset.id),x=getItems(route).find(i=>i.id===id);if(x)copyPreviewLink(x,route);return}const sh=e.target.closest('[data-share-item]');if(sh){const route=sh.dataset.shareItem,id=Number(sh.dataset.id),x=getItems(route).find(i=>i.id===id);if(x)shareItem(x,route);return}});
 function imageDocument(url,title,kind){const bg=kind==='skin'?'#eef5ff':'#edf4fb';return `<!doctype html><html><head><meta name="viewport" content="width=device-width,initial-scale=1"><style>*{box-sizing:border-box}html,body{margin:0;width:100%;height:100%;background:${bg};display:flex;align-items:center;justify-content:center;overflow:hidden}img{display:block;max-width:100%;max-height:100%;width:auto;height:auto;object-fit:contain;border-radius:8px}</style></head><body><img src="${esc(url)}" alt="${esc(title)}"></body></html>`}
 function creatorFrom(x){const m=String(x.deskripsi||'').match(/credit\s*(?:by)?\s*[:\-]?\s*(.+)/i);return m?m[1].trim():''}
-function shareText(x,route){const previewUrl=previewPath(x,route);const support='saweria.co/arpimc | sociabuzz.com/arpi_mc/tribe';const linktree='https://linktr.ee/marple.v2';if(route==='skin')return `*✨ NEW SKIN DROP BY ARPIMC ZONE✨*
- ✧ ▬▭▬ ▬▭▬ ✦✧✦ ▬▭▬ ▬▭▬ ✧
-👑 Credit: ${creatorFrom(x)}
- ▸ Link Download ⤵
-> ${previewUrl}
-━━━━━━━━━━━━━━━
-💌 *Support*: ${support}
-🔗*Linktree*: ${linktree}
-🔎 *sumber*: ${SITE}
-━━━━━━━━━━━━━━━
-\`Follow gak rugi boss, tiap hari skin free kece\``;
-if(route==='addon')return `*✨ NEW ADDON DROP BY ARPIMC ZONE✨*
- ✧ ▬▭▬ ▬▭▬ ✦✧✦ ▬▭▬ ▬▭▬ ✧
-📦 *Nama*: ${x.nama||'Minecraft Addon'}
-📝 *Deskripsi*: ${x.deskripsi||'-'}
-👑 *Credit*: ${creatorFrom(x)||'-'}
- ▸ *Link Download* ⤵
-> ${previewUrl}
-━━━━━━━━━━━━━━━
-💌 *Support*: ${support}
-🔗 *Linktree*: ${linktree}
-🔎 *Sumber*: ${SITE}
-━━━━━━━━━━━━━━━
-`;
-return `*🎮 ${route==='tools'?'TOOLS':'GAME'} BY ARPIMC ZONE*
-
-*${x.nama||'Konten'}*
-${x.deskripsi||''}
-
-🔗 *Buka*: ${previewUrl}
-━━━━━━━━━━━━━━━
-🔗 *Linktree*: ${linktree}
-🔎 *Sumber*: ${SITE}`}
+function shareText(x,route){return window.ARPIMC_WA_TEMPLATE.render(x,route)}
 async function copyPreviewLink(x,route){const url=previewPath(x,route);try{await navigator.clipboard.writeText(url);toast('Link preview berhasil disalin.')}catch{prompt('Salin link preview:',url)}}
 function shareItem(x,route){const text=shareText(x,route).replace(detailPath(x,route),previewPath(x,route));const url='https://wa.me/?text='+encodeURIComponent(text);window.open(url,'_blank','noopener,noreferrer')}
 function openDetail(route,id,update=true){const x=getItems(route).find(i=>i.id===id);if(!x){navigate('/'+route,false);return}state.detail={route,id};$('#listingView').classList.add('hidden');$('#infoView').classList.add('hidden');$('#detailView').classList.remove('hidden');const game=route==='game'||route==='tools';const title=route==='skin'?(x.tag||x.nama):x.nama;const frame=$('#previewFrame'),wrap=$('#previewWrap');wrap.className='preview-frame-wrap '+(game?'game-preview':route==='skin'?'image-preview skin-preview':'image-preview addon-preview');frame.removeAttribute('srcdoc');frame.removeAttribute('sandbox');frame.src=game?(x.link||'about:blank'):'about:blank';if(!game)frame.srcdoc=imageDocument(x.gambar||x.image||'',title,route);frame.title=game?`${route==='tools'?'Tool':'Game'} ${title}`:`Preview gambar ${title}`;$('#detailType').textContent=game?normalizeType(x):(x.kategori||route);$('#detailTitle').textContent=title;$('#detailDescription').textContent=x.deskripsi||'';$('#detailMeta').innerHTML=[x.versi?`<div class="meta-line"><b>Versi:</b> ${esc(x.versi)}</div>`:'',x.ukuran?`<div class="meta-line"><b>Ukuran:</b> ${esc(x.ukuran)}</div>`:'',x.tanggal_upload?`<div class="meta-line"><b>Diunggah:</b> ${esc(x.tanggal_upload)}</div>`:''].filter(Boolean).join('');$('#detailInfo').classList.toggle('hidden',game);$('#gameToolbar').classList.toggle('hidden',!game);const support=(state.siteData.dukungan||[])[0]?.link||'https://saweria.co/arpimc';const previewCopy=route==='skin'||route==='addon'?`<button class="action-button secondary" data-copy-preview="${route}" data-id="${x.id}">Salin Link Preview</button>`:'';$('#detailActions').innerHTML=game?'':`<a class="action-button" href="${esc(x.link_download||'#')}" target="_blank" rel="noopener">Unduh</a><button class="action-button secondary" id="shareDetailItem">Kirim via WhatsApp</button>${previewCopy}<a class="action-button secondary" href="${esc(support)}" target="_blank" rel="noopener">Dukung ArpiMC</a><button class="action-button secondary" id="copyLink">Salin Link Download</button>`;$('#copyLink')?.addEventListener('click',async()=>{try{await navigator.clipboard.writeText(x.link_download||'');$('#copyLink').textContent='Tersalin'}catch{prompt('Salin tautan ini:',x.link_download||'')}});$('#shareDetailItem')?.addEventListener('click',()=>shareItem(x,route));$('#gameNewTab').href=x.link||'#';if(update)history.pushState({},'',`/${route}?${itemSlug(x,route)}-id=${id}`)}
