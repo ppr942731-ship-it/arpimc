@@ -1,4 +1,4 @@
-/* Locked WhatsApp share template: v3. Keep this format stable across JSON updates. */
+/* Locked WhatsApp share template: v4. Keep this format stable across JSON updates. */
 (function(){
   const SUPPORT='saweria.co/arpimc | sociabuzz.com/arpi_mc/tribe';
   const LINKTREE='https://linktr.ee/marple.v2';
@@ -42,16 +42,17 @@
 🔗 *Linktree*: ${LINKTREE}
 ━━━━━━━━━━━━━━━
 \`Buka link untuk melihat preview dan tombol unduh.\``;
+    const external=String(item.link||'').trim()||preview;
     return `*🎮 ${route==='tools'?'TOOLS':'GAME'} BY ARPIMC ZONE*
 
 *${item.nama||'Konten'}*
 ${item.deskripsi||''}
 
-🔗 *Link hasil ArpiMC Zone*: ${preview}
+🔗 *Buka website*: ${external}
 ━━━━━━━━━━━━━━━
 🔗 *Linktree*: ${LINKTREE}
 ━━━━━━━━━━━━━━━
 \`Buka link untuk melihat preview dan tombol unduh.\``;
   };
-  window.ARPIMC_WA_TEMPLATE=Object.freeze({version:'locked-v3',render});
+  window.ARPIMC_WA_TEMPLATE=Object.freeze({version:'locked-v4',render});
 })();
