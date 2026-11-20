@@ -94,10 +94,9 @@ def render(item, kind):
     if external:
         source = source_metadata(external, title, desc, image)
         title, desc, image = source['title'], source['description'], source['image']
-    target = external or detail_url(item, kind)
+    # Keep navigation inside ArpiMC Zone; external is used only as metadata source.
+    target = detail_url(item, kind)
     canonical = f'{SITE}/share/{kind}/{quote(str(item["id"]))}/index.html'
-    if external:
-        canonical = external
     t, d = html.escape(str(title)), html.escape(str(desc))
     img = html.escape(str(image), quote=True)
     dest = html.escape(target, quote=True)
@@ -107,9 +106,9 @@ def render(item, kind):
 <title>{t} | ArpiMC Zone</title><meta name="description" content="{d}"><link rel="canonical" href="{can}">
 <meta property="og:type" content="website"><meta property="og:site_name" content="ArpiMC Zone"><meta property="og:title" content="{t} | ArpiMC Zone"><meta property="og:description" content="{d}"><meta property="og:image" content="{img}"><meta property="og:image:alt" content="{t}"><meta property="og:url" content="{can}">
 <meta name="twitter:card" content="summary_large_image"><meta name="twitter:title" content="{t} | ArpiMC Zone"><meta name="twitter:description" content="{d}"><meta name="twitter:image" content="{img}">
-<meta http-equiv="refresh" content="{0 if external else 8};url={dest}">
+<meta http-equiv="refresh" content="8;url={dest}">
 <style>*{{box-sizing:border-box}}body{{margin:0;min-height:100vh;background:#f0f7ff;color:#172033;font-family:system-ui,sans-serif;display:grid;place-items:center;padding:22px}}main{{width:min(520px,100%);background:white;border:1px solid #dbeafe;border-radius:20px;overflow:hidden;box-shadow:0 12px 40px #1e40af18}}img{{display:block;width:100%;max-height:420px;object-fit:contain;background:#eaf2ff}}section{{padding:20px}}h1{{font-size:22px;margin:0 0 9px}}p{{color:#64748b;line-height:1.6;margin:0 0 18px}}a{{display:inline-flex;background:#06f;color:white;text-decoration:none;font-weight:700;padding:12px 18px;border-radius:11px}}small{{display:block;color:#94a3b8;margin-top:14px}}</style></head>
-<body><main><img src="{img}" alt="{t}"><section><h1>{t}</h1><p>{d}</p><a href="{dest}">{'Buka website asli' if external else 'Buka di ArpiMC Zone'}</a><small>{'Mengalihkan ke website asli...' if external else 'Anda akan diarahkan otomatis dalam beberapa detik.'}</small></section></main></body></html>'''
+<body><main><img src="{img}" alt="{t}"><section><h1>{t}</h1><p>{d}</p><a href="{dest}">Buka di ArpiMC Zone</a><small>{'Anda akan diarahkan ke halaman Game/Tools ArpiMC Zone.' if external else 'Anda akan diarahkan otomatis dalam beberapa detik.'}</small></section></main></body></html>'''
 
 
 def load_items(filename, kind):
