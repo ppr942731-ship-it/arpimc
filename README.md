@@ -36,7 +36,7 @@ Platform sosial dapat menyimpan cache metadata lama. Jika gambar atau judul shar
 Panel owner tidak ditampilkan sebagai menu publik. Untuk membukanya:
 
 1. Klik logo **ArpiMC Zone** tiga kali dengan cepat.
-2. Masukkan kode pada kalkulator keypad yang muncul: `2010`.
+2. Masukkan kode pada kalkulator keypad yang muncul:
 3. Masukkan username owner pada form login.
 4. Masukkan password owner pada form login.
 
