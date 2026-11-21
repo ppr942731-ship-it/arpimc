@@ -56,15 +56,15 @@ function validUnlock(req) {
 }
 
 function setSession(res, token) {
-  res.setHeader('Set-Cookie', `${OWNER_COOKIE}=${encodeURIComponent(token)}; Path=/; HttpOnly; Secure; SameSite=Lax; Max-Age=28800`);
+  res.setHeader('Set-Cookie', `${OWNER_COOKIE}=${encodeURIComponent(token)}; Path=/; HttpOnly; Secure; SameSite=None; Max-Age=28800`);
 }
 
 function setUnlock(res, token) {
-  res.setHeader('Set-Cookie', `${UNLOCK_COOKIE}=${encodeURIComponent(token)}; Path=/; HttpOnly; Secure; SameSite=Lax; Max-Age=600`);
+  res.setHeader('Set-Cookie', `${UNLOCK_COOKIE}=${encodeURIComponent(token)}; Path=/; HttpOnly; Secure; SameSite=None; Max-Age=600`);
 }
 
 function clearSession(res) {
-  res.setHeader('Set-Cookie', `${OWNER_COOKIE}=; Path=/; HttpOnly; Secure; SameSite=Lax; Max-Age=0`);
+  res.setHeader('Set-Cookie', `${OWNER_COOKIE}=; Path=/; HttpOnly; Secure; SameSite=None; Max-Age=0`);
 }
 
 async function body(req) {
