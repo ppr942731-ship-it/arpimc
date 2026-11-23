@@ -14,8 +14,8 @@
     return slugify(value)||`${route}-${item.id}`;
   };
   const previewUrl=(item,route)=>route==='game'||route==='tools'
-    ?`${currentOrigin()}/share/${route}/${encodeURIComponent(String(item.id))}/index.html`
-    :`${currentOrigin()}/share/${route}/${encodeURIComponent(itemSlug(item,route))}`;
+    ?`${currentOrigin()}/share/${route}/${encodeURIComponent(String(item.id))}/index.html?v=20261123`
+    :`${currentOrigin()}/share/${route}/${encodeURIComponent(itemSlug(item,route))}?v=20261123`;
   const creatorFrom=item=>{
     const match=String(item.deskripsi||'').match(/credit\s*(?:by)?\s*[:\-]?\s*(.+)/i);
     return match?match[1].trim():'';

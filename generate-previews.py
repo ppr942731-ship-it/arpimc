@@ -13,7 +13,7 @@ ROOT = Path(__file__).resolve().parent
 SITE = 'https://arpimc.zone.id'
 SHARE = ROOT / 'share'
 MANIFEST = SHARE / '.generated-pages.json'
-FALLBACK_IMAGE = 'https://files.catbox.moe/7vkqqk.jpg'
+FALLBACK_IMAGE = 'https://cdn.phototourl.com/member/2026-11-21-8ac5f79b-8f21-4895-9ac2-23c8158e5599.png'
 
 
 class MetadataParser(HTMLParser):
