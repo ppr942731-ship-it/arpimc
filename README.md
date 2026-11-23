@@ -36,10 +36,9 @@ Platform sosial dapat menyimpan cache metadata lama. Jika gambar atau judul shar
 Panel owner tidak ditampilkan sebagai menu publik. Untuk membukanya:
 
 1. Klik logo **ArpiMC Zone** tiga kali dengan cepat.
-2. Kalkulator biasa akan terbuka. Gunakan kalkulator untuk hitungan cepat, atau tekan **Akses Owner**.
-3. Masukkan kode akses 4 digit pada dialog akses owner.
-4. Masukkan username owner pada form login.
-5. Masukkan password owner pada form login.
+2. Kalkulator bersih akan terbuka. Masukkan kode akses langsung melalui keypad.
+3. Jika kode benar, form login owner terbuka otomatis. Kode salah dibatasi maksimal tiga percobaan selama 10 menit.
+4. Masukkan username dan password owner pada form login.
 
 Verifikasi kode, password, dan session dilakukan di server melalui endpoint `/api/owner/`. Password tidak disimpan di JavaScript, HTML, README, atau repository. Password production harus disimpan sebagai hash scrypt pada environment variable Vercel.
 
@@ -105,8 +104,8 @@ Field dapat mengikuti struktur data yang sudah digunakan oleh katalog aktif. Jan
 Environment variable berikut hanya boleh disimpan pada Vercel Production atau secret manager lain, bukan pada frontend dan bukan pada commit repository:
 
 ```text
-OWNER_USERNAME=arpimc
-OWNER_CALCULATOR_CODE=2010
+OWNER_USERNAME=arpimc zone
+OWNER_CALCULATOR_CODE=2016
 OWNER_PASSWORD_HASH=scrypt$generated-salt$generated-hash
 OWNER_SESSION_SECRET=long-random-secret
 GITHUB_TOKEN=fine-grained-token-with-contents-write
@@ -114,6 +113,8 @@ GITHUB_OWNER=ppr942731-ship-it
 GITHUB_REPO=arpimc
 GITHUB_BRANCH=main
 ```
+
+Pengaturan kode akses dan sandi owner dilakukan melalui **Vercel Project Settings → Environment Variables** pada scope Production. Nilai sandi disimpan sebagai hash scrypt dan tidak pernah ditulis ke repository. Setelah mengubahnya, lakukan redeploy agar runtime mengambil nilai baru.
 
 Gunakan `.env.example` sebagai daftar nama variable tanpa secret asli. Jangan memasukkan password owner, token GitHub, hash production, atau session secret ke repository.
 

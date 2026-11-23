@@ -3,6 +3,7 @@ const crypto = require('node:crypto');
 const ALLOWED_FILES = new Set(['skins.json', 'addons.json', 'games.json']);
 const OWNER_COOKIE = 'arpimc_owner_session';
 const UNLOCK_COOKIE = 'arpimc_owner_unlock';
+const ATTEMPT_COOKIE = 'arpimc_owner_attempts';
 
 function env(name) {
   const value = process.env[name];
@@ -14,6 +15,11 @@ function send(res, status, payload) {
   res.statusCode = status;
   res.setHeader('Content-Type', 'application/json; charset=utf-8');
   res.end(JSON.stringify(payload));
+}
+
+function addCookie(res, value) {
+  const existing = res.getHeader('Set-Cookie');
+  res.setHeader('Set-Cookie', existing ? [...(Array.isArray(existing) ? existing : [existing]), value] : value);
 }
 
 function parseCookies(req) {
@@ -37,6 +43,11 @@ function unlockToken() {
   return `${payload}.${sign(payload)}`;
 }
 
+function attemptToken(count) {
+  const payload = Buffer.from(JSON.stringify({ type: 'attempts', count, exp: Date.now() + 10 * 60 * 1000 })).toString('base64url');
+  return `${payload}.${sign(payload)}`;
+}
+
 function validSignedPayload(token, predicate) {
   const [payload, signature] = String(token || '').split('.');
   const expected = payload ? sign(payload) : '';
@@ -55,12 +66,30 @@ function validUnlock(req) {
   return validSignedPayload(parseCookies(req)[UNLOCK_COOKIE], data => data.type === 'unlock' && Number(data.exp) > Date.now());
 }
 
+function failedAttempts(req) {
+  let count = 0;
+  validSignedPayload(parseCookies(req)[ATTEMPT_COOKIE], data => {
+    if (data.type !== 'attempts' || Number(data.exp) <= Date.now()) return false;
+    count = Math.max(0, Math.min(3, Number(data.count) || 0));
+    return true;
+  });
+  return count;
+}
+
 function setSession(res, token) {
   res.setHeader('Set-Cookie', `${OWNER_COOKIE}=${encodeURIComponent(token)}; Path=/; HttpOnly; Secure; SameSite=None; Max-Age=28800`);
 }
 
 function setUnlock(res, token) {
-  res.setHeader('Set-Cookie', `${UNLOCK_COOKIE}=${encodeURIComponent(token)}; Path=/; HttpOnly; Secure; SameSite=None; Max-Age=600`);
+  addCookie(res, `${UNLOCK_COOKIE}=${encodeURIComponent(token)}; Path=/; HttpOnly; Secure; SameSite=None; Max-Age=600`);
+}
+
+function setAttemptCookie(res, count) {
+  addCookie(res, `${ATTEMPT_COOKIE}=${encodeURIComponent(attemptToken(count))}; Path=/; HttpOnly; Secure; SameSite=None; Max-Age=600`);
+}
+
+function clearAttempts(res) {
+  addCookie(res, `${ATTEMPT_COOKIE}=; Path=/; HttpOnly; Secure; SameSite=None; Max-Age=0`);
 }
 
 function clearSession(res) {
@@ -111,4 +140,4 @@ async function writeGithubFile(file, items) {
   return response.json();
 }
 
-module.exports = { ALLOWED_FILES, body, calculatorCodeMatches, clearSession, env, passwordMatches, send, sessionToken, setSession, setUnlock, unlockToken, validSession, validUnlock, readGithubFile, writeGithubFile };
+module.exports = { ALLOWED_FILES, body, calculatorCodeMatches, clearAttempts, clearSession, env, failedAttempts, passwordMatches, send, sessionToken, setAttemptCookie, setSession, setUnlock, unlockToken, validSession, validUnlock, readGithubFile, writeGithubFile };
