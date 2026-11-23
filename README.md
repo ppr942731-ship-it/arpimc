@@ -104,8 +104,8 @@ Field dapat mengikuti struktur data yang sudah digunakan oleh katalog aktif. Jan
 Environment variable berikut hanya boleh disimpan pada Vercel Production atau secret manager lain, bukan pada frontend dan bukan pada commit repository:
 
 ```text
-OWNER_USERNAME=arpimc zone
-OWNER_CALCULATOR_CODE=2016
+OWNER_USERNAME=rahasia
+OWNER_CALCULATOR_CODE=rahasia
 OWNER_PASSWORD_HASH=scrypt$generated-salt$generated-hash
 OWNER_SESSION_SECRET=long-random-secret
 GITHUB_TOKEN=fine-grained-token-with-contents-write
