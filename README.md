@@ -36,9 +36,10 @@ Platform sosial dapat menyimpan cache metadata lama. Jika gambar atau judul shar
 Panel owner tidak ditampilkan sebagai menu publik. Untuk membukanya:
 
 1. Klik logo **ArpiMC Zone** tiga kali dengan cepat.
-2. Masukkan kode pada kalkulator keypad yang muncul:
-3. Masukkan username owner pada form login.
-4. Masukkan password owner pada form login.
+2. Kalkulator biasa akan terbuka. Gunakan kalkulator untuk hitungan cepat, atau tekan **Akses Owner**.
+3. Masukkan kode akses 4 digit pada dialog akses owner.
+4. Masukkan username owner pada form login.
+5. Masukkan password owner pada form login.
 
 Verifikasi kode, password, dan session dilakukan di server melalui endpoint `/api/owner/`. Password tidak disimpan di JavaScript, HTML, README, atau repository. Password production harus disimpan sebagai hash scrypt pada environment variable Vercel.
 
