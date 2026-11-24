@@ -42,7 +42,7 @@ async function load(){
  applyData(initial.skins,initial.addons,initial.games,initial.siteData);
  setupDownloadButton();
  renderRoute();
- if(window.ARPIMC_DATA)return;
+ // Inline/fallback data hanya dipakai sebagai bootstrap; katalog jaringan tetap menjadi sumber utama.
  const results=await Promise.allSettled([
   readJsonFile('skins.json','skins'),readJsonFile('addons.json','addons'),
   readJsonFile('games.json','games'),readJsonFile('data.json','siteData')
