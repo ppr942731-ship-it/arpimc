@@ -684,7 +684,7 @@
   {
     "id": 63,
     "nama": "Essentials",
-    "kategori": "addon",
+    "kategori": "survival",
     "gambar": "https://cdn.phototourl.com/member/2026-07-26-f47c060c-19a8-4e6f-a024-599be2697e5d.jpg",
     "link_download": "https://www.mediafire.com/file/thhhmuaxngpgtl3/Essentials+Add-on.mcaddon/file",
     "deskripsi": "Tambahan Penting untuk Minecraft! Ucapkan selamat tinggal pada pekerjaan membosankan! Landasan yang Dapat Diperbaiki, Lempengan Miring, Tas Penyimpanan, Penanaman Ulang Tanaman Otomatis, Meja Kerajinan Portabel, Peti Ender, Tungku, Pemecah Bijih, Pemecah Pohon, Pemindai Bijih, Helm Penambang, Remote Universal - Mengubah waktu, cuaca & lainnya, Titik Arah Kematian, Blok Palsu, Teleporter ...dan masih banyak lagi!",
@@ -1080,7 +1080,7 @@
   {
     "id": 99,
     "nama": "Sweep 'N Slash",
-    "kategori": "addon",
+    "kategori": "survival",
     "gambar": "https://i.8upload.com/image/6d82be7dc29c1d54/images-2.jpg",
     "link_download": "https://files.catbox.moe/eiycpr.mcaddon",
     "deskripsi": "Sweep 'N Slash menambahkan serangan sapuan untuk pedang dan menonaktifkan efek dorongan mundur perisai.\nSweep 'N Slash mengkonversi perhitungan kerusakan ke dalam perhitungan yang digunakan oleh Java Edition.\nSweep 'N Slash menggunakan mekanisme efek dorongan mundur (knockback) khusus untuk menghadirkan efek dorongan mundur dari Java Edition ke Bedrock Edition semaksimal mungkin.",
@@ -2583,5 +2583,49 @@
     "versi": "1.26+",
     "ukuran": "7.95 MB",
     "tanggal_upload": "23 Nov 2026"
+  },
+  {
+    "id": 236,
+    "nama": "Tree capitator",
+    "kategori": "survival",
+    "gambar": "https://cdn.phototourl.com/member/2026-11-24-cf0e5cdc-0652-4509-be3a-2af6f09266a1.jpg",
+    "link_download": "https://www.mediafire.com/file/xx3qpqvgjzow41z/TreeCapitator+Add-On.mcaddon/file",
+    "deskripsi": "Saat kamu memotong bagian bawah batang pohon, SELURUH pohon akan langsung tumbang sekaligus, jadi tidak perlu menebang satu per satu, hemat waktu banget!",
+    "versi": "1.26+",
+    "ukuran": "1011.6kb",
+    "tanggal_upload": "24 Nov 2026"
+  },
+  {
+    "id": 237,
+    "nama": "Essential 1.6",
+    "kategori": "survival",
+    "gambar": "https://cdn.phototourl.com/member/2026-11-24-46dd8504-605b-4f9b-9602-ab97531bed10.jpg",
+    "link_download": "https://www.mediafire.com/file/s59msj4sny4lxar/Essentials.mcaddon/file",
+    "deskripsi": "Saat kamu menebang batang bawah pohon, SEMUA batang dan daunnya langsung jatuh sekaligus, pas kamu tambang bijih, semua bijih di sekitarnya ikut pecah otomatis, dan masih banyak lagi, pokoknya survival jadi jauh lebih cepat dan nyaman !",
+    "versi": "1.26+",
+    "ukuran": "3,47mb",
+    "tanggal_upload": "24 Nov 2026"
+  },
+  {
+    "id": 238,
+    "nama": "Night vision",
+    "kategori": "survival",
+    "gambar": "https://cdn.phototourl.com/member/2026-11-24-f85d660c-ef8d-44bb-8852-ab69518dc86c.jpg",
+    "link_download": "https://www.mediafire.com/file/75erb5it1e4ks3a/Night+vision+v2.5.4.mcpack/file",
+    "deskripsi": "Membuat anda melihat dalam kegelapan dengan jelas dan baik",
+    "versi": "1.26+",
+    "ukuran": "56.26 kb",
+    "tanggal_upload": "24 Nov 2026"
+  },
+  {
+    "id": 239,
+    "nama": "Carry more",
+    "kategori": "survival",
+    "gambar": "https://cdn.phototourl.com/member/2026-11-24-140d551c-06ea-4e46-861e-00072793cd9b.jpg",
+    "link_download": "https://www.mediafire.com/file/151ephlrvfyvtgl/Carry+More+Add-On.mcaddon/file",
+    "deskripsi": "intinya bisa angkat barang",
+    "versi": "1.26+",
+    "ukuran": "587.19 kb",
+    "tanggal_upload": "24 Nov 2026"
   }
     ]
