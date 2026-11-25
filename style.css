@@ -80,3 +80,9 @@
 @media(max-width:520px){.about-hero{grid-template-columns:72px 1fr;gap:12px;padding:14px}.about-logo{width:72px;height:72px;border-radius:17px}.about-logo img{border-radius:12px}.about-copy h2{font-size:19px}.about-copy p{font-size:10px}.about-copy .about-lead{font-size:11px}.about-feature-grid{grid-template-columns:repeat(2,minmax(0,1fr))}.tutorial-intro{align-items:flex-start;padding:15px}.tutorial-mark{width:43px;height:43px;flex-basis:43px}.tutorial-intro h2{font-size:16px}}
 
 .extra-card-actions{margin-top:7px}.extra-card-actions .card-button{font-size:10px;min-height:34px}.extra-card-actions .card-share{margin-top:0;grid-column:1/-1}
+.owner-home-popup-backdrop{position:fixed;inset:0;z-index:90;display:grid;place-items:center;padding:18px;background:#07111dcc}
+.owner-home-popup-card{position:relative;width:min(520px,100%);max-height:90vh;overflow:auto;border:1px solid var(--border,#dbeafe);border-radius:18px;background:var(--surface,#fff);color:var(--text,#172033);box-shadow:0 20px 70px #0007}
+.owner-home-popup-card>img{display:block;width:100%;max-height:300px;object-fit:cover;border-radius:18px 18px 0 0}
+.owner-home-popup-content{padding:20px}.owner-home-popup-content h2{margin:0 0 8px}.owner-home-popup-content p{white-space:normal;line-height:1.6;color:var(--muted,#64748b)}
+.owner-home-popup-content a{display:inline-block;margin-top:8px;padding:10px 14px;border-radius:9px;background:var(--primary,#06f);color:#fff;text-decoration:none;font-weight:800}
+.owner-home-popup-close{position:absolute;right:10px;top:10px;width:34px;height:34px;border:0;border-radius:50%;background:#0008;color:#fff;font-size:22px;line-height:1;cursor:pointer}

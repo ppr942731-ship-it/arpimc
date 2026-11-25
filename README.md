@@ -104,14 +104,14 @@ Field dapat mengikuti struktur data yang sudah digunakan oleh katalog aktif. Jan
 Environment variable berikut hanya boleh disimpan pada Vercel Production atau secret manager lain, bukan pada frontend dan bukan pada commit repository:
 
 ```text
-OWNER_USERNAME=rahasia
-OWNER_CALCULATOR_CODE=rahasia
-OWNER_PASSWORD_HASH=scrypt$generated-salt$generated-hash
-OWNER_SESSION_SECRET=long-random-secret
-GITHUB_TOKEN=fine-grained-token-with-contents-write
-GITHUB_OWNER=ppr942731-ship-it
-GITHUB_REPO=arpimc
-GITHUB_BRANCH=main
+OWNER_USERNAME
+OWNER_CALCULATOR_CODE
+OWNER_PASSWORD_HASH
+OWNER_SESSION_SECRET
+GITHUB_TOKEN
+GITHUB_OWNER
+GITHUB_REPO
+GITHUB_BRANCH
 ```
 
 Pengaturan kode akses dan sandi owner dilakukan melalui **Vercel Project Settings → Environment Variables** pada scope Production. Nilai sandi disimpan sebagai hash scrypt dan tidak pernah ditulis ke repository. Setelah mengubahnya, lakukan redeploy agar runtime mengambil nilai baru.

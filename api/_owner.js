@@ -1,6 +1,8 @@
 const crypto = require('node:crypto');
 
-const ALLOWED_FILES = new Set(['skins.json', 'addons.json', 'games.json']);
+const ALLOWED_FILES = new Set(['skins.json', 'addons.json', 'games.json', 'data.json']);
+const CATALOG_FILES = ['skins.json', 'addons.json', 'games.json', 'data.json'];
+const FALLBACK_FILE = 'fallback-data.js';
 const OWNER_COOKIE = 'arpimc_owner_session';
 const UNLOCK_COOKIE = 'arpimc_owner_unlock';
 const ATTEMPT_COOKIE = 'arpimc_owner_attempts';
@@ -124,20 +126,61 @@ function githubUrl(file) {
   return `https://api.github.com/repos/${encodeURIComponent(owner)}/${encodeURIComponent(repo)}/contents/${file}`;
 }
 
-async function readGithubFile(file) {
-  const response = await fetch(`${githubUrl(file)}?ref=${encodeURIComponent(process.env.GITHUB_BRANCH || 'main')}`, { headers: githubHeaders() });
-  if (!response.ok) throw new Error(`GitHub read failed: ${response.status}`);
-  const data = await response.json();
-  return { sha: data.sha, items: JSON.parse(Buffer.from(data.content.replace(/\n/g, ''), 'base64').toString('utf8')) };
+async function githubError(response, action) {
+  let detail = '';
+  try {
+    const payload = await response.json();
+    detail = payload?.message ? ` — ${String(payload.message).slice(0, 180)}` : '';
+  } catch {}
+  return new Error(`${action}: HTTP ${response.status}${detail}`);
 }
 
-async function writeGithubFile(file, items) {
-  const current = await readGithubFile(file);
+function decodeContent(data) {
+  return Buffer.from(String(data.content || '').replace(/\n/g, ''), 'base64').toString('utf8');
+}
+
+async function readGithubTextFile(file) {
+  const response = await fetch(`${githubUrl(file)}?ref=${encodeURIComponent(process.env.GITHUB_BRANCH || 'main')}`, { headers: githubHeaders() });
+  if (!response.ok) throw await githubError(response, `GitHub read ${file} failed`);
+  const data = await response.json();
+  return { sha: data.sha, content: decodeContent(data) };
+}
+
+async function readGithubFile(file) {
+  const result = await readGithubTextFile(file);
+  try {
+    return { sha: result.sha, items: JSON.parse(result.content) };
+  } catch {
+    throw new Error(`GitHub read ${file}: file bukan JSON valid`);
+  }
+}
+
+async function writeGithubTextFile(file, content, message = `Update ${file} from ArpiMC owner panel`) {
+  const current = await readGithubTextFile(file);
   const branch = process.env.GITHUB_BRANCH || 'main';
-  const content = Buffer.from(`${JSON.stringify(items, null, 2)}\n`).toString('base64');
-  const response = await fetch(githubUrl(file), { method: 'PUT', headers: { ...githubHeaders(), 'Content-Type': 'application/json' }, body: JSON.stringify({ message: `Update ${file} from ArpiMC owner panel`, content, sha: current.sha, branch }) });
-  if (!response.ok) throw new Error(`GitHub write failed: ${response.status}`);
+  const response = await fetch(githubUrl(file), {
+    method: 'PUT',
+    headers: { ...githubHeaders(), 'Content-Type': 'application/json' },
+    body: JSON.stringify({ message, content: Buffer.from(String(content)).toString('base64'), sha: current.sha, branch })
+  });
+  if (!response.ok) throw await githubError(response, `GitHub write ${file} failed`);
   return response.json();
 }
 
-module.exports = { ALLOWED_FILES, body, calculatorCodeMatches, clearAttempts, clearSession, env, failedAttempts, passwordMatches, send, sessionToken, setAttemptCookie, setSession, setUnlock, unlockToken, validSession, validUnlock, readGithubFile, writeGithubFile };
+async function writeGithubFile(file, items) {
+  return writeGithubTextFile(file, `${JSON.stringify(items, null, 2)}\n`, `Update ${file} from ArpiMC owner panel`);
+}
+
+async function syncFallbackData() {
+  const [skins, addons, games, siteData] = await Promise.all(CATALOG_FILES.map(readGithubFile));
+  const content = `/* Local fallback: used only when a JSON endpoint is unavailable. */\nwindow.ARPIMC_FALLBACK_DATA=${JSON.stringify({ skins: skins.items, addons: addons.items, games: games.items, siteData: siteData.items }, null, 0)};\n`;
+  let current = '';
+  try { current = (await readGithubTextFile(FALLBACK_FILE)).content; } catch (error) {
+    if (!/HTTP 404/.test(error.message)) throw error;
+  }
+  if (current === content) return { changed: false, file: FALLBACK_FILE };
+  await writeGithubTextFile(FALLBACK_FILE, content, 'Sync fallback data from catalog assets');
+  return { changed: true, file: FALLBACK_FILE };
+}
+
+module.exports = { ALLOWED_FILES, body, calculatorCodeMatches, clearAttempts, clearSession, env, failedAttempts, passwordMatches, send, sessionToken, setAttemptCookie, setSession, setUnlock, syncFallbackData, unlockToken, validSession, validUnlock, readGithubFile, readGithubTextFile, writeGithubFile };

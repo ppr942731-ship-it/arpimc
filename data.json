@@ -92,5 +92,14 @@
       "title": "Memasang ArpiMC Zone",
       "text": "Gunakan tombol Unduh ArpiMC Zone di bagian atas. Jika browser mendukung instalasi, ikuti prompt yang muncul. Jika tidak, buka menu browser dan pilih Tambahkan ke layar utama. Instalasi PWA memerlukan koneksi HTTPS."
     }
-  ]
+  ],
+  "popup": {
+    "enabled": false,
+    "type": "text",
+    "title": "Info ArpiMC Zone",
+    "text": "",
+    "image": "",
+    "link": "",
+    "buttonText": "Buka tautan"
+  }
 }
