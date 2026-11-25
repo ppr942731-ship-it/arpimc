@@ -2627,5 +2627,38 @@
     "versi": "1.26+",
     "ukuran": "587.19 kb",
     "tanggal_upload": "24 Nov 2026"
+  },
+  {
+    "id": 240,
+    "nama": "Paper Doll",
+    "kategori": "pack",
+    "gambar": "https://cdn.phototourl.com/member/2026-11-25-36bc3fa5-ab32-4a59-8dbb-c6b89fa70907.jpg",
+    "link_download": "https://www.mediafire.com/file/4q68famc794zdst/Linxingu0027s%20Paper%20Doll%20v1.3.2.mcpack/file",
+    "deskripsi": "Linxing's Paper Doll v1.3.2 adalah Resource Pack Minecraft Bedrock yang memungkinkan pemain mengatur posisi dan ukuran Paper Doll. Menyediakan 8 pilihan posisi, fitur Always Visible, serta pengaturan langsung di dalam game. Cocok untuk kustomisasi HUD agar tampilan karakter lebih fleksibel.",
+    "versi": "1.26+",
+    "ukuran": "342.97 kb",
+    "tanggal_upload": "25 Nov 2026"
+  },
+  {
+    "id": 241,
+    "nama": "Minecraft patch 1.26.66.1",
+    "kategori": "lain-lain",
+    "gambar": "https://cdn.phototourl.com/member/2026-11-25-7a363e2a-8b5b-4402-b790-4cea84bb04e0.jpg",
+    "link_download": "https://www.mediafire.com/file/qywcvwntqdmlsql/MC_Patch_1-26-66-1_Musc_64%2632bit.apk/file",
+    "deskripsi": "MC Patch 1.26.66.1 adalah versi Minecraft Bedrock Android yang telah dimodifikasi dengan dukungan arsitektur 64-bit dan 32-bit. Versi ini menyediakan fitur tambahan seperti dukungan skin 4D, shader, Vibrant Visuals, serta pengaturan kecerahan hingga 200%. Varian Musc kemungkinan merupakan versi dengan musik yang disertakan.",
+    "versi": "1.26.66.1",
+    "ukuran": "822.34 mb",
+    "tanggal_upload": "25 Nov 2026"
+  },
+  {
+    "id": 242,
+    "nama": "Jetbus 5",
+    "kategori": "addon",
+    "gambar": "https://cdn.phototourl.com/member/2026-11-25-6aab8c80-22eb-4c8d-b427-7b0925fd8a02.jpg",
+    "link_download": "https://www.mediafire.com/file/f3id4n5o19fc6j4/ADDON_JETBUS_5_Nuansa_Indonesia.mcaddon/file",
+    "deskripsi": "ADDON JETBUS 5 Nuansa Indonesia adalah addon Minecraft Bedrock yang menghadirkan kendaraan bus Jetbus 5 dengan nuansa khas transportasi Indonesia. Addon ini ditujukan bagi pemain yang ingin menambahkan pengalaman berkendara dan suasana transportasi bus Indonesia ke dalam Minecraft.",
+    "versi": "1.26+",
+    "ukuran": "1.87 mb",
+    "tanggal_upload": "25 Nov 2026"
   }
-    ]
+]
