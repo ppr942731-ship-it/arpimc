@@ -1,4 +1,4 @@
-const LOGO='https://cdn.phototourl.com/member/2026-11-21-8ac5f79b-8f21-4895-9ac2-23c8158e5599.png';
+const LOGO='https://arpimc.zone.id/icon-arpimc-zone.png?v=20261125';
 const SITE='https://arpimc.zone.id';
 const state={route:'skin',skinFilter:'all',addonFilter:'all',gameFilter:'all',toolFilter:'all',infoTab:'tutorial',skins:[],addons:[],games:[],siteData:{},detail:null,installPrompt:null};
 const $=s=>document.querySelector(s);
