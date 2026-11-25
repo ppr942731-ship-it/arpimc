@@ -10,7 +10,7 @@
   "theme_color": "#0066ff",
   "icons": [
     {
-      "src": "/icon-arpimc-zone.png?v=20261125",
+      "src": "https://arpihost.lovable.app/f/swmdg9pc.png",
       "sizes": "any",
       "type": "image/png",
       "purpose": "any"
@@ -36,7 +36,7 @@
       "url": "/skin",
       "icons": [
         {
-          "src": "/icon-arpimc-zone.png?v=20261125",
+          "src": "https://arpihost.lovable.app/f/swmdg9pc.png",
           "sizes": "any",
           "type": "image/png"
         },
@@ -54,7 +54,7 @@
       "url": "/addon",
       "icons": [
         {
-          "src": "/icon-arpimc-zone.png?v=20261125",
+          "src": "https://arpihost.lovable.app/f/swmdg9pc.png",
           "sizes": "any",
           "type": "image/jpeg"
         },

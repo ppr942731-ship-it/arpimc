@@ -1,4 +1,4 @@
-const LOGO='https://arpimc.zone.id/icon-arpimc-zone.png?v=20261125';
+const LOGO='https://arpihost.lovable.app/f/swmdg9pc.png';
 const SITE='https://arpimc.zone.id';
 const state={route:'skin',skinFilter:'all',addonFilter:'all',gameFilter:'all',toolFilter:'all',infoTab:'tutorial',skins:[],addons:[],games:[],siteData:{},detail:null,installPrompt:null};
 const $=s=>document.querySelector(s);
