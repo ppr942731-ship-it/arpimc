@@ -5,7 +5,7 @@ const $=s=>document.querySelector(s);
 const esc=s=>String(s??'').replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
 const slugify=s=>String(s||'').toLowerCase().normalize('NFD').replace(/[\u0300-\u036f]/g,'').replace(/[^a-z0-9]+/g,'-').replace(/^-|-$/g,'');
 function skinSlug(x){let s=x.slug||x.tag||x.nama||'';s=s.replace(/^SKIN\s*/i,'').replace(/\s*\|\s*/g,'-').replace(/^CR\s*/i,'cr-');return slugify(s).replace(/-\d+$/,'')||`skin-${x.id}`}
-function itemSlug(x,type){if(type==='skin')return skinSlug(x);if(type==='addon'&&String(x.nama||'').toLowerCase()==='mutants')return'mutans';return slugify(x.slug||x.nama||`${type}-${x.id}`)}
+function itemSlug(x,type){if(type==='skin')return skinSlug(x);if(type==='addon'&&String(x.nama||'').toLowerCase()==='mutants')return'mutans-1';return slugify(x.slug||x.nama||`${type}-${x.id}`)}
 function categoryLabel(value){const labels={'cowok':'Cowok','cewek':'Cewek','pvp':'PVP','template':'Template Skin','pack':'Pack','couple':'Skin Couple','google':'Skin Google','lain-lain':'Lain-lain','addon':'Addon','shader':'Shader','ui':'UI','horor':'Horor','survival':'Survival','maps':'Maps','game':'Game','game-santai':'Game Santai','game-quiz':'Game Quiz','tools':'Tools','fun':'Fun'};return labels[String(value||'').toLowerCase()]||String(value||'').replace(/-/g,' ')}
 function normalizeType(g){let t=String(g.jenis||g.kategori||g.tipe||'game').toLowerCase();if(['games','game'].includes(t))return'game';if(['tool','tools','alat'].includes(t))return'tools';if(['fun','hiburan'].includes(t))return'fun';return'lain-lain'}
 function toast(msg){const el=$('#toast');el.textContent=msg;el.classList.remove('hidden');clearTimeout(toast.timer);toast.timer=setTimeout(()=>el.classList.add('hidden'),2800)}
