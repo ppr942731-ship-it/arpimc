@@ -6,6 +6,7 @@ on:
       - 'skins.json'
       - 'addons.json'
       - 'games.json'
+      - 'data.json'
       - 'generate-previews.py'
       - '.github/workflows/generate-previews.yml'
 permissions:
@@ -25,15 +26,31 @@ jobs:
         uses: actions/setup-python@v5
         with:
           python-version: '3.x'
+      - name: Sync fallback data from catalog assets
+        run: |
+          python - <<'PY'
+          import json
+          from pathlib import Path
+
+          data = {
+              'skins': json.loads(Path('skins.json').read_text(encoding='utf-8')),
+              'addons': json.loads(Path('addons.json').read_text(encoding='utf-8')),
+              'games': json.loads(Path('games.json').read_text(encoding='utf-8')),
+              'siteData': json.loads(Path('data.json').read_text(encoding='utf-8')),
+          }
+          content = '/* Local fallback: used only when a JSON endpoint is unavailable. */\n'
+          content += 'window.ARPIMC_FALLBACK_DATA=' + json.dumps(data, ensure_ascii=False, separators=(',', ':')) + ';\n'
+          Path('fallback-data.js').write_text(content, encoding='utf-8')
+          PY
       - name: Generate or update preview pages
         run: python generate-previews.py
       - name: Commit generated previews when changed
         run: |
-          if [[ -n "$(git status --porcelain share/)" ]]; then
+          if [[ -n "$(git status --porcelain share/ fallback-data.js)" ]]; then
             git config user.name "github-actions[bot]"
             git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
-            git add share/
-            git commit -m "Auto-update social preview pages"
+            git add share/ fallback-data.js
+            git commit -m "Sync fallback data and social preview pages"
             git push
           else
             echo "Preview pages are already up to date."
