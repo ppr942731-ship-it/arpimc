@@ -95,11 +95,11 @@
   ],
   "popup": {
     "enabled": true,
-    "type": "text",
+    "type": "image",
     "title": "Info ArpiMC Zone",
-    "text": "Ajjaja",
-    "image": "",
-    "link": "",
+    "text": "Sedang uji coba pop up",
+    "image": "https://cdn.phototourl.com/member/2026-11-25-7a363e2a-8b5b-4402-b790-4cea84bb04e0.jpg",
+    "link": "https://sociabuzz.com/arpi_mc",
     "buttonText": "Buka tautan"
   }
 }
