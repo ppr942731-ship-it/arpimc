@@ -598,5 +598,25 @@
     "link_download": "https://www.mediafire.com/file/kns0xtyj8pzl4v5/81465.png/file",
     "deskripsi": "Credit by rendi store",
     "tanggal_upload": "23 nov 2026"
+  },
+  {
+    "id": 61,
+    "slug": "skin-cowok-cr-dapz-61",
+    "tag": "SKIN COWOK | CR DAPZ",
+    "kategori": "cowok",
+    "gambar": "https://cdn.phototourl.com/member/2026-11-26-c282dae5-24c3-4cfa-b23b-18e76faa5eaf.jpg",
+    "link_download": "https://www.mediafire.com/file/zsjosi7519u63sq/SkinseedSkin_1780455930280.png/file",
+    "deskripsi": "Credit by dapz",
+    "tanggal_upload": "26 Nov 2026"
+  },
+  {
+    "id": 62,
+    "slug": "skin-cewek-cr-sall-62",
+    "tag": "SKIN CEWEK | CR SALL",
+    "kategori": "cewek",
+    "gambar": "https://cdn.phototourl.com/member/2026-11-26-8a26f740-03e4-44e3-8d5f-94bf1ce1bd3a.jpg",
+    "link_download": "https://www.mediafire.com/file/ri3wta6mf0ewnld/SkinseedSkin_1794377053538.png/file",
+    "deskripsi": "Credit by sall",
+    "tanggal_upload": "26 Nov 2026"
   }
-    ]
+]
