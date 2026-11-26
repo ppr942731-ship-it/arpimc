@@ -94,10 +94,10 @@
     }
   ],
   "popup": {
-    "enabled": false,
+    "enabled": true,
     "type": "text",
     "title": "Info ArpiMC Zone",
-    "text": "",
+    "text": "Ajjaja",
     "image": "",
     "link": "",
     "buttonText": "Buka tautan"
