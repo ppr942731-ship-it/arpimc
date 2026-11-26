@@ -95,7 +95,7 @@
   ],
   "popup": {
     "enabled": true,
-    "type": "image",
+    "type": "text",
     "title": "Website telah update lagi",
     "text": "Follow saluran untuk dapat info arpimc zone",
     "image": "https://cdn.phototourl.com/member/2026-11-25-7a363e2a-8b5b-4402-b790-4cea84bb04e0.jpg",
