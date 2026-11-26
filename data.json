@@ -94,11 +94,11 @@
     }
   ],
   "popup": {
-    "enabled": false,
-    "type": "text",
+    "enabled": true,
+    "type": "link",
     "title": "Website telah update lagi",
     "text": "Follow saluran untuk dapat info arpimc zone",
-    "image": "https://cdn.phototourl.com/member/2026-11-25-7a363e2a-8b5b-4402-b790-4cea84bb04e0.jpg",
+    "image": "https://arpihost.lovable.app/f/swmdg9pc.png",
     "link": "https://whatsapp.com/channel/0029VbEJrxXIHphF6AX1ks1Y",
     "buttonText": "Join saluran untuk update tentang arpimc zone"
   }
