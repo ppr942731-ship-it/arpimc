@@ -94,7 +94,7 @@
     }
   ],
   "popup": {
-    "enabled": true,
+    "enabled": false,
     "type": "text",
     "title": "Website telah update lagi",
     "text": "Follow saluran untuk dapat info arpimc zone",
