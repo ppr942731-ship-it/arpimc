@@ -14,6 +14,7 @@ SITE = 'https://arpimc.zone.id'
 SHARE = ROOT / 'share'
 MANIFEST = SHARE / '.generated-pages.json'
 FALLBACK_IMAGE = 'https://arpihost.lovable.app/f/swmdg9pc.png'
+CLOUDFLARE_BEACON = "<!-- Cloudflare Web Analytics --><script type='module' src='https://static.cloudflareinsights.com/beacon.min.js' data-cf-beacon='{\"token\":\"d2823010cfef49e9b6b122f5ff9ea46a\"}'></script><!-- End Cloudflare Web Analytics -->"
 
 
 class MetadataParser(HTMLParser):
@@ -106,7 +107,7 @@ def render(item, kind):
 <title>{t} | ArpiMC Zone</title><meta name="description" content="{d}"><link rel="canonical" href="{can}">
 <meta property="og:type" content="website"><meta property="og:site_name" content="ArpiMC Zone"><meta property="og:title" content="{t} | ArpiMC Zone"><meta property="og:description" content="{d}"><meta property="og:image" content="{img}"><meta property="og:image:alt" content="{t}"><meta property="og:url" content="{can}">
 <meta name="twitter:card" content="summary_large_image"><meta name="twitter:title" content="{t} | ArpiMC Zone"><meta name="twitter:description" content="{d}"><meta name="twitter:image" content="{img}">
-<meta http-equiv="refresh" content="8;url={dest}">
+<meta http-equiv="refresh" content="8;url={dest}">{CLOUDFLARE_BEACON}
 <style>*{{box-sizing:border-box}}body{{margin:0;min-height:100vh;background:#f0f7ff;color:#172033;font-family:system-ui,sans-serif;display:grid;place-items:center;padding:22px}}main{{width:min(520px,100%);background:white;border:1px solid #dbeafe;border-radius:20px;overflow:hidden;box-shadow:0 12px 40px #1e40af18}}img{{display:block;width:100%;max-height:420px;object-fit:contain;background:#eaf2ff}}section{{padding:20px}}h1{{font-size:22px;margin:0 0 9px}}p{{color:#64748b;line-height:1.6;margin:0 0 18px}}a{{display:inline-flex;background:#06f;color:white;text-decoration:none;font-weight:700;padding:12px 18px;border-radius:11px}}small{{display:block;color:#94a3b8;margin-top:14px}}</style></head>
 <body><main><img src="{img}" alt="{t}"><section><h1>{t}</h1><p>{d}</p><a href="{dest}">Buka di ArpiMC Zone</a><small>{'Anda akan diarahkan ke halaman Game/Tools ArpiMC Zone.' if external else 'Anda akan diarahkan otomatis dalam beberapa detik.'}</small></section></main></body></html>'''
 
