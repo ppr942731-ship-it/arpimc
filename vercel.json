@@ -20,6 +20,7 @@
     }
   ],
   "rewrites": [
+    { "source": "/panel-owner", "destination": "/api/owner/page" },
     { "source": "/share/skin/:id", "destination": "/share/skin/:id/index.html" },
     { "source": "/share/addon/:id", "destination": "/share/addon/:id/index.html" },
     { "source": "/share/game/:id", "destination": "/share/game/:id/index.html" },

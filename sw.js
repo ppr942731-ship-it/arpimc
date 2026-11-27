@@ -80,6 +80,10 @@ self.addEventListener('fetch', event => {
 
   const url = new URL(request.url);
   if (url.origin !== self.location.origin || url.pathname.startsWith('/api/')) return;
+  if (url.pathname === '/panel-owner') {
+    event.respondWith(fetch(request, { cache: 'no-store' }));
+    return;
+  }
 
   const isHtml = request.mode === 'navigate' || url.pathname === '/' || url.pathname.endsWith('.html');
   const isJavaScript = url.pathname.endsWith('.js');
