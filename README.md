@@ -42,6 +42,8 @@ Panel owner tidak ditampilkan sebagai menu publik. Untuk membukanya:
 
 Verifikasi kode, password, dan session dilakukan di server melalui endpoint `/api/owner/`. Password tidak disimpan di JavaScript, HTML, README, atau repository. Password production harus disimpan sebagai hash scrypt pada environment variable Vercel.
 
+Firebase Authentication tersedia sebagai opsi tambahan pada form login owner. Browser melakukan login email/password melalui Firebase Web SDK, mengirim ID token ke server, lalu Firebase Admin SDK memverifikasi token sebelum session owner existing dibuat. Login username/password tetap tersedia sebagai fallback. Firebase tidak menggantikan kalkulator unlock dan tidak memberi bypass terhadap verifikasi server-side.
+
 Panel owner dapat mengelola:
 
 - `skins.json`
@@ -90,6 +92,7 @@ Field dapat mengikuti struktur data yang sudah digunakan oleh katalog aktif. Jan
 ├── owner-panel.js           # UI kalkulator dan panel owner
 ├── api/owner/               # Endpoint unlock, login, logout, dan asset
 ├── api/_owner.js            # Validasi scrypt, cookie, session, dan GitHub API
+├── api/_firebase.js         # Verifikasi Firebase ID token server-side
 ├── skins.json               # Katalog skin
 ├── addons.json              # Katalog addon/maps
 ├── games.json               # Katalog game/tools
@@ -112,11 +115,25 @@ GITHUB_TOKEN
 GITHUB_OWNER
 GITHUB_REPO
 GITHUB_BRANCH
+FIREBASE_PROJECT_ID
+FIREBASE_CLIENT_EMAIL
+FIREBASE_PRIVATE_KEY
+FIREBASE_WEB_API_KEY
+FIREBASE_WEB_AUTH_DOMAIN
+FIREBASE_WEB_DATABASE_URL
+FIREBASE_WEB_PROJECT_ID
+FIREBASE_WEB_STORAGE_BUCKET
+FIREBASE_WEB_MESSAGING_SENDER_ID
+FIREBASE_WEB_APP_ID
+FIREBASE_OWNER_UID
+FIREBASE_OWNER_EMAIL
 ```
 
 Pengaturan kode akses dan sandi owner dilakukan melalui **Vercel Project Settings → Environment Variables** pada scope Production. Nilai sandi disimpan sebagai hash scrypt dan tidak pernah ditulis ke repository. Setelah mengubahnya, lakukan redeploy agar runtime mengambil nilai baru.
 
 Gunakan `.env.example` sebagai daftar nama variable tanpa secret asli. Jangan memasukkan password owner, token GitHub, hash production, atau session secret ke repository.
+
+Untuk mengaktifkan login Firebase, aktifkan Email/Password pada Firebase Authentication lalu isi environment variable Firebase Admin dan Web di Vercel Production. Batasi akun yang boleh membuat session owner dengan salah satu dari `FIREBASE_OWNER_UID` atau `FIREBASE_OWNER_EMAIL`. Private key Admin hanya boleh berada di environment server.
 
 ## Deployment Vercel
 
@@ -131,9 +148,11 @@ Endpoint owner:
 ```text
 POST /api/owner/unlock
 POST /api/owner/login
+POST /api/owner/firebase-login
 POST /api/owner/logout
 GET  /api/owner/assets
 PUT  /api/owner/assets
+GET  /api/owner/firebase-config
 ```
 
 ## Alur perubahan katalog
