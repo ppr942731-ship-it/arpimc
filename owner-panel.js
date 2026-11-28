@@ -1,5 +1,5 @@
 (() => {
-  const state = { files: {}, kind: 'skins.json', modal: null, fallback: null, authenticated: false, firebase: { config: null, auth: null, signIn: null, signOut: null } };
+  const state = { files: {}, kind: 'skins.json', modal: null, fallback: null, authenticated: false, firebase: { config: null, auth: null, signIn: null, signInGoogle: null, googleProvider: null, signOut: null } };
   const style = document.createElement('style');
   style.textContent = `.owner-backdrop{position:fixed;inset:0;z-index:100;background:#07111dcc;display:grid;place-items:center;padding:18px}.owner-card{width:min(820px,100%);max-height:min(90vh,820px);overflow:auto;background:var(--surface,#fff);color:var(--text,#172033);border:1px solid var(--border,#dbeafe);border-radius:18px;padding:20px;box-shadow:0 18px 60px #0007}.owner-card h2{margin:0 0 6px;font-size:20px}.owner-card h3{margin:14px 0 4px;font-size:14px}.owner-card p{color:var(--muted,#64748b);font-size:12px;line-height:1.5}.owner-form{display:grid;gap:10px}.owner-form input,.owner-form select,.owner-form textarea{width:100%;border:1px solid var(--border,#dbeafe);border-radius:10px;padding:11px;background:var(--bg-alt,#fff);color:var(--text,#172033);font:inherit}.owner-form textarea{min-height:330px;font-family:ui-monospace,SFMono-Regular,monospace;font-size:11px;line-height:1.5}.owner-actions{display:flex;gap:8px;flex-wrap:wrap}.owner-actions button{border:0;border-radius:9px;padding:10px 13px;background:var(--primary,#06f);color:#fff;font-weight:800;cursor:pointer}.owner-actions .owner-secondary{background:var(--bg-alt,#fff);color:var(--text,#172033);border:1px solid var(--border,#dbeafe)}.owner-message{min-height:18px;font-size:12px;font-weight:700;color:var(--primary,#06f)}.owner-divider{display:flex;align-items:center;gap:8px;color:var(--muted,#64748b);font-size:11px}.owner-divider::before,.owner-divider::after{content:'';height:1px;background:var(--border,#dbeafe);flex:1}.owner-firebase-note{margin:0!important}.owner-danger{color:#b91c1c}.owner-code{background:var(--bg-alt,#f0f7ff);padding:10px;border-radius:9px;font:11px ui-monospace,monospace;overflow:auto}.owner-status{display:flex;gap:8px;flex-wrap:wrap}.owner-badge{padding:7px 10px;border-radius:999px;background:var(--bg-alt,#f0f7ff);font-size:11px;font-weight:700}.owner-popup-grid{display:grid;grid-template-columns:1fr 1fr;gap:8px}.owner-popup-grid .wide{grid-column:1/-1}.calculator{display:grid;gap:10px}.calculator-display{font:700 28px/1.2 ui-monospace,SFMono-Regular,monospace;text-align:right;letter-spacing:.04em}.calculator-keys{display:grid!important;grid-template-columns:repeat(4,1fr);gap:8px}.calculator-keys button{min-height:46px;font-size:16px}.calculator-keys [data-calc-action=equals]{grid-column:span 2;background:var(--primary2,#0052cc)}.calculator-hint{margin:0;font-size:11px!important}@media(max-width:600px){.owner-popup-grid{grid-template-columns:1fr}}`;
   document.head.appendChild(style);
@@ -37,6 +37,8 @@
     state.firebase.config = configData.config;
     state.firebase.auth = authModule.getAuth(app);
     state.firebase.signIn = authModule.signInWithEmailAndPassword;
+    state.firebase.signInGoogle = authModule.signInWithPopup;
+    state.firebase.googleProvider = new authModule.GoogleAuthProvider();
     state.firebase.signOut = authModule.signOut;
     return state.firebase;
   }
@@ -47,16 +49,29 @@
     message(el, 'Memverifikasi akun Firebase...');
     const firebase = await loadFirebaseAuth();
     const credential = await firebase.signIn(firebase.auth, email, password);
+    if (credential.user.isAnonymous) throw Error('Akun guest tidak dapat membuka panel owner.');
     const idToken = await credential.user.getIdToken(true);
     const response = await fetch('/api/owner/firebase-login', { method:'POST', headers:{'Content-Type':'application/json'}, body:JSON.stringify({ idToken }) });
     const data = await response.json();
     if (!response.ok) throw Error(data.error || 'Login Firebase gagal.');
     location.replace('/panel-owner');
   }
+  async function loginWithGoogle(el) {
+    message(el, 'Membuka login Google...');
+    const firebase = await loadFirebaseAuth();
+    const credential = await firebase.signInGoogle(firebase.auth, firebase.googleProvider);
+    if (credential.user.isAnonymous) throw Error('Akun guest tidak dapat membuka panel owner.');
+    const idToken = await credential.user.getIdToken(true);
+    const response = await fetch('/api/owner/firebase-login', { method:'POST', headers:{'Content-Type':'application/json'}, body:JSON.stringify({ idToken }) });
+    const data = await response.json();
+    if (!response.ok) throw Error(data.error || 'Login Google gagal.');
+    location.replace('/panel-owner');
+  }
   function openLogin() {
-    const el = shell('Login Owner ArpiMC Zone', `<p>Kredensial diverifikasi oleh server. Password tidak disimpan di browser.</p><form class="owner-form" data-login><input name="username" autocomplete="username" value="arpimc zone" placeholder="Username owner" required><input type="password" name="password" autocomplete="current-password" placeholder="Sandi owner" required><div class="owner-actions"><button type="submit">Masuk</button></div><div class="owner-divider">atau Firebase Authentication</div><input name="firebaseEmail" type="email" autocomplete="username" placeholder="Email Firebase owner"><input name="firebasePassword" type="password" autocomplete="current-password" placeholder="Sandi Firebase"><div class="owner-actions"><button type="button" class="owner-secondary" data-firebase-login>Masuk dengan Firebase</button></div><p class="owner-firebase-note">Opsi Firebase aktif setelah konfigurasi Firebase dipasang di server. Login lama tetap tersedia sebagai cadangan.</p><div class="owner-message" data-owner-message></div></form>`);
+    const el = shell('Login Owner ArpiMC Zone', `<p>Kredensial diverifikasi oleh server. Password tidak disimpan di browser.</p><form class="owner-form" data-login><input name="username" autocomplete="username" value="arpimc zone" placeholder="Username owner" required><input type="password" name="password" autocomplete="current-password" placeholder="Sandi owner" required><div class="owner-actions"><button type="submit">Masuk</button></div><div class="owner-divider">atau Firebase Authentication</div><input name="firebaseEmail" type="email" autocomplete="username" placeholder="Email Firebase owner"><input name="firebasePassword" type="password" autocomplete="current-password" placeholder="Sandi Firebase"><div class="owner-actions"><button type="button" class="owner-secondary" data-firebase-login>Masuk dengan Email Firebase</button><button type="button" class="owner-secondary" data-google-login>Masuk dengan Google</button></div><p class="owner-firebase-note">Login guest/anonymous tidak memiliki akses owner. Login lama tetap tersedia sebagai cadangan.</p><div class="owner-message" data-owner-message></div></form>`);
     el.querySelector('[data-login]').addEventListener('submit', async event => { event.preventDefault(); const form = event.currentTarget; message(el, 'Memverifikasi...'); try { const response = await fetch('/api/owner/login', { method: 'POST', headers: {'Content-Type':'application/json'}, body: JSON.stringify({ username: form.username.value, password: form.password.value }) }); const data = await response.json(); if (!response.ok) throw Error(data.error || 'Login gagal.'); location.replace('/panel-owner'); } catch (error) { message(el, error.message, true); } });
     el.querySelector('[data-firebase-login]').addEventListener('click', async () => { const button = el.querySelector('[data-firebase-login]'); button.disabled = true; try { await loginWithFirebase(el, el.querySelector('[data-login]')); } catch (error) { message(el, error.message, true); button.disabled = false; } });
+    el.querySelector('[data-google-login]').addEventListener('click', async () => { const button = el.querySelector('[data-google-login]'); button.disabled = true; try { await loginWithGoogle(el); } catch (error) { message(el, error.message, true); button.disabled = false; } });
   }
   function selectedItems() { if (state.kind === 'data.json') return state.files['data.json'] || {}; if (state.kind !== 'tools.json') return state.files[state.kind] || []; return (state.files['games.json'] || []).filter(item => String(item.jenis || item.tipe || '').toLowerCase() === 'tools'); }
   function popupValue() { const d = state.files['data.json'] || {}; return d.popup || { enabled:false, type:'text', title:'Info ArpiMC Zone', text:'', image:'', link:'', buttonText:'Buka tautan' }; }

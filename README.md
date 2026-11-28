@@ -42,7 +42,7 @@ Panel owner tidak ditampilkan sebagai menu publik. Untuk membukanya:
 
 Verifikasi kode, password, dan session dilakukan di server melalui endpoint `/api/owner/`. Password tidak disimpan di JavaScript, HTML, README, atau repository. Password production harus disimpan sebagai hash scrypt pada environment variable Vercel.
 
-Firebase Authentication tersedia sebagai opsi tambahan pada form login owner. Browser melakukan login email/password melalui Firebase Web SDK, mengirim ID token ke server, lalu Firebase Admin SDK memverifikasi token sebelum session owner existing dibuat. Login username/password tetap tersedia sebagai fallback. Firebase tidak menggantikan kalkulator unlock dan tidak memberi bypass terhadap verifikasi server-side.
+Firebase Authentication tersedia sebagai opsi tambahan pada form login owner. Browser melakukan login email/password atau Google melalui Firebase Web SDK, mengirim ID token ke server, lalu Firebase Admin SDK memverifikasi token sebelum session owner existing dibuat. Login username/password tetap tersedia sebagai fallback. Akun guest/anonymous tidak diterima sebagai owner. Firebase tidak menggantikan kalkulator unlock dan tidak memberi bypass terhadap verifikasi server-side.
 
 Panel owner dapat mengelola:
 
@@ -125,6 +125,7 @@ FIREBASE_WEB_PROJECT_ID
 FIREBASE_WEB_STORAGE_BUCKET
 FIREBASE_WEB_MESSAGING_SENDER_ID
 FIREBASE_WEB_APP_ID
+FIREBASE_WEB_MEASUREMENT_ID
 FIREBASE_OWNER_UID
 FIREBASE_OWNER_EMAIL
 ```
